@@ -40,29 +40,31 @@ function ProfileButton() {
   };
 
   return (
-    <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
+    <div className={"profile-menu"}>
+      <button onClick={toggleMenu} className={"user-circle"}>
+        <FaUserCircle/>
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
+              <li className={"user-menu-items"}>{user.username}</li>
+              <li className={"user-menu-items"}>{user.email}</li>
               <li>
-                <button onClick={logout}>Log Out</button>
+                <button onClick={logout} className={"user-menu-items"}>Log Out</button>
               </li>
             </>
           ) : (
             <>
               <OpenModalMenuItem
                 itemText="Log In"
+                className="menu-items"
                 onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
               <OpenModalMenuItem
                 itemText="Sign Up"
+                className="menu-items"
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
@@ -70,7 +72,7 @@ function ProfileButton() {
           )}
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

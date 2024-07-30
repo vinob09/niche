@@ -1,3 +1,34 @@
+.navbar {
+  margin: 0px;
+  border: 1px solid rgb(187, 251, 220);
+  padding: 0px 15px 0px 5px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.home-link {
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  font-size: x-large;
+}
+.profile-menu {
+  display: flex;
+  flex-direction: row;
+
+}
+.user-circle {
+  border: 1px solid rgb(187, 251, 220);
+  border-radius: 60%;
+}
 .profile-dropdown {
-  position: absolute;
+  list-style: none;
+  color:rgb(151, 149, 149);
+
+}
+.menu-items {
+  list-style: none;
 }
