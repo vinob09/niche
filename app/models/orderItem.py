@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA
-from pastOrder import PastOrder
-from product import Product
+from .pastOrder import PastOrder
+from .product import Product
 
 class OrderItem(db.Model):
     __tablename__ = 'order_items'

@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA
-from user import User
-from product import Product
+from .user import User
+from .product import Product
 
 class Review(db.Model):
     __tablename__ = 'reviews'
