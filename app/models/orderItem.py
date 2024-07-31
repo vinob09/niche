@@ -13,6 +13,7 @@ class OrderItem(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('Product.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
+
     # many to one with PastOrder
     order = db.relationship("PastOrder", back_populates="order_items")
     # many to one with Product

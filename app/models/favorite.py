@@ -12,6 +12,7 @@ class Favorite(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('Product.id'), nullable=False)
 
+
     # many to one with User
     user = db.relationship("User", back_populates="favorites")
     # many to one with Product

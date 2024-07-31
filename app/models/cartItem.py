@@ -13,6 +13,7 @@ class CartItem(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('Product.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
+
     # many to one with User
     user = db.relationship("User", back_populates="items")
     # many to one with Product

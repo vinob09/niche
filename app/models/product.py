@@ -7,6 +7,7 @@ from .orderItem import OrderItem
 from .review import Review
 from .productImage import ProductImage
 
+
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -19,6 +20,7 @@ class Product(db.Model):
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
     price = db.Column(db.Float, nullable=False)
+
 
     # many to one with User
     user = db.relationship("User", back_populates="products")

@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA
 from .user import User
+
 from .orderItem import OrderItem
 
 class PastOrder(db.Model):
