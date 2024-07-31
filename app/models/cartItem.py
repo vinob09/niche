@@ -25,3 +25,5 @@ class CartItem(db.Model):
             'productId': self.product_id,
             'quantity': self.quantity
         }
+
+## amzing work guys!
