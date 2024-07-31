@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA
-from .product import Product
-from .user import User
+# from .product import Product
+# from .user import User
 
 class Favorite(db.Model):
     __tablename__ = 'favorites'
@@ -9,8 +9,8 @@ class Favorite(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('Product.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
 
     # many to one with User
     user = db.relationship("User", back_populates="favorites")

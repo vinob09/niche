@@ -1,11 +1,11 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from .product import Product
-from .cartItem import CartItem
-from .favorite import Favorite
-from .review import Review
-from .pastOrder import PastOrder
+# from .product import Product
+# from .cartItem import CartItem
+# from .favorite import Favorite
+# from .review import Review
+# from .pastOrder import PastOrder
 
 
 class User(db.Model, UserMixin):
@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     # one to many with Product
-    products = db.relationship("Product", back_populates="user")
+    products = db.relationship("Product", back_populates="seller")
     # one to many with CartItem
     items = db.relationship("CartItem", back_populates="user")
     # one to many with Favorite
