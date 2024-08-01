@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_products():
+def seed_category():
     home = Category(
         category_name='Home'
         )
@@ -35,7 +35,7 @@ def seed_products():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_users():
+def undo_category():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.products RESTART IDENTITY CASCADE;")
     else:
