@@ -5,11 +5,74 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_products():
     demo = Product(
-        username='Demo',
-        first_name='Demo',
-        last_name='User',
-        email='demo@aa.io',
-        password='password'
+        seller_id=1,
+        category_id=1,
+        name="Charcuterie Board",
+        description='Premium Top Grain cheese boards',
+        price=20.00,
+        )
+    demo = Product(
+        seller_id=2,
+        category_id=1,
+        name='Watercolor Pet Portrait',
+        description='The PERFECT Handmade Christmas Gift For Pet Parents',
+        price=7
+        )
+    demo = Product(
+        seller_id=1
+        category_id=2
+        name='Leather Desk Mat'
+        description=
+        price=
+        )
+    demo = Product(
+        seller_id=3
+        category_id=2
+        name=
+        description=
+        price=
+        )
+    demo = Product(
+        seller_id=1
+        category_id=3
+        name=
+        description=
+        price=
+        )
+    demo = Product(
+        seller_id=2
+        category_id=3
+        name=
+        description=
+        price=
+        )
+    demo = Product(
+        seller_id=1
+        category_id=4
+        name=
+        description=
+        price=
+        )
+    demo = Product(
+        seller_id=3
+        category_id=4
+        name=
+        description=
+        price=
+        )
+    demo = Product(
+        seller_id=1
+        category_id=5
+        name=
+        description=
+        price=
+        )
+    demo = Product(
+        seller_id=2
+        category_id=5
+        name=
+        description=
+        price=
         )
 
 
