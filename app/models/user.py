@@ -1,11 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-# from .product import Product
-# from .cartItem import CartItem
-# from .favorite import Favorite
-# from .review import Review
-# from .pastOrder import PastOrder
 
 
 class User(db.Model, UserMixin):
