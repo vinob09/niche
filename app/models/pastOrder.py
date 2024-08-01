@@ -1,6 +1,5 @@
-from .db import db, environment, SCHEMA
-# from .user import User
-# from .orderItem import OrderItem
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+
 
 class PastOrder(db.Model):
     __tablename__ = 'past_orders'
@@ -9,7 +8,7 @@ class PastOrder(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    purchaser_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    purchaser_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     total = db.Column(db.Float, nullable=False)
     purchase_date = db.Column(db.Date, nullable=False)
     has_reviewed = db.Column(db.Boolean, nullable=False)
