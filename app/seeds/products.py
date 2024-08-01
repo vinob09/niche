@@ -47,31 +47,31 @@ def seed_products():
         price=40
         )
     car = Product(
-        seller_id=1
-        category_id=4
-        name='Kids Ride on Car Truck'
-        description='12V 7Ah Kids Electric Vehicles Car Ride on Toy for Toddlers 3-5 with Remote Control'
+        seller_id=1,
+        category_id=4,
+        name='Kids Ride on Car Truck',
+        description='12V 7Ah Kids Electric Vehicles Car Ride on Toy for Toddlers 3-5 with Remote Control',
         price=40
         )
     psfive = Product(
-        seller_id=3
-        category_id=4
-        name='PlayStation®5 console (slim)'
-        description='Includes DualSense Wireless Controller, 1TB SSD, Disc Drive, 2 Horizontal Stand Feet, HDMI Cable, AC power cord, USB cable'
+        seller_id=3,
+        category_id=4,
+        name='PlayStation®5 console (slim)',
+        description='Includes DualSense Wireless Controller, 1TB SSD, Disc Drive, 2 Horizontal Stand Feet, HDMI Cable, AC power cord, USB cable',
         price=449
         )
     exhaust = Product(
-        seller_id=2
-        category_id=5
-        name='BMW F30 / F22 / F36 / F32 Valved Sport Exhaust'
-        description='BMW F30 / F22 / F36 / F32 Valved Sport Exhaust System (Axleback) F chassis'
+        seller_id=2,
+        category_id=5,
+        name='BMW F30 / F22 / F36 / F32 Valved Sport Exhaust',
+        description='BMW F30 / F22 / F36 / F32 Valved Sport Exhaust System (Axleback) F chassis',
         price=1099
         )
     kw = Product(
-        seller_id=1
-        category_id=5
-        name='KW  VARIANT 3 COIL-OVER'
-        description='"Race technology for the road with adjustable compression and rebound damping"'
+        seller_id=1,
+        category_id=5,
+        name='KW  VARIANT 3 COIL-OVER',
+        description="Race technology for the road with adjustable compression and rebound damping",
         price=2454
         )
 
