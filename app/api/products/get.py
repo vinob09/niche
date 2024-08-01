@@ -1,9 +1,6 @@
-from flask import Flask, Blueprint, render_template, redirect, url_for
-from flask_migrate import Migrate
+from flask import Blueprint, render_template
 #IMPORT FORMS
-from app.config import Config
-from app.models import db, Product, Review, ProductImage, Favorite
-from sqlalchemy.orm import joinedload
+from app.models import Product
 
 product_routes = Blueprint("products", __name__)
 
@@ -13,9 +10,3 @@ def get_all_products():
     products = Product.query.all()
     '''LANDING PAGE TO TAKE IN products'''
     return render_template('/products', products=products)
-
-
-
-
-
-
