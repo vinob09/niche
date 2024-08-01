@@ -7,7 +7,7 @@ category_routes = Blueprint("categories", __name__)
 
 '''GET all Products'''
 
-@product_get_routes.route("/products", methods=['GET'])
+@product_get_routes.route("", methods=['GET'])
 def get_all_products():
     products = Product.query.all()
     products_data = [product.to_dict() for product in products]
@@ -16,7 +16,7 @@ def get_all_products():
 
 '''GET a Product by product_id'''
 
-@product_get_routes.route("/products/<int:product_id>", methods=['GET'])
+@product_get_routes.route("/<int:product_id>", methods=['GET'])
 def get_product(product_id):
     product = Product.query.get_or_404(product_id)
     product_images = ProductImage.query.filter_by(product_id=product_id).all()
@@ -40,7 +40,7 @@ def get_product(product_id):
 
 '''GET all Products Owned by the Current User'''
 
-@product_get_routes.route("/products/current", methods=['GET'])
+@product_get_routes.route("/current", methods=['GET'])
 @login_required
 def get_curr_user_products():
 
@@ -55,7 +55,7 @@ def get_curr_user_products():
 
 '''GET all Products by Category'''
 
-@product_get_routes.route("/products/categories/<int:category_id>", methods=['GET'])
+@product_get_routes.route("/categories/<int:category_id>", methods=['GET'])
 def get_products_by_category(category_id):
     Category.query.get_or_404(category_id)
     products = Product.query.filter_by(category_id=category_id).all()
@@ -66,7 +66,7 @@ def get_products_by_category(category_id):
 
 '''GET all Categories'''
 
-@category_routes.route("/categories", methods=['GET'])
+@category_routes.route("", methods=['GET'])
 def get_categories():
     categories = Category.query.all()
     categories_data = [category.to_dict() for category in categories]
