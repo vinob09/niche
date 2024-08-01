@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_cartItem():
+def seed_cart_items():
     cart1 = CartItem(
         user_id=1,
         product_id=10,
@@ -20,7 +20,7 @@ def seed_cartItem():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_cartItem():
+def undo_cart_items():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.cart_items RESTART IDENTITY CASCADE;")
     else:

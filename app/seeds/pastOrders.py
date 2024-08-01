@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_pastOrder():
+def seed_past_orders():
     order1 = PastOrder(
         purchaser_id=1,
         total=40,
@@ -21,7 +21,7 @@ def seed_pastOrder():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_pastOrder():
+def undo_past_orders():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.past_orders RESTART IDENTITY CASCADE;")
     else:
