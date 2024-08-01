@@ -2,17 +2,17 @@ from flask import Blueprint, render_template
 from flask_login import current_user, login_required
 from app.models import Product, ProductImage, Review, Favorite, Category, db
 
-product_routes = Blueprint("products", __name__)
+product_get_routes = Blueprint("product_get", __name__)
 category_routes = Blueprint("categories", __name__)
 
 '''GET all Products'''
-@product_routes.route("/products", methods=['GET'])
+@product_get_routes.route("/products", methods=['GET'])
 def get_all_products():
     products = Product.query.all()
     return render_template('productsComponent', products=products)
 
 '''GET a Product by product_id'''
-@product_routes.route("/products/<int:product_id>", methods=['GET'])
+@product_get_routes.route("/products/<int:product_id>", methods=['GET'])
 def get_product(product_id):
     product = Product.query.get_or_404(product_id)
     product_images = ProductImage.query.filter_by(product_id=product_id).all()
@@ -34,7 +34,7 @@ def get_product(product_id):
     return render_template('/productdetail.html', product=product_data)
 
 '''GET all Products Owned by the Current User'''
-@product_routes.route("/prducts/current", methods=['GET'])
+@product_get_routes.route("/prducts/current", methods=['GET'])
 @login_required
 def get_curr_user_products():
 
@@ -46,7 +46,7 @@ def get_curr_user_products():
 '''CATEGORIES.. own routes?'''
 
 '''GET all Products by Category'''
-@product_routes.route("/products/categories/<int:category_id>", methods=['GET'])
+@product_get_routes.route("/products/categories/<int:category_id>", methods=['GET'])
 def get_products_by_category(category_id):
     category = Category.query.get_or_404(category_id)
 
