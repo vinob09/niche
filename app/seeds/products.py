@@ -28,7 +28,7 @@ def seed_products():
     charger = Product(
         seller_id=3,
         category_id=2,
-        name='Personalized Walnut Wood iPhone Apple Watch Airpods Wireless Charger',
+        name='Personalized Walnut Wood Wireless Charger',
         description='This handmade walnut wood 4 in 1 wireless charger is the perfect combination of form and function.',
         price=40
         )
@@ -63,7 +63,7 @@ def seed_products():
     exhaust = Product(
         seller_id=2,
         category_id=5,
-        name='BMW F30 / F22 / F36 / F32 Valved Sport Exhaust',
+        name='BMW FXX Valved Sport Exhaust',
         description='BMW F30 / F22 / F36 / F32 Valved Sport Exhaust System (Axleback) F chassis',
         price=1099
         )
