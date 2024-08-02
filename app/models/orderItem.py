@@ -1,6 +1,5 @@
-from .db import db, environment, SCHEMA
-# from .pastOrder import PastOrder
-# from .product import Product
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+
 
 class OrderItem(db.Model):
     __tablename__ = 'order_items'
@@ -9,8 +8,8 @@ class OrderItem(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.Integer, db.ForeignKey('past_orders.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    order_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('past_orders.id')), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
     # many to one with PastOrder

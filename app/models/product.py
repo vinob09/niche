@@ -1,11 +1,5 @@
-from .db import db, environment, SCHEMA
-# from .user import User
-# from .category import Category
-# from .favorite import Favorite
-# from .cartItem import CartItem
-# from .orderItem import OrderItem
-# from .review import Review
-# from .productImage import ProductImage
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -14,8 +8,8 @@ class Product(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    seller_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
     price = db.Column(db.Float, nullable=False)
