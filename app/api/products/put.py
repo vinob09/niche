@@ -14,7 +14,7 @@ product_put_routes = Blueprint("product_put", __name__)
 
 #     if product.seller_id == current_user.id:
 #         form = ProductDetailForm()
-#         #cookies
+#         form['csrf_token'].data = request.cookies['csrf_token']
 #         if form.validate_on_submit():
 #             product.name = form.data['name'],
 #             product.description = form.data['description'],
