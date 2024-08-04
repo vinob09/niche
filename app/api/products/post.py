@@ -11,7 +11,7 @@ product_post_routes = Blueprint("product_post", __name__)
 # @login_required
 # def create_product():
 #     # form = ProductDetailForm() #to be created
-#     #cookies
+#    form['csrf_token'].data = request.cookies['csrf_token']
 #     if form.validate_on_submit():
 #         new_product = Product(
 #          seller_id = current_user.id,
@@ -30,7 +30,7 @@ product_post_routes = Blueprint("product_post", __name__)
 # @login_required
 # def new_product_review(product_id):
 #     form = ProductReviewForm()
-
+#     form['csrf_token'].data = request.cookies['csrf_token']
 #     if form.validate_on_submit():
 #         review = form.review.data
 #         star_rating = form.star_rating.data
