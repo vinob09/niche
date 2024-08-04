@@ -56,8 +56,19 @@ def get_curr_user_products():
         return jsonify(products_data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-'''    CATEGORIES   '''
 
+
+'''Get all Reviews by a Product's id'''
+
+@product_get_routes('/<int:product_id>/reviews', methods=['GET'])
+def get_reviews_by_product_id(product_id):
+    reviews = Review.query.filter_by(product_id=product_id).all()
+    if not reviews:
+        return jsonify({'error': 'No reviews for this product'}), 404
+    return jsonify([review.to_dict() for review in reviews]), 200
+
+
+'''CATEGORIES'''
 
 '''GET all Products by Category'''
 
@@ -68,9 +79,11 @@ def get_products_by_category(category_id):
         products = Product.query.filter_by(category_id=category_id).all()
         products_data = [product.to_dict() for product in products]
 
-        return jsonify(products_data)
+        return jsonify(products_data), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
 
 
 '''GET all Categories'''
