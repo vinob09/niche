@@ -11,8 +11,8 @@ cart_add_items = Blueprint('cart_items_post', __name__)
 @login_required
 def add_to_cart(product_id):
     check_cart = CartItem.query.filter(CartItem.user_id==current_user.id, CartItem.product_id==product_id).all()
+    r = request.get_json()
     if check_cart:
-        r = request.get_json()
         check_cart[0].quantity = r['quantity']
         db.session.commit()
         return jsonify(check_cart[0].to_dict())
@@ -20,7 +20,7 @@ def add_to_cart(product_id):
         cart_item = CartItem(
         user_id = current_user.id,
         product_id = product_id,
-        quantity=1
+        quantity = r['quantity']
         )
 
         db.session.add(cart_item)
