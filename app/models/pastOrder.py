@@ -21,8 +21,8 @@ class PastOrder(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'userId': self.user_id,
-            'productId': self.product_id,
-            'review': self.review,
-            'starRating': self.star_rating
+            'purchaserId': self.purchaser_id,
+            'total': self.total,
+            'purchaseDate': self.purchase_date,
+            'hasReviewed': self.has_reviewed
         }
