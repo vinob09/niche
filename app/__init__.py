@@ -14,6 +14,9 @@ from .api.products.delete import product_delete_routes
 from .api.reviews.get import review_get_routes
 from .api.reviews.delete import review_delete_routes
 from .api.reviews.put import review_put_routes
+from .api.favorites.get import favorite_get_routes
+from .api.favorites.delete import favorite_delete_routes
+from .api.favorites.post import favorite_post_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -43,6 +46,9 @@ app.register_blueprint(category_routes, url_prefix='/api/categories')
 app.register_blueprint(review_get_routes, url_prefix='/api/reviews')
 app.register_blueprint(review_delete_routes, url_prefix='/api/reviews')
 app.register_blueprint(review_put_routes, url_prefix='/api/reviews')
+app.register_blueprint(favorite_get_routes, url_prefix='/api/favorites')
+app.register_blueprint(favorite_delete_routes, url_prefix='/api/favorites')
+app.register_blueprint(favorite_post_routes, url_prefix='/api/favorites')
 db.init_app(app)
 Migrate(app, db)
 

@@ -5,7 +5,7 @@ from app.models import Review, db
 review_delete_routes = Blueprint("review_delete", __name__)
 
 
-@review_delete_routes.route("/<int:review_id>")
+@review_delete_routes.route("/<int:review_id>", methods=["DELETE"])
 @login_required
 def delete_review(review_id):
     '''
