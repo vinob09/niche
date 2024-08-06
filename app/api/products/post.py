@@ -1,31 +1,32 @@
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
-from app.models import Product, Review, PastOrder, db
-# from app.forms import ProductDetailForm #TO BE CREATED
+from app.models import Product, Review, PastOrder, Category, db
+from app.forms.product_form import ProductForm
 from app.forms.review_form import ReviewForm 
 
 
 product_post_routes = Blueprint("product_post", __name__)
 
 '''POST a New Product'''
-# @product_post_routes.route("", methods=["POST"])
-# @login_required
-# def create_product():
-#     # form = ProductDetailForm() #to be created
-#    form['csrf_token'].data = request.cookies['csrf_token']
-#     if form.validate_on_submit():
-#         new_product = Product(
-#          seller_id = current_user.id,
-#          category_id = form.data['category_id'],
-#          name = form.data['name'],
-#          description = form.data['description'],
-#          price = form.data['price']
-#         )
-#         db.session.add(new_product)
-#         db.session.commit()
+@product_post_routes.route("", methods=["POST"])
+@login_required
+def create_product():
+   form = ProductForm()
+   form.category_id.options = [(category.id, category.name) for category in Category.query.all()]
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+        new_product = Product(
+         seller_id = current_user.id,
+         name = form.data['name'],
+         description = form.data['description'],
+         price = form.data['price'],
+         category_id = form.data['category_id']
+        )
+        db.session.add(new_product)
+        db.session.commit()
 
-#         return jsonify({"product_id": new_product.id}), 201
-#     return jsonify(form.errors), 400
+        return jsonify({"product_id": new_product.id}), 201
+   return jsonify(form.errors), 400
 '''POST a New Review for a Product by Product's id'''
 @product_post_routes.route('/<int:product_id>/reviews', methods=['POST'])
 @login_required
