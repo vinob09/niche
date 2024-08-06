@@ -68,6 +68,9 @@ def add_image(product_id):
         if not product:
             return {"errors": {"message": "Invalid product id"}}, 404
 
+        if product.seller_id != current_user.id:
+            return {"errors": {"message": "You must own this product to add an image"}}, 403
+
         new_image = ProductImage(
             product_id=product_id,
             url=form.data['url']
