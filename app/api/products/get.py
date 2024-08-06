@@ -60,6 +60,7 @@ def get_curr_user_products():
 
 '''Get all Reviews by a Product's id'''
 
+
 @product_get_routes.route('/<int:product_id>/reviews', methods=['GET'])
 def get_reviews_by_product_id(product_id):
     reviews = Review.query.filter_by(product_id=product_id).all()
@@ -96,3 +97,4 @@ def get_categories():
       return jsonify(categories_data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
