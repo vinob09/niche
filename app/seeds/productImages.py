@@ -111,7 +111,7 @@ def seed_images():
     add_all_images = [db.session.add(image) for image in all_images]
     print("All images added")
 
-    db.session.commit(add_all_images)
+    db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
