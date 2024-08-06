@@ -19,17 +19,21 @@ def get_past_orders():
 
     return jsonify(order_data)
 
+'''
+    Get all items and their details from a past order
+'''
+
 @past_order_get_routes.route("/<int:order_id>")
 @login_required
-def get_past_orders(order_id):
+def get_order_items(order_id):
     order_items = OrderItem.query.filter_by(order_id=order_id).all()
     items_data = [item.to_dict() for item in order_items]
 
     for item in items_data:
-        product = Product.query.filter_by(id=item.product_id).first()
-        item['Product_details'] = product.to_dic()
+        product = Product.query.get(item['productId'])
+        item['Product_details'] = product.to_dict()
 
     if not order_items:
-        return {"errors": {"message": "Past Order does not exist"}}
+        return {"errors": {"message": "Items not found"}}, 404
 
     return jsonify(items_data)
