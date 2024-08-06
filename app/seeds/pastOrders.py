@@ -1,5 +1,6 @@
 from app.models import db, PastOrder, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import date
 
 
 # Adds a demo user, you can add other users here if you want
@@ -7,7 +8,7 @@ def seed_past_orders():
     order1 = PastOrder(
         purchaser_id=1,
         total=40,
-        purchase_date='2024-07-31',
+        purchase_date= date(2024,7,31),
         has_reviewed=0
         )
 
