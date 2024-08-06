@@ -10,7 +10,7 @@ Delete cart item by cart id
 
 @cart_delete_items.route("/<int:cart_item_id>", methods=['DELETE'])
 @login_required
-def add_to_cart(cart_item_id):
+def remove_from_cart(cart_item_id):
     check_cart = CartItem.query.filter_by(id=cart_item_id).first()
 
     if not check_cart:
