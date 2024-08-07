@@ -8,14 +8,14 @@ class Product(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    seller_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=False)
+    seller_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='SET NULL'), nullable=True)
+    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id'), ondelete='SET NULL'), nullable=True)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
     price = db.Column(db.Float, nullable=False)
 
     # many to one with User
-    seller = db.relationship("User", back_populates="products")
+    seller = db.relationship("User", back_populates="products", passive_deletes=True)
     # one to many with Favorite
     favorites = db.relationship("Favorite", back_populates="product")
     # one to many with CartItem
@@ -27,7 +27,7 @@ class Product(db.Model):
     # one to many with ProductImage
     images = db.relationship("ProductImage", back_populates="product")
     # many to one with User
-    category = db.relationship("Category", back_populates="products")
+    category = db.relationship("Category", back_populates="products", passive_deletes=True)
 
 
     def to_dict(self):
