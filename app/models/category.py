@@ -10,7 +10,7 @@ class Category(db.Model):
     category_name = db.Column(db.String(40), nullable=False)
 
     # one to many with Product
-    products = db.relationship("Product", back_populates="category")
+    products = db.relationship("Product", back_populates="category", passive_deletes=True)
 
 
     def to_dict(self):

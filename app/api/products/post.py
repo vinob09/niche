@@ -1,58 +1,60 @@
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
-from app.models import Product, Review, PastOrder, ProductImage, db
-# from app.forms import ProductDetailForm #TO BE CREATED
-#from app.forms import ProductReviewForm #TO BE CREATED
+from app.models import Product, Review, PastOrder, ProductImage, Category, db
 from app.forms import ImageForm
+from app.forms.product_form import ProductForm
+from app.forms.review_form import ReviewForm 
+
 
 product_post_routes = Blueprint("product_post", __name__)
 
 '''POST a New Product'''
-# @product_post_routes.route("", methods=["POST"])
-# @login_required
-# def create_product():
-#     # form = ProductDetailForm() #to be created
-#    form['csrf_token'].data = request.cookies['csrf_token']
-#     if form.validate_on_submit():
-#         new_product = Product(
-#          seller_id = current_user.id,
-#          category_id = form.data['category_id'],
-#          name = form.data['name'],
-#          description = form.data['description'],
-#          price = form.data['price']
-#         )
-#         db.session.add(new_product)
-#         db.session.commit()
+@product_post_routes.route("", methods=["POST"])
+@login_required
+def create_product():
+   form = ProductForm()
+   form.category_id.options = [(category.id, category.name) for category in Category.query.all()]
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+        new_product = Product(
+         seller_id = current_user.id,
+         name = form.data['name'],
+         description = form.data['description'],
+         price = form.data['price'],
+         category_id = form.data['category_id']
+        )
+        db.session.add(new_product)
+        db.session.commit()
 
-#         return jsonify({"product_id": new_product.id}), 201
-#     return jsonify(form.errors), 400
+        return jsonify({"product_id": new_product.id}), 201
+   return jsonify(form.errors), 400
 '''POST a New Review for a Product by Product's id'''
-# @product_post_routes.route('/<int:product_id>/reviews', methods=['POST'])
-# @login_required
-# def new_product_review(product_id):
-#     form = ProductReviewForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     if form.validate_on_submit():
-#         review = form.review.data
-#         star_rating = form.star_rating.data
+@product_post_routes.route('/<int:product_id>/reviews', methods=['POST'])
+@login_required
+def new_product_review(product_id):
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        review = form.review.data
+        star_rating = form.star_rating.data
 
 
-#         past_order = PastOrder.query.filter_by(purchaser_id=current_user.id, product_id=product_id).first()
+        past_order = PastOrder.query.filter_by(purchaser_id=current_user.id, product_id=product_id).first()
 
-#         if not past_order:
-#             return jsonify({'error': 'User must have this product in a past order.'}), 403
+        if not past_order:
+            return jsonify({'error': 'User must have this product in a past order.'}), 403
 
-#         new_review = Review(
-#          user_id = current_user.id,
-#           product_id = product_id,
-#           review = review,
-#          star_rating = star_rating
-#         )
-#         db.session.add(new_review)
-#         db.session.commit()
+        new_review = Review(
+         user_id = current_user.id,
+          product_id = product_id,
+          review = review,
+         star_rating = star_rating
+        )
+        db.session.add(new_review)
+        db.session.commit()
 
-#         return jsonify({'review_id': new_review.id}), 201
-#     return jsonify(form.errors), 400
+        return jsonify({'review_id': new_review.id}), 201
+    return jsonify(form.errors), 400
 
 
 '''POST an Image to a Product based on Id'''
