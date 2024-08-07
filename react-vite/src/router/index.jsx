@@ -30,41 +30,41 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path: "/categories/:category_id",
+        path: "categories/:category_id",
         element: <CategoryPage />
       },
       {
-        path: "/favorites",
+        path: "favorites",
         element: <FavoritePage />
       },
       {
-        path: "/products/:product_id",
+        path: "products/:product_id",
         element: <ProductDetailsPage />
       },
       {
-        path: "/products/new-product",
+        path: "products/new-product",
         element: <NewProductFormPage />
       },
       {
-        path: "/products/my-products",
+        path: "products/my-products",
         element: <UserProductsPage />
       },
       {
-        path: "/:user_id",
+        path: ":user_id",
         element: <UserDetailsPage />
       },
       {
-        path: "/shopping-cart",
+        path: "shopping-cart",
         element: <CartDetailsPage />
       },
       {
-        path: "/products/:product_id/review-form",
+        path: "products/:product_id/review-form",
         /*We can decide to remove this and have the modal pop up
         instead on the Product Details page if more streamlined*/
         element: <ReviewFormModal />
       },
       {
-        path: "/past-orders",
+        path: "past-orders",
         element: <PastOrdersPage />
       }
     ],
