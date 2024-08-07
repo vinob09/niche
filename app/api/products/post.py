@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
-from app.models import Product, Review, PastOrder, Category, db
+from app.models import Product, Review, PastOrder, ProductImage, Category, db
+from app.forms import ImageForm
 from app.forms.product_form import ProductForm
 from app.forms.review_form import ReviewForm 
 
@@ -42,7 +43,7 @@ def new_product_review(product_id):
 
         if not past_order:
             return jsonify({'error': 'User must have this product in a past order.'}), 403
-    
+
         new_review = Review(
          user_id = current_user.id,
           product_id = product_id,
@@ -54,3 +55,31 @@ def new_product_review(product_id):
 
         return jsonify({'review_id': new_review.id}), 201
     return jsonify(form.errors), 400
+
+
+'''POST an Image to a Product based on Id'''
+@product_post_routes.route("/<int:product_id>/images", methods=["POST"])
+@login_required
+def add_image(product_id):
+    form = ImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        product = Product.query.get(product_id)
+
+        if not product:
+            return {"errors": {"message": "Invalid product id"}}, 404
+
+        if product.seller_id != current_user.id:
+            return {"errors": {"message": "You must own this product to add an image"}}, 403
+
+        new_image = ProductImage(
+            product_id=product_id,
+            url=form.data['url']
+        )
+
+        db.session.add(new_image)
+        db.session.commit()
+        return new_image.to_dict()
+
+    return form.errors, 401

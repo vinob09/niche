@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
 from app.models import Review, db
-from app.forms.review_form import ReviewForm
+from app.forms import ReviewForm
 
 
 review_put_routes = Blueprint("review_put", __name__)
