@@ -8,13 +8,13 @@ class Favorite(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='SET NULL'), nullable=True)
+    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id'), ondelete='SET NULL'), nullable=True)
 
     # many to one with User
-    user = db.relationship("User", back_populates="favorites")
+    user = db.relationship("User", back_populates="favorites", passive_deletes=True)
     # many to one with Product
-    product = db.relationship("Product", back_populates="favorites")
+    product = db.relationship("Product", back_populates="favorites", passive_deletes=True)
 
     def to_dict(self):
         return {
