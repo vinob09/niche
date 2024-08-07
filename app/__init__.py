@@ -11,13 +11,14 @@ from .api.products.get import product_get_routes, category_routes
 from .api.products.post import product_post_routes
 from .api.products.put import product_put_routes
 from .api.products.delete import product_delete_routes
-from .api.cart_items import cart_get_items, cart_add_items
+from .api.cart_items import cart_get_items, cart_add_items, cart_delete_items
 from .api.reviews.get import review_get_routes
 from .api.reviews.delete import review_delete_routes
 from .api.reviews.put import review_put_routes
 from .api.favorites.get import favorite_get_routes
 from .api.favorites.delete import favorite_delete_routes
 from .api.favorites.post import favorite_post_routes
+from .api.past_orders import past_order_get_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -46,12 +47,14 @@ app.register_blueprint(product_delete_routes, url_prefix='/api/products')
 app.register_blueprint(category_routes, url_prefix='/api/categories')
 app.register_blueprint(cart_get_items, url_prefix='/api/cart')
 app.register_blueprint(cart_add_items, url_prefix='/api/cart')
+app.register_blueprint(cart_delete_items, url_prefix='/api/cart')
 app.register_blueprint(review_get_routes, url_prefix='/api/reviews')
 app.register_blueprint(review_delete_routes, url_prefix='/api/reviews')
 app.register_blueprint(review_put_routes, url_prefix='/api/reviews')
 app.register_blueprint(favorite_get_routes, url_prefix='/api/favorites')
 app.register_blueprint(favorite_delete_routes, url_prefix='/api/favorites')
 app.register_blueprint(favorite_post_routes, url_prefix='/api/favorites')
+app.register_blueprint(past_order_get_routes, url_prefix='/api/past-orders')
 db.init_app(app)
 Migrate(app, db)
 
