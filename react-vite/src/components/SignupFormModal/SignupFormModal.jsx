@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
-import "./SignupForm.css";
+import "./SignupFormModal.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div className="signup-form-modal">
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
@@ -85,7 +85,7 @@ function SignupFormModal() {
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
