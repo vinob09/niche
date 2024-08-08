@@ -7,7 +7,6 @@ import LandingPage from '../components/LandingPage';
 import ProductDetailsPage from '../components/ProductDetailsPage';
 import NewProductFormPage from '../components/NewProductFormPage';
 import UserProductsPage from '../components/UserProductsPage';
-import UserDetailsPage from '../components/UserDetailsPage';
 import CartDetailsPage from '../components/CartDetailsPage';
 import ReviewFormModal from '../components/ReviewFormModal';
 import PastOrdersPage from '../components/PastOrdersPage';
@@ -48,10 +47,6 @@ export const router = createBrowserRouter([
       {
         path: "products/my-products",
         element: <UserProductsPage />
-      },
-      {
-        path: ":user_id",
-        element: <UserDetailsPage />
       },
       {
         path: "shopping-cart",
