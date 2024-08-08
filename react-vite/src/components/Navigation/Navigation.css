@@ -1,4 +1,6 @@
+/*NAVBAR */
 .navbar {
+  position: relative;
   margin: 0px;
   border: 1px solid rgb(187, 251, 220);
   padding: 0px 15px 0px 5px;
@@ -8,26 +10,140 @@
   justify-content: space-between;
   height: 60px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: #bcebd4;
+  overflow: hidden;
 }
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #92beac 0%, #a6e4c6 40%, #c0f0d8 100%);
+  opacity: 0;
+  /* Start with hidden gradient */
+  transition: opacity 0.3s ease;
+  /* Transition on opacity */
+  z-index: 0;
+  /* Ensure it stays behind the content */
+}
+.navbar:hover .gradient-overlay {
+  opacity: 1;
+  /* Fade in gradient on hover */
+}
+.navbar ul {
+  position: relative;
+  /* Make sure the list is above the gradient */
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  flex-grow: 1;
+    /* Ensure it grows to fill available space */
+    justify-content: space-between;
+    /* Distribute items evenly */
+}
+
+.navbar li {
+  display: flex;
+  align-items: center;
+}
+/*.navbar:hover{
+  background: linear-gradient(to bottom, #92beac 0%, #a6e4c6 40%, #c0f0d8 100%);
+}*/
+
+
+/* HOME */
 .home-link {
   text-decoration: none;
   color: black;
   font-weight: bolder;
   font-size: x-large;
+  transition: color 0.3s;
+}
+/* Categories, Favs, Products, Cart*/
+.navbar a {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  padding-bottom: 5px;
+}
+.navbar a::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.navbar a:hover::after{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.search-bar{
+  flex-grow: 1;
+  max-width: 600px;
+  text-align: center;
+}
+
+/*SEARCH*/
+.search-bar input {
+  width: 100%;
+  padding: 4px;
+  font-size: medium;
 }
 .profile-menu {
   display: flex;
   flex-direction: row;
-
+  align-items: center;
 }
 .user-circle {
   border: 1px solid rgb(187, 251, 220);
-  border-radius: 60%;
+  border-radius: 50%;
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
 }
+.shopping-cart{
+  margin-left: 10px;
+}
+
+/*PROFILE*/
 .profile-dropdown {
   list-style: none;
   color:rgb(151, 149, 149);
 
+}
+.profile-dropdown li{
+  margin: 5px 0;
+}
+
+/*Categories/Favorites*/
+.categories-button {
+  margin: 0px 10px;
+}
+.favorites-button, products-button{
+  margin-right: 15px;
+}
+
+/* LOGGED OUT USER*/
+.logged-out .user-cart{
+  margin-left: auto;
+}
+
+/*LOGGED IN USER*/
+.logged-in .favorites-button, .logged-in .products-button{
+  margin-right: 10px;
+}
+.logged-in .user-cart{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
 }
 .menu-items {
   list-style: none;
