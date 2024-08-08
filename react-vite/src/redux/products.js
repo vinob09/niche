@@ -6,7 +6,6 @@ const GET_PRODUCTS = 'products/getAll';
 const GET_PRODUCT = 'products/productId';
 const GET_MY_PRODUCTS = 'products/current';
 const CREATE_PRODUCT = 'products/new';
-// const GET_PRODUCT_REVIEWS = 'products/productId/reviews'
 // const CREATE_REVIEW = 'products/productId/createReviews'
 // const DELETE_REVIEW = 'reviews/reviewId'
 
@@ -87,14 +86,15 @@ export const fetchCreateProduct = (product) => async (dispatch) => {
     return data;
 };
 
-export const fetchDeleteProduct = (spotId) => async () => {
-    const response = await csrfFetch(`/api/spots/${spotId}`, {
+export const fetchDeleteProduct = (spotId) => async (dispatch) => {
+    await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     });
-    return Promise.all([
+    const refresh = await Promise.all([
         dispatch(fetchProducts()),
         dispatch(fetchUserProducts())
     ]);
+    return refresh
 }
 
 
@@ -102,7 +102,7 @@ export const fetchDeleteProduct = (spotId) => async () => {
 this will be the initial state of the store */
 const initialState = {
     allProducts: {},
-    currProduct: null,
+    currProduct: {},
     myProducts: {},
     reviews: {},
     images: {}
@@ -119,7 +119,7 @@ const ProductsReducer = (state = initialState, action) => {
         case GET_PRODUCT:
             return {...state, currProduct: action.payload}
         case CREATE_PRODUCT:
-            const newState = {...state};
+            let newState = {...state};
             newState.allProducts[action.payload.id] = action.payload
             return newState
         default:
