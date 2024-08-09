@@ -62,7 +62,7 @@
 
 .slider {
     overflow: hidden;
-    background-color: rgb(252, 252, 252); /* Base color for the slider background */
+    background-color: rgb(222, 223, 221); /* Base color for the slider background */
     margin: 0 15px;
     height: 80px;
     width: 20px;
