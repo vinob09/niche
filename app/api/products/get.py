@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import current_user, login_required
 from app.models import Product, ProductImage, Review, Favorite, Category, db
+from sqlalchemy.orm import joinedload
 
 product_get_routes = Blueprint("product_get", __name__)
 category_routes = Blueprint("categories", __name__)
@@ -10,7 +11,7 @@ category_routes = Blueprint("categories", __name__)
 @product_get_routes.route("", methods=['GET'])
 def get_all_products():
     try:
-        products = Product.query.all()
+        products = Product.query.options(joinedload(Product.images)).all()
         products_data = [product.to_dict() for product in products]
         return jsonify(products_data)
     except Exception as e:
@@ -97,4 +98,3 @@ def get_categories():
       return jsonify(categories_data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-

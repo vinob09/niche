@@ -118,10 +118,11 @@ const ProductsReducer = (state = initialState, action) => {
             return {...state, myProducts: action.payload};
         case GET_PRODUCT:
             return {...state, currProduct: action.payload}
-        case CREATE_PRODUCT:
+        case CREATE_PRODUCT: {
             let newState = {...state};
             newState.allProducts[action.payload.id] = action.payload
             return newState
+        }
         default:
             return state;
     }
