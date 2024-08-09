@@ -3,11 +3,9 @@ import { csrfFetch } from "./csrf";
 // define action types
 /* name of the action (think url) that we want to use */
 const GET_PRODUCTS = 'products/getAll';
-// const GET_PRODUCT = 'products/productId';
-// const GET_MY_PRODUCTS = 'products/current'
-// const CREATE_PRODUCT = 'products/new'
-// // const DELETE_PRODUCT = 'products/productId/delete';
-// const GET_PRODUCT_REVIEWS = 'products/productId/reviews'
+const GET_PRODUCT = 'products/productId';
+const GET_MY_PRODUCTS = 'products/current';
+const CREATE_PRODUCT = 'products/new';
 // const CREATE_REVIEW = 'products/productId/createReviews'
 // const DELETE_REVIEW = 'reviews/reviewId'
 
@@ -20,35 +18,83 @@ const getProducts = (products) => ({
     payload: products
 })
 
-// const getMyProducts = (products) => ({
-//     type: GET_MY_PRODUCTS,
-//     payload: products
-// })
+const getMyProducts = (products) => ({
+    type: GET_MY_PRODUCTS,
+    payload: products
+})
 
-// const getProduct = (product) => ({
-//     type: GET_PRODUCT,
-//     payload: product
-// })
+const getProduct = (product) => ({
+    type: GET_PRODUCT,
+    payload: product
+})
+
+const createProduct = (product) => ({
+    type: CREATE_PRODUCT,
+    payload: product
+})
 
 // const getProductReviews = (reviews) => ({
 //     type: GET_PRODUCT_REVIEWS,
 //     payload: reviews
 // })
 
-// const createProduct = (product) => ({
-//     type: CREATE_PRODUCT,
-//     payload: product
-// })
-
 /* define a thunk
 a function that will take in the dispatch, and whatever variable you pass into it to do a thing (call the db)
 Once the call to the db for the changes you want is made, the function dispatches an action with the returned info from the db to update the store
 */
+
+//helper function to create products object with a key of product id
+const toDict = async (products) => {
+    let orderedData = {};
+    products.forEach(product => {
+        orderedData[product.id] = product
+    });
+    return orderedData;
+}
+
+
 export const fetchProducts = () => async (dispatch) => {
     const response = await csrfFetch('/api/products');
     const data = await response.json();
-    dispatch(getProducts(data))
-    return response
+    const orderedData = await toDict(data);
+    dispatch(getProducts(orderedData));
+    return response;
+};
+
+export const fetchUserProducts = () => async (dispatch) => {
+    const response = await csrfFetch('/api/products/current');
+    const data = await response.json();
+    const orderedData = await toDict(data);
+    dispatch(getMyProducts(orderedData));
+    return response;
+};
+
+export const fetchProductId = (product_id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/products/${product_id}`);
+    const data = await response.json();
+    dispatch(getProduct(data));
+    return response;
+};
+
+export const fetchCreateProduct = (product) => async (dispatch) => {
+    const response = await csrfFetch('/api/products', {
+        method: 'POST',
+        body: JSON.stringify(product)
+    });
+    const data = await response.json();
+    dispatch(createProduct(data));
+    return data;
+};
+
+export const fetchDeleteProduct = (spotId) => async (dispatch) => {
+    await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    });
+    const refresh = await Promise.all([
+        dispatch(fetchProducts()),
+        dispatch(fetchUserProducts())
+    ]);
+    return refresh
 }
 
 
@@ -56,7 +102,7 @@ export const fetchProducts = () => async (dispatch) => {
 this will be the initial state of the store */
 const initialState = {
     allProducts: {},
-    currProduct: null,
+    currProduct: {},
     myProducts: {},
     reviews: {},
     images: {}
@@ -68,6 +114,14 @@ const ProductsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_PRODUCTS:
             return {...state, allProducts: action.payload};
+        case GET_MY_PRODUCTS:
+            return {...state, myProducts: action.payload};
+        case GET_PRODUCT:
+            return {...state, currProduct: action.payload}
+        case CREATE_PRODUCT:
+            let newState = {...state};
+            newState.allProducts[action.payload.id] = action.payload
+            return newState
         default:
             return state;
     }
