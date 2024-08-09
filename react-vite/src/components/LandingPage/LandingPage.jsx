@@ -1,28 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchProducts } from '../../redux/products';
 import ProductTiles from '../ProductTiles';
 import './LandingPage.css'
 
 function LandingPage() {
     const dispatch = useDispatch();
+    const [isLoaded, setIsLoaded] = useState(false);
     const products = useSelector(state => Object.values(state.products.allProducts));
 
     useEffect(() => {
         dispatch(fetchProducts())
+        .then(() => {
+            setIsLoaded(true)
+        })
     }, [dispatch]);
 
-    // sorted by newest item added to oldest; we can change or remove this
-    const sortedProducts = products.sort((a, b) => b.id - a.id);
-
-    return (
+    return isLoaded ? (
         <div className='landing-page'>
             <h1>Welcome, user!</h1>
-            {sortedProducts.map((product) => (
+            {products.map((product) => (
                 <ProductTiles key={product.id} product={product} />
             ))}
         </div>
-    )
+    ) : (<h1>Loading...</h1>)
 }
 
 export default LandingPage;
