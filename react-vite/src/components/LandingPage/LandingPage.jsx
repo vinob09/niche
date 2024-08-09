@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchProducts } from '../../redux/products';
+import { FaHandHoldingHeart } from "react-icons/fa";
 import ProductTiles from '../ProductTiles';
+import BestSellersBar from '../BestSellersBar';
 import './LandingPage.css'
 
 function LandingPage() {
@@ -17,12 +19,19 @@ function LandingPage() {
     }, [dispatch]);
 
     return isLoaded ? (
-        <div className='landing-page'>
-            <h1>Welcome, user!</h1>
-            {products.map((product) => (
-                <ProductTiles key={product.id} product={product} />
-            ))}
-        </div>
+        <>
+            <h1 className='landing-page-title'>Welcome, user!</h1>
+            <BestSellersBar products={products} />
+            <div className='landing-page'>
+                <div className='landing-page-text'>
+                    <h2>Shop for some of our favorite picks!</h2>
+                    <p><FaHandHoldingHeart /></p>
+                </div>
+                {products.map((product) => (
+                    <ProductTiles key={product.id} product={product} />
+                ))}
+            </div>
+        </>
     ) : (<h1>Loading...</h1>)
 }
 
