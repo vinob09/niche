@@ -144,7 +144,6 @@
   .navbar,
   .home-link,
   .navbar a{
-    background-color: #bcebd4 !important;
     color: black !important;
   }
   .navbar a::after{

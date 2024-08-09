@@ -91,7 +91,7 @@
 
 @keyframes animate_2 {
     0% {
-        transform: translateY(250px) rotate(-80deg);
+        transform: translateY(250px) rotate(80deg);
         filter: hue-rotate(0deg);
     }
 
@@ -101,7 +101,7 @@
     }
 
     100% {
-        transform: translateY(250px) rotate(80deg);
+        transform: translateY(250px) rotate(-80deg);
         filter: hue-rotate(180deg); /* Adjusted to mint green hues */
     }
 }
