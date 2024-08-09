@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import { fetchCreateProduct } from '../../redux/products';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 
 function NewProductFormPage () {
     const dispatch = useDispatch();
@@ -24,6 +25,12 @@ function NewProductFormPage () {
         };
         fetchCategories();
     }, []);
+    useEffect(() => {
+        dispatch(fetchProducts())
+            .then(() => {
+                setIsLoaded(true)
+            })
+    }, [dispatch]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,7 +53,7 @@ function NewProductFormPage () {
         }
     }
 
-    return (
+    return isLoaded ? (
         <form onSubmit={handleSubmit} className = 'product-form'>
             <ul>
                 {errors.map((err, i) => <li key={i}>{err}</li>)}
@@ -89,7 +96,7 @@ function NewProductFormPage () {
             </div>
             <button type='submit'>create product</button>
         </form>
-    )
+    ) : <Loader/>;
 }
 
 export default NewProductFormPage;
