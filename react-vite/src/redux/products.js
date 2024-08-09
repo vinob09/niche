@@ -6,10 +6,15 @@ const GET_PRODUCTS = 'products/getAll';
 const GET_PRODUCT = 'products/productId';
 const GET_MY_PRODUCTS = 'products/current';
 const CREATE_PRODUCT = 'products/new';
-// const CREATE_REVIEW = 'products/productId/createReviews'
-// const DELETE_REVIEW = 'reviews/reviewId'
+// edit uses the get product to reload the product after the edit
+// delete uses the get products to reload all products
 
-/*uncommented out the above and functions below to bypass linter warning of unused variables*/
+const GET_CATEGORIES = 'categories/getAll';
+const GET_PRODUCTS_BY_CATEGORY = 'products/categories/catId'
+
+const GET_FAVORITES = '/api/favorites'
+const POST_FAVORITE = '/api/favorites/favId'
+// delete uses the get favs to reload all favs
 
 /* define actions
 A function that takes in the change you want to make and sends it to the reducer along with the action type (url) */
@@ -33,10 +38,20 @@ const createProduct = (product) => ({
     payload: product
 })
 
-// const getProductReviews = (reviews) => ({
-//     type: GET_PRODUCT_REVIEWS,
-//     payload: reviews
-// })
+const getCategories = (categories) => ({
+    type: GET_CATEGORIES,
+    payload: categories
+})
+
+const getProductsByCategory = (payload) => ({
+    type: GET_PRODUCTS_BY_CATEGORY,
+    payload
+})
+
+const getUserFavorites = (payload) => ({
+    type: GET_FAVORITES,
+    payload
+})
 
 /* define a thunk
 a function that will take in the dispatch, and whatever variable you pass into it to do a thing (call the db)
@@ -86,8 +101,29 @@ export const fetchCreateProduct = (product) => async (dispatch) => {
     return data;
 };
 
-export const fetchDeleteProduct = (spotId) => async (dispatch) => {
-    await csrfFetch(`/api/spots/${spotId}`, {
+export const fetchEditProduct = (product) => async (dispatch) => {
+    const {product_id, name, description, price, category_id} = product
+    const response = await csrfFetch(`/api/products/${product_id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            name,
+            description,
+            price,
+            category_id
+        })
+    });
+
+    if (response.okay) {
+        const refresh = await Promise.all([
+            dispatch(fetchProductId(product_id)),
+            dispatch(fetchProducts())
+        ]);
+        return refresh;
+    }
+}
+
+export const fetchDeleteProduct = (product_id) => async (dispatch) => {
+    await csrfFetch(`/api/spots/${product_id}`, {
         method: 'DELETE'
     });
     const refresh = await Promise.all([
@@ -97,6 +133,96 @@ export const fetchDeleteProduct = (spotId) => async (dispatch) => {
     return refresh
 }
 
+export const fetchCreateReview = (payload) => async (dispatch) => {
+    const { product_id, review, star_rating } = payload
+    const response = await csrfFetch(`/api/products/${product_id}/reviews`, {
+        method: 'POST',
+        body: JSON.stringify({
+            review,
+            star_rating
+        })
+    });
+    if (response.okay) {
+        const refresh = await Promise.all([
+        dispatch(fetchProductId(product_id))
+        ])
+        return refresh
+    }
+}
+
+export const fetchEditReview = (payload) => async (dispatch) => {
+    const { review_id, review, star_rating } = payload
+    const response = await csrfFetch(`/api/reviews/${review_id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            review,
+            star_rating
+        })
+    })
+    if (response.okay) {
+        const refresh = await Promise.all([
+            dispatch(fetchProductId(product_id))
+        ])
+        return refresh
+    }
+}
+
+export const fetchDeleteReview = (review_id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${review_id}`, {
+        method: 'DELETE'
+    });
+
+    if (response.okay) {
+        const refresh = await Promise.all([
+        dispatch(fetchProductId(productId))
+        ])
+        return refresh
+    }
+
+}
+
+export const fetchCategories = () => async (dispatch) => {
+    const response = await csrfFetch('/api/categories')
+
+    if (response.okay) {
+        const data = await response.json();
+        const orderedData = await toDict(data);
+        dispatch(getCategories(orderedData));
+        return response;
+    }
+}
+
+export const fetchProductsByCategory = (cat_id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/products/categories/${cat_id}`)
+
+    if (response.okay) {
+        const data = await response.json();
+        dispatch(getProductsByCategory(data));
+        return response;
+    }
+}
+
+export const fetchFavorites = () => async (dispatch) => {
+    const response = await csrfFetch('/api/favorites')
+
+    if (response.okay) {
+        const data = await response.json()
+        dispatch(getUserFavorites(data))
+    }
+}
+
+export const fetchDeleteFavorite = (product_id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/favorites/products/${product_id}`, {
+        method: 'DELETE',
+    });
+
+    if (response.okay) {
+        const refresh = await Promise.all([
+        dispatch(fetchFavorites())
+        ])
+        return refresh
+    }
+}
 
 /* define a default state
 this will be the initial state of the store */
@@ -104,8 +230,9 @@ const initialState = {
     allProducts: {},
     currProduct: {},
     myProducts: {},
-    reviews: {},
-    images: {}
+    categories: {},
+    productsByCategory: {},
+    favorites: {}
 };
 
 /* define the reducer
@@ -118,10 +245,17 @@ const ProductsReducer = (state = initialState, action) => {
             return {...state, myProducts: action.payload};
         case GET_PRODUCT:
             return {...state, currProduct: action.payload}
-        case CREATE_PRODUCT:
+        case CREATE_PRODUCT: {
             let newState = {...state};
             newState.allProducts[action.payload.id] = action.payload
             return newState
+        }
+        case GET_CATEGORIES:
+            return {...state, categories: action.payload}
+        case GET_PRODUCTS_BY_CATEGORY:
+            return {...state, productsByCategory: action.payload}
+        case GET_FAVORITES:
+            return {...state, favorites: action.payload}
         default:
             return state;
     }
