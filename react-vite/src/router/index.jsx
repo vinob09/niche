@@ -61,6 +61,11 @@ export const router = createBrowserRouter([
       {
         path: "past-orders",
         element: <PastOrdersPage />
+      },
+      {
+        /*Wildcard catch all redirect back to landing page*/
+        path: "*",
+        element: <LandingPage />
       }
     ],
   },
