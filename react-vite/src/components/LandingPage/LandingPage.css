@@ -1,3 +1,107 @@
 /* .landing-page {
     - whatever styling we want to do
 } */
+ /* From Uiverse.io by omriluz */
+ /*.loader {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: row;
+ }
+
+ .slider {
+     overflow: hidden;
+     background-color: white;
+     margin: 0 15px;
+     height: 80px;
+     width: 20px;
+     border-radius: 30px;
+     box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1), -15px -15px 30px #fff,
+         inset -5px -5px 10px rgba(0, 0, 255, 0.1),
+         inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+     position: relative;
+ }
+
+ .slider::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 20px;
+     width: 70px;
+     border-radius: 100%;
+     box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.3), 0px 420px 0 400px #2697f3,
+         inset 0px 0px 0px rgba(0, 0, 0, 0.1);
+     animation: animate_2 2.5s ease-in-out infinite;
+     animation-delay: calc(-0.09s * var(--i));
+ }
+
+ @keyframes animate_2 {
+     0% {
+         transform: translateY(250px) rotate(-80deg);
+         filter: hue-rotate(0deg);
+     }
+
+     50% {
+         transform: translateY(0) rotate(0deg);
+     }
+
+     100% {
+         transform: translateY(250px) rotate(80deg);
+         filter: hue-rotate(180deg);
+     }
+ }*/
+ .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 100vh; /* Center the loader vertically */
+    width: 100%; /* Center the loader horizontally */
+}
+
+.slider {
+    overflow: hidden;
+    background-color: rgb(252, 252, 252); /* Base color for the slider background */
+    margin: 0 15px;
+    height: 80px;
+    width: 20px;
+    border-radius: 30px;
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1), 
+                -15px -15px 30px #fff,
+                inset -5px -5px 10px rgba(0, 255, 255, 0.1), /* Adjusted to a mint hue */
+                inset 5px 5px 10px rgba(0, 0, 0, 0.1) !important;
+    position: relative;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 70px;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.3) ,
+                0px 420px 0 400px #fcf5cb, /* Adjusted to a mint green hue */
+                inset 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
+    animation: animate_2 2.3s ease-in-out infinite;
+    animation-delay: calc(-0.09s * var(--i));
+}
+
+@keyframes animate_2 {
+    0% {
+        transform: translateY(250px) rotate(-80deg);
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(0) rotate(0deg);
+        filter: hue-rotate(90deg); /* Adjusted to mint green hues */
+    }
+
+    100% {
+        transform: translateY(250px) rotate(80deg);
+        filter: hue-rotate(180deg); /* Adjusted to mint green hues */
+    }
+}
