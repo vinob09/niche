@@ -23,7 +23,13 @@ function LandingPage() {
                 <ProductTiles key={product.id} product={product} />
             ))}
         </div>
-    ) : (<h1>Loading...</h1>)
+    ) : (<section className="loader">
+        <div style={{ '--i': 0 }} className="slider"></div>
+        <div style={{ '--i': 1 }} className="slider"></div>
+        <div style={{ '--i': 2 }} className="slider"></div>
+        <div style={{ '--i': 3 }} className="slider"></div>
+        <div style={{ '--i': 4 }} className="slider"></div>
+    </section>)
 }
 
 export default LandingPage;
