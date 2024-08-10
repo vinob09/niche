@@ -12,6 +12,7 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: #bcebd4;
   overflow: hidden;
+  color: black;
 }
 .gradient-overlay {
   position: absolute;
@@ -19,40 +20,29 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #92beac 0%, #a6e4c6 40%, #c0f0d8 100%);
+  background: linear-gradient(to bottom, #92beac 0%, #a6e4c6 40%, #c0f0d8 100%) !important;
   opacity: 0;
-  /* Start with hidden gradient */
   transition: opacity 0.3s ease;
-  /* Transition on opacity */
   z-index: 0;
-  /* Ensure it stays behind the content */
 }
 .navbar:hover .gradient-overlay {
   opacity: 1;
-  /* Fade in gradient on hover */
 }
 .navbar ul {
   position: relative;
-  /* Make sure the list is above the gradient */
   z-index: 1;
   margin: 0;
   padding: 0;
   display: flex;
   list-style: none;
   flex-grow: 1;
-    /* Ensure it grows to fill available space */
     justify-content: space-between;
-    /* Distribute items evenly */
 }
 
 .navbar li {
   display: flex;
   align-items: center;
 }
-/*.navbar:hover{
-  background: linear-gradient(to bottom, #92beac 0%, #a6e4c6 40%, #c0f0d8 100%);
-}*/
-
 
 /* HOME */
 .home-link {
@@ -65,7 +55,7 @@
 /* Categories, Favs, Products, Cart*/
 .navbar a {
   text-decoration: none;
-  color: inherit;
+  color: black;
   position: relative;
   padding-bottom: 5px;
 }
@@ -147,4 +137,16 @@
 }
 .menu-items {
   list-style: none;
+}
+
+/* DARK MODE */
+@media (prefers-color-scheme: dark) or (prefers-color-scheme: light) {
+  .navbar,
+  .home-link,
+  .navbar a{
+    color: black !important;
+  }
+  .navbar a::after{
+    background-color: black !important;
+  }
 }
