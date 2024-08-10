@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchProducts } from '../../redux/products';
 import ProductTiles from '../ProductTiles';
+import Loader from '../Loader/Loader';
 import './LandingPage.css'
 
 function LandingPage() {
@@ -23,7 +24,7 @@ function LandingPage() {
                 <ProductTiles key={product.id} product={product} />
             ))}
         </div>
-    ) : (<h1>Loading...</h1>)
+    ) : <Loader />;
 }
 
 export default LandingPage;
