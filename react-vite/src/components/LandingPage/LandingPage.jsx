@@ -33,13 +33,6 @@ function LandingPage() {
                 ))}
             </div>
         </>
-    ) : (<h1>Loading...</h1>)
-        <div className='landing-page'>
-            <h1>Welcome, user!</h1>
-            {products.map((product) => (
-                <ProductTiles key={product.id} product={product} />
-            ))}
-        </div>
     ) : <Loader />;
 }
 
