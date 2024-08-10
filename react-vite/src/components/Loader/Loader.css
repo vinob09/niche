@@ -1,18 +1,16 @@
+/*
 .loader {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     height: 100vh;
-    /* Center the loader vertically */
     width: 100%;
-    /* Center the loader horizontally */
 }
 
 .slider {
     overflow: hidden;
     background-color: rgb(222, 223, 221);
-    /* Base color for the slider background */
     margin: 0 15px;
     height: 80px;
     width: 20px;
@@ -20,7 +18,6 @@
     box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1),
         -15px -15px 30px #fff,
         inset -5px -5px 10px rgba(0, 255, 255, 0.1),
-        /* Adjusted to a mint hue */
         inset 5px 5px 10px rgba(0, 0, 0, 0.1) !important;
     position: relative;
 }
@@ -35,7 +32,6 @@
     border-radius: 100%;
     box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.3),
         0px 420px 0 400px #fcf5cb,
-        /* Adjusted to a mint green hue */
         inset 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
     animation: animate_2 2.3s ease-in-out infinite;
     animation-delay: calc(-0.09s * var(--i));
@@ -50,12 +46,68 @@
     50% {
         transform: translateY(0) rotate(0deg);
         filter: hue-rotate(90deg);
-        /* Adjusted to mint green hues */
     }
 
     100% {
         transform: translateY(250px) rotate(-80deg);
         filter: hue-rotate(180deg);
-        /* Adjusted to mint green hues */
+    }
+}
+*/
+/* From Uiverse.io by adamgiebl */
+.dots-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    width: auto;
+}
+
+.dot {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    border-radius: 10px;
+    background-color: #b3d4fc;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.dot:last-child {
+    margin-right: 0;
+}
+
+.dot:nth-child(1) {
+    animation-delay: -0.3s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: -0.1s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.1s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        background-color: #b3fcd6;
+        box-shadow: 0 0 0 0 rgba(178, 252, 219, 0.7);
+    }
+
+    50% {
+        transform: scale(1.2);
+        background-color: #8ff7c7;
+        box-shadow: 0 0 0 10px rgba(178, 252, 180, 0);
+    }
+
+    100% {
+        transform: scale(0.8);
+        background-color: #b3fcd4;
+        box-shadow: 0 0 0 0 rgba(178, 252, 224, 0.7);
     }
 }
