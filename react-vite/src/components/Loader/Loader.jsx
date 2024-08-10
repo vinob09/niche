@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';*/
 import './Loader.css'
 
 function Loader() {
@@ -10,13 +10,13 @@ function Loader() {
             <div style={{ '--i': 3 }} className="slider"></div>
             <div style={{ '--i': 4 }} className="slider"></div>
         </section>*/
-        /* From Uiverse.io by adamgiebl */
-        <section class="dots-container">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+
+        <section className="dots-container">
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
         </section>
 
     );
