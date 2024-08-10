@@ -43,7 +43,7 @@
 }
 
 .signup-form-modal input:focus {
-    border-color: #ffafbd;
+    border-color: #e4befa;
     background-color: #f0f8ff;
     outline: none;
 }

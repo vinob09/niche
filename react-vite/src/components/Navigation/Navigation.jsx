@@ -8,7 +8,7 @@ function Navigation({hasLoggedIn}) {
       <div className="gradient-overlay"></div>
     <ul>
         <li>
-          <NavLink to="/" className={"home-link"}>niche™</NavLink>
+          <NavLink to="/" className={"home-link"}>niche</NavLink>
         </li>
         <li className="categories-button">
           <NavLink to="/categories">categories</NavLink>

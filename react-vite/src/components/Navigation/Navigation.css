@@ -13,6 +13,13 @@
   background-color: #bcebd4;
   overflow: hidden;
   color: black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.navbar:hover {
+  transform: scale(1.00);
+  /* Slightly expand the navbar */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  /* Add a shadow for better visual depth */
 }
 .gradient-overlay {
   position: absolute;
@@ -20,7 +27,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #92beac 0%, #a6e4c6 40%, #c0f0d8 100%) !important;
+  background: linear-gradient(to bottom, #87efb2 0%,#89cfa2 15% ,#89cfa2 35%, #a4e1bc 65%, #bcebd4 100%) !important;
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 0;
@@ -75,17 +82,26 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-.search-bar{
+.search-bar {
   flex-grow: 1;
   max-width: 600px;
   text-align: center;
 }
 
-/*SEARCH*/
 .search-bar input {
   width: 100%;
-  padding: 4px;
+  padding: 10px;
   font-size: medium;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  background-color: #f0f8ff;
+}
+
+.search-bar input:focus {
+  border-color: #bef4fa;
+  background-color: #f0f8ff;
+  outline: none;
 }
 .profile-menu {
   display: flex;
@@ -117,7 +133,7 @@
 .categories-button {
   margin: 0px 10px;
 }
-.favorites-button, products-button{
+.favorites-button{
   margin-right: 15px;
 }
 
