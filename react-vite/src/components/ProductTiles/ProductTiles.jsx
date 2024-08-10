@@ -1,18 +1,16 @@
+import { Link } from 'react-router-dom';
 import './ProductTiles.css'
 
 function ProductTiles({ product }) {
     return (
-        <div className='product-tiles'>
-            {/*Using unordered list just to display products as placeholder,
-            this will be updated according to our wireframe!*/}
-            <ul>
-                <li>
-                    {product.name}
-                    { " --- " }
-                    ${product.price}
-                </li>
-            </ul>
-        </div>
+        <Link to={`/products/${product.id}`} title={product.name}>
+            <div className='product-tiles'>
+                <img src={product.previewImage} alt={product.name} />
+                <div className='price-container'>
+                    <p className='product-price'>${product.price}</p>
+                </div>
+            </div>
+        </Link>
     )
 }
 
