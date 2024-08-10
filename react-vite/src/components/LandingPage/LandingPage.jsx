@@ -6,6 +6,7 @@ import ProductTiles from '../ProductTiles';
 import BestSellersBar from '../BestSellersBar';
 import Loader from '../Loader/Loader';
 import './LandingPage.css'
+import { fetchCartItems } from '../../redux/orders';
 
 function LandingPage() {
     const dispatch = useDispatch();
@@ -14,6 +15,9 @@ function LandingPage() {
 
     useEffect(() => {
         dispatch(fetchProducts())
+        .then(() => {
+            dispatch(fetchCartItems(1))
+        })
         .then(() => {
             setIsLoaded(true)
         })

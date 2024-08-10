@@ -27,5 +27,5 @@ def add_to_cart(product_id):
         db.session.commit()
 
         return jsonify({
-            'cart_Id': cart_item.id
+            cart_item
         }), 200
