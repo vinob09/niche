@@ -1,0 +1,31 @@
+.best-sellers-bar {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(236, 236, 236);
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 1000px;
+    margin: 0 auto 100px;
+    box-sizing: border-box;
+}
+
+.best-sellers-bar h2 {
+    text-align: center;
+    margin: 10px;
+}
+
+.best-sellers-content {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 1000px) {
+    .best-sellers-bar {
+        width: 100%;
+        padding: 10px;
+    }
+}

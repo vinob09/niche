@@ -1,16 +1,7 @@
-/*import React from 'react';*/
 import './Loader.css'
 
 function Loader() {
     return (
-        /*<section className="loader">
-            <div style={{ '--i': 0 }} className="slider"></div>
-            <div style={{ '--i': 1 }} className="slider"></div>
-            <div style={{ '--i': 2 }} className="slider"></div>
-            <div style={{ '--i': 3 }} className="slider"></div>
-            <div style={{ '--i': 4 }} className="slider"></div>
-        </section>*/
-
         <section className="dots-container">
             <div className="dot"></div>
             <div className="dot"></div>
@@ -18,7 +9,6 @@ function Loader() {
             <div className="dot"></div>
             <div className="dot"></div>
         </section>
-
     );
 }
 

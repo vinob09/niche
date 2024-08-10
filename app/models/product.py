@@ -31,11 +31,15 @@ class Product(db.Model):
 
 
     def to_dict(self):
+        # fetch first image
+        preview_image = self.images[0].url if self.images else None
+
         return {
             'id': self.id,
             'sellerId': self.seller_id,
             'categoryId': self.category_id,
             'name': self.name,
             'description': self.description,
-            'price': self.price
+            'price': self.price,
+            'previewImage': preview_image
         }
