@@ -1,6 +1,5 @@
 /*NAVBAR */
 .navbar {
-  position: relative;
   margin: 0px;
   border: 1px solid rgb(187, 251, 220);
   padding: 0px 15px 0px 5px;
@@ -15,11 +14,10 @@
   color: black;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .navbar:hover {
   transform: scale(1.00);
-  /* Slightly expand the navbar */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  /* Add a shadow for better visual depth */
 }
 .gradient-overlay {
   position: absolute;
@@ -43,7 +41,7 @@
   display: flex;
   list-style: none;
   flex-grow: 1;
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .navbar li {
@@ -109,7 +107,6 @@
   align-items: center;
 }
 .user-circle {
-  border: 1px solid rgb(187, 251, 220);
   border-radius: 50%;
   margin-left: 10px;
   width: 40px;
@@ -122,12 +119,19 @@
 /*PROFILE*/
 .profile-dropdown {
   list-style: none;
-  color:rgb(151, 149, 149);
+  z-index: 101;
 
 }
 .profile-dropdown li{
   margin: 5px 0;
-}
+  font-weight: lighter;
+  color: rgb(4, 4, 4);
+  cursor: pointer;
+  position: relative;
+  display: block;
+  list-style: none;
+  text-align: center;
+    }
 
 /*Categories/Favorites*/
 .categories-button {
@@ -143,7 +147,7 @@
 }
 
 /*LOGGED IN USER*/
-.logged-in .favorites-button, .logged-in .products-button{
+.logged-in .favorites-button{
   margin-right: 10px;
 }
 .logged-in .user-cart{
@@ -155,7 +159,12 @@
   list-style: none;
 }
 
-/* DARK MODE */
+.navbar {
+  position: relative;
+  z-index: 100;
+}
+
+/* DARK MODE -- certain devices only*/
 @media (prefers-color-scheme: dark) or (prefers-color-scheme: light) {
   .navbar,
   .home-link,

@@ -1,0 +1,35 @@
+
+.profile-menu-container {
+    position: relative;
+    z-index: 101;
+
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: linear-gradient(135deg, #6da5d0, #b6f6eb, #bcebd4, #64bb61);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    list-style: none;
+    min-width: 120px;
+    z-index: 101;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border: none;
+}
+
+.profile-dropdown.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.user-circle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
