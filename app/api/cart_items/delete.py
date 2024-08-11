@@ -18,4 +18,6 @@ def remove_from_cart(cart_item_id):
 
     db.session.delete(check_cart)
     db.session.commit()
-    return {"message": "Successfully removed product from cart"}, 200
+    return jsonify({
+        cart_item_id
+    })
