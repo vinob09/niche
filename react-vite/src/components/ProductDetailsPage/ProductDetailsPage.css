@@ -1,3 +1,56 @@
-/* .product-details-page {
-    - whatever styling we want to do
-} */
+.product-details {
+    display: flex;
+    gap: 20px;
+}
+
+.product-images img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.product-info {
+    max-width: 400px;
+}
+
+.product-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.product-details-add {
+    padding: 10px 20px;
+    background-color: darkgray;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.product-details-add:hover {
+    background-color: lightgray;
+}
+
+.product-details-reviews {
+    margin-top: 40px;
+}
+
+.product-details-reviews h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.product-details-review {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.product-details-review p {
+    margin: 5px 0;
+}
