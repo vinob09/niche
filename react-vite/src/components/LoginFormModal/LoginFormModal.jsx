@@ -18,7 +18,7 @@ function LoginFormModal() {
     }else{
       setDisableLogin(true)
     }
-  })
+  }, [email, password])
  
 
   const handleSubmit = async (e) => {
@@ -41,12 +41,12 @@ function LoginFormModal() {
   const handleDemo = async(e) => {
     e.preventDefault();
     try{
-      await dispatch(thunkLogin({ email: "demo@email.com", password: "password123" }))
+      await dispatch(thunkLogin({ email: "demo@email.com", password: "password123" }));
       closeModal();
     } catch(res){
       const data = await res.json();
       if(data && data.errors){
-        setErrors.apply(data.errors)
+        setErrors(data.errors)
       } else{
         setErrors({email: 'Unsuccessful Demo Login'})
       }

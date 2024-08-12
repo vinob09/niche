@@ -33,3 +33,14 @@
     cursor: pointer;
     font-size: 20px;
 }
+.user-menu-items {
+    margin: 5px 0;
+    font-weight: lighter;
+    color: rgb(4, 4, 4);
+    background-color: red;
+    cursor: pointer;
+    position: relative;
+    display: block;
+    list-style: none;
+    text-align: center;
+}

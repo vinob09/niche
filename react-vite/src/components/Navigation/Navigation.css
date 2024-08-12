@@ -122,16 +122,6 @@
   z-index: 101;
 
 }
-.profile-dropdown li{
-  margin: 5px 0;
-  font-weight: lighter;
-  color: rgb(4, 4, 4);
-  cursor: pointer;
-  position: relative;
-  display: block;
-  list-style: none;
-  text-align: center;
-    }
 
 /*Categories/Favorites*/
 .categories-button {
