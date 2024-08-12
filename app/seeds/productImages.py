@@ -84,6 +84,14 @@ def seed_images():
         product_id=10,
         url="https://chansbucket.s3.us-east-2.amazonaws.com/Products-Images/Products-Images/kw2.jpg"
     )
+    wood1 = ProductImage(
+        product_id=11,
+        url="https://chansbucket.s3.us-east-2.amazonaws.com/Products-Images/Products-Images/wood1.jpg"
+    )
+    wood2 = ProductImage(
+        product_id=11,
+        url="https://chansbucket.s3.us-east-2.amazonaws.com/Products-Images/Products-Images/wood2.jpg"
+    )
 
     all_images = [
         board1,
@@ -105,7 +113,9 @@ def seed_images():
         exhaust1,
         exhaust2,
         kw1,
-        kw2
+        kw2,
+        wood1,
+        wood2
     ]
 
     add_all_images = [db.session.add(image) for image in all_images]
