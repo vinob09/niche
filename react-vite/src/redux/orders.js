@@ -1,4 +1,3 @@
-import { FaPause } from "react-icons/fa";
 import { csrfFetch } from "./csrf";
 
 //define action types
@@ -13,7 +12,7 @@ const getCartItems = (payload) => ({
 })
 
 const editCart = (payload) => ({
-    type: ADD_TO_CART,
+    type: ADD_EDIT_CART,
     payload
 })
 
