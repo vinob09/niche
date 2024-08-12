@@ -19,6 +19,7 @@ function LandingPage() {
         })
     }, [dispatch]);
 
+
     return isLoaded ? (
         <>
             <h1 className='landing-page-title'>Welcome, user!</h1>
@@ -32,6 +33,10 @@ function LandingPage() {
                     <ProductTiles key={product.id} product={product} />
                 ))}
             </div>
+
+            {/*Section for "Gifts under $50" tile will redirect to => "Office" category page products, id 2*/}
+            {/*Section for "Gifts for Him" tile will redirect to => "Automative" category page products, id 5*/}
+            {/*Section for "Wedding Gifts" tile will redirect to => "Home" category page products, id 1*/}
         </>
     ) : <Loader />;
 }
