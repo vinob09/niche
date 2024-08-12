@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchProductId } from '../../redux/products';
 import Loader from '../Loader/Loader';
 import './ProductDetailsPage.css'
@@ -8,6 +8,7 @@ import './ProductDetailsPage.css'
 function ProductDetailsPage() {
     const { product_id } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const product = useSelector(state => state.products.currProduct);
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -17,11 +18,17 @@ function ProductDetailsPage() {
             setIsLoaded(true);
         })
     }, [dispatch, product_id]);
-    
+
+
+    // handle on click for add to cart
+    const handleAddToCart = () => {
+        navigate('/shopping-cart');
+    };
+
 
     return isLoaded ? (
         <div className='product-details-page'>
-            <h1>Product Details Page</h1>
+            <h1>{product.name}</h1>
             <div className='product-details'>
                 <div className='product-images'>
                     {product.images.map(image => (
@@ -29,10 +36,9 @@ function ProductDetailsPage() {
                     ))}
                 </div>
                 <div className='product-info'>
-                    <h2>{product.name}</h2>
                     <p>{product.description}</p>
-                    <h3>Price: {product.price}</h3>
-                    <button className='product-details-add'>Add to Cart</button>
+                    <h3>Price: ${product.price}</h3>
+                    <button className='product-details-add' onClick={handleAddToCart}>Add to Cart</button>
                 </div>
             </div>
             <div className='product-details-reviews'>
