@@ -17,12 +17,12 @@ function SignupFormModal() {
   const { closeModal } = useModal();
 
   useEffect(() => {
-    if (username && first_name && last_name && email && password && confirmPassword) {
+    if (username && email && password && confirmPassword) {
       setDisableSignUp(false)
     } else {
       setDisableSignUp(true)
     }
-}, [username, first_name, last_name, email, password, confirmPassword])
+}, [username, email, password, confirmPassword])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
