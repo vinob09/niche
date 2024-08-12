@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
@@ -13,6 +13,7 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [disableSignUp, setDisableSignUp] = useState(true);
+  const [user, setUser] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -34,15 +35,7 @@ function SignupFormModal() {
       });
     }
 
-    const serverResponse = await dispatch(
-      thunkSignup({
-        username,
-        first_name,
-        last_name,
-        email,
-        password,
-      })
-    );
+    const serverResponse = await dispatch(thunkSignup(user));
 
     if (serverResponse && serverResponse.errors) {
       setErrors(serverResponse.errors);
@@ -52,7 +45,7 @@ function SignupFormModal() {
       closeModal();
     }
   };
-
+  
   return (
     <div className="signup-form-modal">
       <h1>Sign Up</h1>
@@ -123,5 +116,5 @@ function SignupFormModal() {
     </div>
   );
 }
-
 export default SignupFormModal;
+
