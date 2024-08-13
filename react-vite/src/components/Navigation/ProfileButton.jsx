@@ -1,20 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import './UserMenu.css';
 
 function ProfileButton() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
-    setShowMenu(!showMenu);
+    e.stopPropagation();
+    setShowMenu((prev) => !prev);
   };
 
   useEffect(() => {
@@ -26,10 +29,12 @@ function ProfileButton() {
       }
     };
 
-    document.addEventListener("click", closeMenu);
-
+      document.addEventListener("click", closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+   
+
+    
 
   const closeMenu = () => setShowMenu(false);
 
@@ -38,36 +43,46 @@ function ProfileButton() {
     dispatch(thunkLogout());
     closeMenu();
   };
-
   return (
-    <div className={"profile-menu"}>
+    <div className="profile-menu-container">
       <button onClick={toggleMenu} className={"user-circle"}>
-        <FaUserCircle/>
+        <FaUserCircle />
       </button>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <ul
+          className={`profile-dropdown ${showMenu ? 'show' : ''}`}
+        >
           {user ? (
             <>
               <li className={"user-menu-items"}>{user.username}</li>
               <li className={"user-menu-items"}>{user.email}</li>
+              <li className={"user-menu-items"} onClick={() => navigate('/past-orders')}>
+                Past Orders
+              </li>
               <li>
                 <button onClick={logout} className={"user-menu-items"}>Log Out</button>
               </li>
             </>
           ) : (
             <>
-              <OpenModalMenuItem
-                itemText="Log In"
-                className="menu-items"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                className="menu-items"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
+              <li className={"user-menu-items"}>
+                
+                <OpenModalMenuItem
+                  itemText="Log In"
+                  className="login-signup-button"
+                  onItemClick={closeMenu}
+                  modalComponent={<LoginFormModal />}
+                />
+              </li>
+              <li className={"user-menu-items"}>
+                <OpenModalMenuItem
+                  itemText="Sign Up"
+                  className="login-signup-button"
+                  onItemClick={closeMenu}
+                  modalComponent={<SignupFormModal />}
+                />
+                
+              </li>
             </>
           )}
         </ul>
@@ -75,5 +90,5 @@ function ProfileButton() {
     </div>
   );
 }
-
 export default ProfileButton;
+
