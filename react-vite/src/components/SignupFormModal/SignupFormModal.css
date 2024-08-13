@@ -1,11 +1,13 @@
 .signup-form-modal {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     width: 400px;
-    padding: 30px;
+    max-height: 300px;
+    overflow: scroll;
+    padding: 80px;
     border-radius: 20px;
     background: linear-gradient(135deg, #f3f5f7,#ebfffc, #bcebd4, #93ea90);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: fixed;
+    position:fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -69,6 +71,7 @@
 
 .signup-form-modal .pill-button:disabled {
     background-color: #ddd;
+    color:#868788;
     cursor: not-allowed;
 }
 

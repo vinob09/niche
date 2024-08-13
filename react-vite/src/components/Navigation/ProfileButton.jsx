@@ -51,8 +51,6 @@ function ProfileButton() {
       {showMenu && (
         <ul
           className={`profile-dropdown ${showMenu ? 'show' : ''}`}
-          ref={ulRef}
-          style={{ top: 'calc(100% + 10px)', zIndex: 101 }}
         >
           {user ? (
             <>
