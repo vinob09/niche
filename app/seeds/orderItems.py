@@ -14,10 +14,16 @@ def seed_order_items():
         product_id=3,
         quantity=1
         )
+    item3 = OrderItem(
+        order_id=1,
+        product_id=9,
+        quantity=1
+    )
 
 
     db.session.add(item1)
     db.session.add(item2)
+    db.session.add(item3)
     db.session.commit()
 
 

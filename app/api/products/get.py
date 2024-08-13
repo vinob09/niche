@@ -29,7 +29,15 @@ def get_product(product_id):
 
         product_data = product.to_dict()
         product_data['images'] = [image.to_dict() for image in product_images]
-        product_data['reviews'] = [review.to_dict() for review in reviews]
+        product_data['reviews'] = [
+            {
+                'id': review.id,
+                'review': review.review,
+                'starRating': review.star_rating,
+                'userFirstName': review.user.first_name,
+                'userId': review.user_id
+            } for review in reviews
+        ]
 
 
         is_favorited = False
