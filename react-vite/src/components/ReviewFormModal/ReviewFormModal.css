@@ -1,3 +1,7 @@
 /* .review-form-modal {
     - whatever styling we want to do
 } */
+
+.review-errors {
+    color: red;
+}
