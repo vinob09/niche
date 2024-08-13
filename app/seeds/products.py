@@ -74,6 +74,13 @@ def seed_products():
         description="Race technology for the road with adjustable compression and rebound damping",
         price=2454
         )
+    wood = Product(
+        seller_id=1,
+        category_id=1,
+        name='Custom Wood Sign',
+        description='Personalize your family name with this beautiful custom wood design. Great as wedding gifts!',
+        price=14
+    )
 
 
     db.session.add(board)
@@ -86,6 +93,7 @@ def seed_products():
     db.session.add(psfive)
     db.session.add(exhaust)
     db.session.add(kw)
+    db.session.add(wood)
     db.session.commit()
 
 

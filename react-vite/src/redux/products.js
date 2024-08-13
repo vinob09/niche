@@ -151,7 +151,7 @@ export const fetchCreateReview = (payload) => async (dispatch) => {
 }
 
 export const fetchEditReview = (payload) => async (dispatch) => {
-    const { review_id, review, star_rating } = payload
+    const { product_id, review_id, review, star_rating } = payload
     const response = await csrfFetch(`/api/reviews/${review_id}`, {
         method: 'PUT',
         body: JSON.stringify({
@@ -167,18 +167,17 @@ export const fetchEditReview = (payload) => async (dispatch) => {
     }
 }
 
-export const fetchDeleteReview = (review_id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/reviews/${review_id}`, {
+export const fetchDeleteReview = (payload) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${payload.review_id}`, {
         method: 'DELETE'
     });
 
     if (response.okay) {
         const refresh = await Promise.all([
-        dispatch(fetchProductId(productId))
+        dispatch(fetchProductId(payload.product_id))
         ])
         return refresh
     }
-
 }
 
 export const fetchCategories = () => async (dispatch) => {
