@@ -34,6 +34,10 @@ class Product(db.Model):
         # fetch first image
         preview_image = self.images[0].url if self.images else None
 
+        # calculate avg star rating & review count
+        review_count = len(self.reviews)
+        avg_rating = round(sum([review.star_rating for review in self.reviews]) / review_count, 1) if review_count > 0 else 0
+
         return {
             'id': self.id,
             'sellerId': self.seller_id,
@@ -41,5 +45,7 @@ class Product(db.Model):
             'name': self.name,
             'description': self.description,
             'price': self.price,
-            'previewImage': preview_image
+            'previewImage': preview_image,
+            'avgRating': avg_rating,
+            'reviewCount': review_count
         }
