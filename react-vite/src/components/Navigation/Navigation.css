@@ -1,6 +1,5 @@
 /*NAVBAR */
 .navbar {
-  position: relative;
   margin: 0px;
   border: 1px solid rgb(187, 251, 220);
   padding: 0px 15px 0px 5px;
@@ -13,6 +12,13 @@
   background-color: #bcebd4;
   overflow: hidden;
   color: black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.navbar:hover {
+  transform: scale(1.00);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 .gradient-overlay {
   position: absolute;
@@ -20,7 +26,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #92beac 0%, #a6e4c6 40%, #c0f0d8 100%) !important;
+  background: linear-gradient(to bottom, #87efb2 0%,#89cfa2 15% ,#89cfa2 35%, #a4e1bc 65%, #bcebd4 100%) !important;
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 0;
@@ -36,7 +42,7 @@
   display: flex;
   list-style: none;
   flex-grow: 1;
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .navbar li {
@@ -75,29 +81,39 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-.search-bar{
+.search-bar {
   flex-grow: 1;
   max-width: 600px;
   text-align: center;
 }
 
-/*SEARCH*/
 .search-bar input {
   width: 100%;
-  padding: 4px;
+  padding: 10px;
   font-size: medium;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  background-color: #f0f8ff;
+}
+
+.search-bar input:focus {
+  border-color: #bef4fa;
+  background-color: #f0f8ff;
+  outline: none;
 }
 .profile-menu {
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
 }
 .user-circle {
-  border: 1px solid rgb(187, 251, 220);
   border-radius: 50%;
   margin-left: 10px;
   width: 40px;
   height: 40px;
+  position: relative;
 }
 .shopping-cart{
   margin-left: 10px;
@@ -106,18 +122,15 @@
 /*PROFILE*/
 .profile-dropdown {
   list-style: none;
-  color:rgb(151, 149, 149);
+  z-index: 101;
 
-}
-.profile-dropdown li{
-  margin: 5px 0;
 }
 
 /*Categories/Favorites*/
 .categories-button {
   margin: 0px 10px;
 }
-.favorites-button, products-button{
+.favorites-button{
   margin-right: 15px;
 }
 
@@ -127,7 +140,7 @@
 }
 
 /*LOGGED IN USER*/
-.logged-in .favorites-button, .logged-in .products-button{
+.logged-in .favorites-button{
   margin-right: 10px;
 }
 .logged-in .user-cart{
@@ -139,7 +152,12 @@
   list-style: none;
 }
 
-/* DARK MODE */
+.navbar {
+  position: relative;
+  z-index: 100;
+}
+
+/* DARK MODE -- certain devices only*/
 @media (prefers-color-scheme: dark) or (prefers-color-scheme: light) {
   .navbar,
   .home-link,
