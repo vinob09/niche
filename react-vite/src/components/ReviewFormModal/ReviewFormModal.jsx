@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchCreateReview, fetchEditReview, fetchDeleteReview } from '../../redux/products';
+import { fetchCreateReview, fetchEditReview, fetchDeleteReview, fetchProductId } from '../../redux/products';
 import './ReviewFormModal.css'
 
 export const AddReviewModal = ({ productId, onClose }) => {
@@ -13,7 +13,11 @@ export const AddReviewModal = ({ productId, onClose }) => {
             product_id: productId,
             review,
             star_rating: starRating
-        })).then(() => onClose());
+        })).then(() => {
+            dispatch(fetchProductId(productId));
+            onClose();
+        })
+        .catch(err => console.error("Error adding review:", err));
     };
 
     return (
@@ -44,7 +48,10 @@ export const EditReviewModal = ({ productId, review, onClose }) => {
             review_id: review.id,
             review: updatedReview,
             star_rating: starRating
-        })).then(() => onClose());
+        })).then(() => {
+            onClose();
+            dispatch(fetchProductId(productId));
+        });
     };
 
     return (
@@ -71,7 +78,10 @@ export const DeleteReviewModal = ({ productId, review, onClose }) => {
         dispatch(fetchDeleteReview({
             product_id: productId,
             review_id: review.id
-        })).then(() => onClose());
+        })).then(() => {
+            onClose();
+            dispatch(fetchProductId(productId));
+        });
     };
 
     return (

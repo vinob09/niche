@@ -17,7 +17,6 @@ function LandingPage() {
         .then(() => {
             setIsLoaded(true)
         })
-        .catch(e => {console.log(e)})
     }, [dispatch]);
 
 

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchProductId } from '../../redux/products';
 import { useModal } from '../../context/Modal';
+import { AddReviewModal, DeleteReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
 import Loader from '../Loader/Loader';
 import './ProductDetailsPage.css'
-import { AddReviewModal, DeleteReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
 
 function ProductDetailsPage() {
     const { product_id } = useParams();
