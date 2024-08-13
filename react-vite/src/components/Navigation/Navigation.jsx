@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { FaRegHeart} from "react-icons/fa";
+import { FaStoreAlt } from "react-icons/fa";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
@@ -23,11 +24,8 @@ function Navigation({hasLoggedIn}) {
             <li className="favorites-button">
               <NavLink to="/favorites"><FaRegHeart/></NavLink>
             </li>
-            <li className="past-orders-button">
-              <NavLink to="/past-orders">products</NavLink>
-            </li>
             <li className="shop-manager-button">
-              <ShopManager />
+            <NavLink to ="/my-products"><FaStoreAlt/></NavLink>
             </li>
           </>
         ) : null}

@@ -5,7 +5,7 @@
     width: 400px;
     padding: 30px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #6da5d0, #b6f6eb, #bcebd4, #64bb61);
+    background: linear-gradient(135deg,#f3f5f7,#ebfffc,#bcebd4,#93ea90);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 50%;
@@ -29,7 +29,7 @@
 
 .login-form-modal label {
     font-weight: bold;
-    color: #fff;
+    color: #4b4b4b;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     margin-bottom: 5px;
     display: block;
@@ -45,7 +45,7 @@
 }
 
 .login-form-modal input:focus {
-    border-color: #e4befa;
+    border-color:#73cee95d;
     background-color: #f0f8ff;
     outline: none;
 }

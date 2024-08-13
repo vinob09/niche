@@ -12,12 +12,12 @@ function LoginFormModal() {
   const { closeModal } = useModal();
 
   useEffect(() => {
-    if(email && password){
+    if(user.email && user.password){
       setDisableLogin(false)
     }else{
       setDisableLogin(true)
     }
-  }, [email, password])
+  }, [user.email, user.password])
  
 
   const handleSubmit = async (e) => {
@@ -66,7 +66,7 @@ function LoginFormModal() {
           Password
           <input
             type="password"
-            value={password}
+            value={user.password}
             onChange={(e) => setUser({ ...user, password: e.target.value })}
             required
           />
