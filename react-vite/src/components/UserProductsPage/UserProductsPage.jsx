@@ -38,7 +38,7 @@ function UserProductsPage() {
     return isLoaded ? (
         <div className='user-products-page'>
             <h1>{user.firstName}&apos;s Products</h1>
-            <div className='user-products-container'>
+            <div className='container'>
                 {products.map((product) => (
                     <div key={product.id} className='user-product-tile'>
                             <Link to={`/products/${product.id}`}>
