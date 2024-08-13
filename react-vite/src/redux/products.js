@@ -123,7 +123,7 @@ export const fetchEditProduct = (product) => async (dispatch) => {
 }
 
 export const fetchDeleteProduct = (product_id) => async (dispatch) => {
-    await csrfFetch(`/api/spots/${product_id}`, {
+    await csrfFetch(`/api/products/${product_id}`, {
         method: 'DELETE'
     });
     const refresh = await Promise.all([
