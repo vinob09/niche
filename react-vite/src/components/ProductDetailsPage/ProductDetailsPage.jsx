@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchProductId, fetchDeleteReview } from '../../redux/products';
+import { fetchProductId } from '../../redux/products';
 import { useModal } from '../../context/Modal';
 import Loader from '../Loader/Loader';
 import './ProductDetailsPage.css'
-import { AddReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
+import { AddReviewModal, DeleteReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
 
 function ProductDetailsPage() {
     const { product_id } = useParams();
@@ -55,24 +55,20 @@ function ProductDetailsPage() {
     // handle on click for delete a review
     const handleDeleteReview = (review) => {
         setModalContent(
-            <div className="delete-confirmation">
-                <h2>Confirm Delete?</h2>
-                <p>Are you sure you want to delete this review?</p>
-                <button onClick={() => {
-                    dispatch(fetchDeleteReview({
-                        product_id,
-                        review_id: review.id
-                    })).then(() => closeModal());
-                }}>Yes, Delete</button>
-                <button onClick={closeModal}>Cancel</button>
-            </div>
+            <DeleteReviewModal
+                productId={product_id}
+                review={review}
+                onClose={closeModal} 
+            />
         );
     };
 
     // check if seller of product
     const isSeller = user && user.id === product.sellerId;
     // check if owner of review
-    // const userReview = product.reviews.find(review => review.userId === user.id);
+    const userReview = (Array.isArray(product.reviews) && user)
+    ? product.reviews.find(review => review.userId === user.id)
+    : null;
 
     return isLoaded ? (
         <div className='product-details-page'>
@@ -91,8 +87,7 @@ function ProductDetailsPage() {
             </div>
             <div className='product-details-reviews'>
                 <h2>Reviews</h2>
-                {/*Still need userReview check below*/}
-                {user && !isSeller && (
+                {user && !isSeller && !userReview && (
                     <button onClick={handleAddReview}>Add a Review</button>
                 )}
                 {product.reviews.map(review => (
