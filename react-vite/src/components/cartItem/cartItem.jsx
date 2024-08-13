@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchDeleteCartItem, fetchEditItemQuantity } from "../../redux/orders";
 import { FaDollarSign } from "react-icons/fa";
+import './cartItem.css'
 
 const CartItem = ({key, data}) => {
     const product = data.product_details

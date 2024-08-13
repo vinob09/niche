@@ -47,11 +47,10 @@ export const fetchAddToCart = (payload) => async (dispatch) => {
         body: JSON.stringify(payload.quantity)
     });
 
-    if (response.okay) {
-        const data = await response.json();
-        dispatch(editCart(data))
-        return data;
-    }
+
+    const data = await response.json();
+    dispatch(editCart(data))
+    return data;
 }
 
 export const fetchEditItemQuantity = (payload) => async (dispatch) => {
@@ -63,10 +62,7 @@ export const fetchEditItemQuantity = (payload) => async (dispatch) => {
         })
         });
 
-        console.log('woot woot thunking')
-
         const data = await response.json();
-        console.log('this data', data)
         dispatch(editCart(data))
         return data;
     }
@@ -78,11 +74,10 @@ export const fetchDeleteCartItem = (cart_item_id) => async (dispatch) => {
         body: JSON.stringify(cart_item_id)
     });
 
-    if (response.okay) {
-        const data = await response.json();
-        dispatch(deleteCartItems(cart_item_id))
-        return data;
-    }
+    const data = await response.json();
+    dispatch(deleteCartItems(data.id))
+    return data;
+
 }
 
 //define route and initial state
@@ -101,9 +96,9 @@ const OrdersReducer = (state = initialState, action) => {
             return {...state, cartItems}
         }
         case REMOVE_CART_ITEM: {
-            const newState = {...state}
-            delete newState.cartItems[action.payload]
-            return newState
+            let cartItems = {...state.cartItems}
+            delete cartItems[action.payload]
+            return {...state, cartItems}
         }
         default:
             return state;
