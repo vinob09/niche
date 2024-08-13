@@ -1,22 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchProductId } from '../../redux/products';
+import { fetchProductId, fetchDeleteReview } from '../../redux/products';
+import { useModal } from '../../context/Modal';
 import Loader from '../Loader/Loader';
 import './ProductDetailsPage.css'
+import { AddReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
 
 function ProductDetailsPage() {
     const { product_id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { setModalContent, closeModal } = useModal();
+
     const product = useSelector(state => state.products.currProduct);
+    const user = useSelector(state => state.session.user);
+
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         dispatch(fetchProductId(product_id))
-        .then(() => {
-            setIsLoaded(true);
-        })
+            .then(() => {
+                setIsLoaded(true);
+            })
     }, [dispatch, product_id]);
 
 
@@ -25,6 +31,48 @@ function ProductDetailsPage() {
         navigate('/shopping-cart');
     };
 
+    // handle on click for add a review
+    const handleAddReview = () => {
+        setModalContent(
+            <AddReviewModal
+                productId={product_id}
+                onClose={closeModal}
+            />
+        )
+    };
+
+    // handle on click for edit a review
+    const handleEditReview = (review) => {
+        setModalContent(
+            <EditReviewModal
+                productId={product_id}
+                review={review}
+                onClose={closeModal}
+            />
+        )
+    };
+
+    // handle on click for delete a review
+    const handleDeleteReview = (review) => {
+        setModalContent(
+            <div className="delete-confirmation">
+                <h2>Confirm Delete?</h2>
+                <p>Are you sure you want to delete this review?</p>
+                <button onClick={() => {
+                    dispatch(fetchDeleteReview({
+                        product_id,
+                        review_id: review.id
+                    })).then(() => closeModal());
+                }}>Yes, Delete</button>
+                <button onClick={closeModal}>Cancel</button>
+            </div>
+        );
+    };
+
+    // check if seller of product
+    const isSeller = user && user.id === product.sellerId;
+    // check if owner of review
+    // const userReview = product.reviews.find(review => review.userId === user.id);
 
     return isLoaded ? (
         <div className='product-details-page'>
@@ -32,7 +80,7 @@ function ProductDetailsPage() {
             <div className='product-details'>
                 <div className='product-images'>
                     {product.images.map(image => (
-                        <img key={image.id} src={image.url} alt={product.name}/>
+                        <img key={image.id} src={image.url} alt={product.name} />
                     ))}
                 </div>
                 <div className='product-info'>
@@ -43,11 +91,21 @@ function ProductDetailsPage() {
             </div>
             <div className='product-details-reviews'>
                 <h2>Reviews</h2>
+                {/*Still need userReview check below*/}
+                {user && !isSeller && (
+                    <button onClick={handleAddReview}>Add a Review</button>
+                )}
                 {product.reviews.map(review => (
                     <div key={review.id} className='product-details-review'>
                         <p>{review.userFirstName}</p>
                         <p>Rating: {review.starRating} stars</p>
                         <p>{review.review}</p>
+                        {user && review.userId === user.id && (
+                            <>
+                                <button onClick={() => handleEditReview(review)}>Edit</button>
+                                <button onClick={() => handleDeleteReview(review)}>Delete</button>
+                            </>
+                        )}
                     </div>
                 ))}
             </div>

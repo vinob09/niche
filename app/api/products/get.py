@@ -35,6 +35,7 @@ def get_product(product_id):
                 'review': review.review,
                 'starRating': review.star_rating,
                 'userFirstName': review.user.first_name,
+                'userId': review.user_id
             } for review in reviews
         ]
 
