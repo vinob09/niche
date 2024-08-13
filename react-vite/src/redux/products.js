@@ -182,23 +182,17 @@ export const fetchDeleteReview = (payload) => async (dispatch) => {
 
 export const fetchCategories = () => async (dispatch) => {
     const response = await csrfFetch('/api/categories')
-
-    if (response.okay) {
         const data = await response.json();
         const orderedData = await toDict(data);
         dispatch(getCategories(orderedData));
         return response;
-    }
 }
 
 export const fetchProductsByCategory = (cat_id) => async (dispatch) => {
     const response = await csrfFetch(`/api/products/categories/${cat_id}`)
-
-    if (response.okay) {
         const data = await response.json();
         dispatch(getProductsByCategory(data));
         return response;
-    }
 }
 
 export const fetchFavorites = () => async (dispatch) => {
