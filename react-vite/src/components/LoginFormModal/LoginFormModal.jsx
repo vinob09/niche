@@ -6,8 +6,7 @@ import "./LoginFormModal.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [disableLogin, setDisableLogin] = useState(true);
   const { closeModal } = useModal();
@@ -25,10 +24,7 @@ function LoginFormModal() {
     e.preventDefault();
     setErrors({});
     const serverResponse = await dispatch(
-      thunkLogin({
-        email,
-        password,
-      })
+      thunkLogin((user))
     );
 
     if (serverResponse) {
@@ -61,22 +57,21 @@ function LoginFormModal() {
           Email
           <input
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={user.email}
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
             required
           />
         </label>
-        {errors.email && <p className='errors'>{errors.email}</p>}
         <label>
           Password
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
             required
           />
         </label>
-        {errors.password && <p className='errors'>{errors.password}</p>}
+        {errors.user && <p className='errors'>{errors}</p>}
         <button type="submit" className="pill-button" disabled={disableLogin}>Log In</button>
         <button type="button" className="pill-button" onClick={handleDemo}>Demo User</button>
       </form>
