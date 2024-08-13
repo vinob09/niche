@@ -23,7 +23,7 @@ const deleteCartItems = (payload) => ({
 
 
 //helper function to create products object with a key of product id
-const toDict = async (payload) => {
+const toDict = (payload) => {
     let orderedData = {};
     payload.forEach(item => {
         orderedData[item.id] = item
@@ -33,14 +33,12 @@ const toDict = async (payload) => {
 
 //define thunks
 export const fetchCartItems = (user_id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/cart/${user_id}`);
+    const response = await csrfFetch(`/api/cart/1`);
 
-    if (response.okay) {
-        const data = await response.json();
-        const orderedData = toDict(data)
-        dispatch(getCartItems(orderedData))
-        return orderedData;
-    }
+    const data = await response.json();
+    dispatch(getCartItems(toDict(data)))
+    return data;
+
 }
 
 export const fetchAddToCart = (payload) => async (dispatch) => {
@@ -57,13 +55,18 @@ export const fetchAddToCart = (payload) => async (dispatch) => {
 }
 
 export const fetchEditItemQuantity = (payload) => async (dispatch) => {
-    const response = await csrfFetch(`/api/cart/${payload.product_id}`, {
+    if (payload.quantity > 0) {
+        const response = await csrfFetch(`/api/cart/${payload.product_id}`, {
         method: 'PUT',
-        body: JSON.stringify(payload.quantity)
-    });
+        body: JSON.stringify({
+            quantity: payload.quantity
+        })
+        });
 
-    if (response.okay) {
+        console.log('woot woot thunking')
+
         const data = await response.json();
+        console.log('this data', data)
         dispatch(editCart(data))
         return data;
     }
@@ -93,9 +96,9 @@ const OrdersReducer = (state = initialState, action) => {
         case GET_CURRENT_CART:
             return {...state, cartItems: action.payload}
         case ADD_EDIT_CART: {
-            const newState = {...state};
-            newState.cartItems[action.payload.id] = action.payload
-            return newState
+            let cartItems = {...state.cartItems}
+            cartItems[action.payload.id].quantity = action.payload.quantity
+            return {...state, cartItems}
         }
         case REMOVE_CART_ITEM: {
             const newState = {...state}
