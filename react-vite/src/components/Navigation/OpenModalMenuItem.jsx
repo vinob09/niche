@@ -1,5 +1,5 @@
 import { useModal } from '../../context/Modal';
-import './UserMenu.css'
+import './Navigation.css'
 
 function refreshPage() {
   window.location.reload();

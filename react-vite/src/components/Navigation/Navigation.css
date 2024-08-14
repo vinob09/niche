@@ -1,9 +1,7 @@
 
 .profile-menu-container {
   position: relative;
-  overflow-x:scroll;
 }
-
 .profile-dropdown {
   position: absolute;
   overflow: visible;
