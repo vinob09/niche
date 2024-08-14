@@ -5,7 +5,7 @@ import BestSellersBar from '../BestSellersBar';
 import { fetchCartItems } from '../../redux/orders';
 import { fetchProducts } from '../../redux/products';
 import { useModal } from '../../context/Modal'
-import stripeCheckoutModal from '../cartCheckoutModal/cartCheckoutModel';
+import { paymentCheckoutModal } from '../cartCheckoutModal/cartCheckoutModel';
 import Loader from '../Loader/Loader';
 import './CartDetailsPage.css';
 
@@ -39,7 +39,7 @@ function CartDetailsPage () {
     //modal for payment
     const handleCheckout = () => {
         setModalContent(
-            <stripeCheckoutModal />
+            <paymentCheckoutModal onClose={closeModal}/>
         )
     }
 
@@ -64,7 +64,7 @@ function CartDetailsPage () {
                 <h3>Item(s) Total: ${getTotal()}</h3>
             </div>
             <div>
-                <button onClick={handleCheckout}>Proceed to checkout</button>
+                <button onClick={() => handleCheckout()}>Proceed to checkout</button>
             </div>
             <div>
                 <h3>Items you may like:</h3>
