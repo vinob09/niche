@@ -13,7 +13,7 @@ const GET_CATEGORIES = 'categories/getAll';
 const GET_PRODUCTS_BY_CATEGORY = 'products/categories/catId'
 
 const GET_FAVORITES = '/api/favorites'
-const POST_FAVORITE = '/api/favorites/favId'
+const POST_FAVORITE = '/api/favorites/add'
 // delete uses the get favs to reload all favs
 
 /* define actions
@@ -202,16 +202,32 @@ export const fetchFavorites = () => async (dispatch) => {
         return response;
 }
 
+export const fetchAddFavorite = (product_id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/favorites/products/${product_id}`, {
+        method: 'POST'
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(fetchFavorites())
+        return data
+    } else {
+        const errorData = await response.json();
+        console.error('Failed to add favorite:', errorData)
+        return errorData
+    }
+}
+
 export const fetchDeleteFavorite = (product_id) => async (dispatch) => {
     const response = await csrfFetch(`/api/favorites/products/${product_id}`, {
         method: 'DELETE',
     });
 
-    if (response.okay) {
-        const refresh = await Promise.all([
+    if (response.ok) {
         dispatch(fetchFavorites())
-        ])
-        return refresh
+    } else {
+        const errorData = await response.json();
+        console.error('Failed to delete favorite:', errorData)
     }
 }
 
@@ -247,6 +263,8 @@ const ProductsReducer = (state = initialState, action) => {
             return {...state, productsByCategory: action.payload}
         case GET_FAVORITES:
             return {...state, favorites: action.payload}
+        case POST_FAVORITE:
+            return state;
         default:
             return state;
     }

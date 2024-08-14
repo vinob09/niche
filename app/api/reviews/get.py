@@ -4,7 +4,7 @@ from app.models import Review
 
 review_get_routes = Blueprint("review_get", __name__)
 
-@review_get_routes.route("/")
+@review_get_routes.route("")
 def get_all_reviews():
     '''
     Get all Reviews
