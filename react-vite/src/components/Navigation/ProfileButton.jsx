@@ -8,6 +8,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import './UserMenu.css';
 
+
 function ProfileButton() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    window.location.reload();
   };
   return (
     <div className="profile-menu-container">
