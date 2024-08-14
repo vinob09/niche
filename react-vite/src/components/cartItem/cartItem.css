@@ -1,0 +1,10 @@
+.cart-item-tile {
+    padding: 20px 30px;
+    height: 120px;
+    display: flex;
+  }
+
+  .cart-item-tile:nth-child(3) {
+    border-top:  1px solid #E1E8EE;
+    border-bottom:  1px solid #E1E8EE;
+  }

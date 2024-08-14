@@ -1,3 +1,25 @@
-/* .cart-details-page {
-    - whatever styling we want to do
-} */
+* {
+    box-sizing: border-box;
+  }
+
+.cart-item-tile {
+    width: 750px;
+    height: 423px;
+    margin: 80px 80px;
+    background: #FFFFFF;
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+    border-radius: 6px;
+
+    display: flex;
+  }
+
+  .cart-item-tile {
+    padding: 20px 30px;
+    height: 120px;
+    display: flex;
+  }
+
+  .cart-buttons {
+    display: flex;
+    align-content: center;
+  }

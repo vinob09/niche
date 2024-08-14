@@ -1,4 +1,3 @@
-import { FaPause } from "react-icons/fa";
 import { csrfFetch } from "./csrf";
 
 //define action types
@@ -13,7 +12,7 @@ const getCartItems = (payload) => ({
 })
 
 const editCart = (payload) => ({
-    type: ADD_TO_CART,
+    type: ADD_EDIT_CART,
     payload
 })
 
@@ -24,7 +23,7 @@ const deleteCartItems = (payload) => ({
 
 
 //helper function to create products object with a key of product id
-const toDict = async (payload) => {
+const toDict = (payload) => {
     let orderedData = {};
     payload.forEach(item => {
         orderedData[item.id] = item
@@ -34,14 +33,12 @@ const toDict = async (payload) => {
 
 //define thunks
 export const fetchCartItems = (user_id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/cart/${user_id}`);
+    const response = await csrfFetch(`/api/cart/1`);
 
-    if (response.okay) {
-        const data = await response.json();
-        const orderedData = toDict(data)
-        dispatch(getCartItems(orderedData))
-        return orderedData;
-    }
+    const data = await response.json();
+    dispatch(getCartItems(toDict(data)))
+    return data;
+
 }
 
 export const fetchAddToCart = (payload) => async (dispatch) => {
@@ -50,20 +47,21 @@ export const fetchAddToCart = (payload) => async (dispatch) => {
         body: JSON.stringify(payload.quantity)
     });
 
-    if (response.okay) {
-        const data = await response.json();
-        dispatch(editCart(data))
-        return data;
-    }
+
+    const data = await response.json();
+    dispatch(editCart(data))
+    return data;
 }
 
 export const fetchEditItemQuantity = (payload) => async (dispatch) => {
-    const response = await csrfFetch(`/api/cart/${payload.product_id}`, {
+    if (payload.quantity > 0) {
+        const response = await csrfFetch(`/api/cart/${payload.product_id}`, {
         method: 'PUT',
-        body: JSON.stringify(payload.quantity)
-    });
+        body: JSON.stringify({
+            quantity: payload.quantity
+        })
+        });
 
-    if (response.okay) {
         const data = await response.json();
         dispatch(editCart(data))
         return data;
@@ -76,11 +74,10 @@ export const fetchDeleteCartItem = (cart_item_id) => async (dispatch) => {
         body: JSON.stringify(cart_item_id)
     });
 
-    if (response.okay) {
-        const data = await response.json();
-        dispatch(deleteCartItems(cart_item_id))
-        return data;
-    }
+    const data = await response.json();
+    dispatch(deleteCartItems(data.id))
+    return data;
+
 }
 
 //define route and initial state
@@ -94,14 +91,14 @@ const OrdersReducer = (state = initialState, action) => {
         case GET_CURRENT_CART:
             return {...state, cartItems: action.payload}
         case ADD_EDIT_CART: {
-            const newState = {...state};
-            newState.cartItems[action.payload.id] = action.payload
-            return newState
+            let cartItems = {...state.cartItems}
+            cartItems[action.payload.id].quantity = action.payload.quantity
+            return {...state, cartItems}
         }
         case REMOVE_CART_ITEM: {
-            const newState = {...state}
-            delete newState.cartItems[action.payload]
-            return newState
+            let cartItems = {...state.cartItems}
+            delete cartItems[action.payload]
+            return {...state, cartItems}
         }
         default:
             return state;

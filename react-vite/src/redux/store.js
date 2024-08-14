@@ -12,7 +12,7 @@ import OrdersReducer from "./orders";
 const rootReducer = combineReducers({
   session: sessionReducer,
   products: ProductsReducer,
-  CartOrders: OrdersReducer
+  orders: OrdersReducer
 });
 
 let enhancer;
