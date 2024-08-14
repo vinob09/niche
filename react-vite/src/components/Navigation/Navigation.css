@@ -1,4 +1,57 @@
-/*NAVBAR */
+
+.profile-menu-container {
+  position: relative;
+}
+.profile-dropdown {
+  position: absolute;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  top: 100%;
+  height: 60px;
+  right: 0;
+  background-color: #dcf4e881;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px 4px rgba(0, 0, 0, 0.278);
+  padding: 15px;
+  list-style: none;
+  min-width: 120px;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border: none;
+}
+
+.profile-dropdown.show {
+  opacity: 1;
+  transform: translateY(10);
+}
+
+.user-circle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.user-menu-items button {
+  color: rgb(43, 43, 43);
+  font-weight: normal;
+  background-color: #bcebd400;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.user-menu-items {
+  margin: 5px 0;
+  font-weight: lighter;
+  color: rgb(4, 4, 4);
+  cursor: pointer;
+  position: relative;
+  display: block;
+  list-style: none;
+  text-align: center;
+}/*NAVBAR */
 .navbar {
   margin: 0px;
   border: 1px solid rgb(187, 251, 220);

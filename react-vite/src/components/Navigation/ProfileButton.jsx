@@ -6,7 +6,8 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import './UserMenu.css';
+import './Navigation.css';
+
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -37,11 +38,15 @@ function ProfileButton() {
     
 
   const closeMenu = () => setShowMenu(false);
-
+  const closeNav = () => {
+    navigate('/past-orders')
+    closeMenu();
+  };
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    window.location.reload();
   };
   return (
     <div className="profile-menu-container">
@@ -56,7 +61,7 @@ function ProfileButton() {
             <>
               <li className={"user-menu-items"}>{user.username}</li>
               <li className={"user-menu-items"}>{user.email}</li>
-              <li className={"user-menu-items"} onClick={() => navigate('/past-orders')}>
+              <li className={"user-menu-items"} onClick={closeNav}>
                 Past Orders
               </li>
               <li>

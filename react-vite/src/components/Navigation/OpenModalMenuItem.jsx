@@ -1,6 +1,9 @@
 import { useModal } from '../../context/Modal';
-import './UserMenu.css'
+import './Navigation.css'
 
+function refreshPage() {
+  window.location.reload();
+}
 function OpenModalMenuItem({
   modalComponent, // component to render inside the modal
   itemText, // text of the button that opens the modal
@@ -10,7 +13,10 @@ function OpenModalMenuItem({
   const { setModalContent, setOnModalClose } = useModal();
 
   const onClick = () => {
-    if (onModalClose) setOnModalClose(onModalClose);
+    if (onModalClose) {
+      setOnModalClose(onModalClose);
+      refreshPage();
+    }
     setModalContent(modalComponent);
     if (typeof onItemClick === "function") onItemClick();
   };

@@ -9,8 +9,20 @@ def seed_cart_items():
         product_id=10,
         quantity=1
         )
+    cart2 = CartItem(
+        user_id=1,
+        product_id=9,
+        quantity=1
+    )
+    cart3 = CartItem(
+        user_id=1,
+        product_id=2,
+        quantity=1
+    )
 
     db.session.add(cart1)
+    db.session.add(cart2)
+    db.session.add(cart3)
     db.session.commit()
 
 
