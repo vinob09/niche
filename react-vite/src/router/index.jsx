@@ -8,7 +8,6 @@ import ProductDetailsPage from '../components/ProductDetailsPage';
 import NewProductFormPage from '../components/NewProductFormPage';
 import UserProductsPage from '../components/UserProductsPage';
 import CartDetailsPage from '../components/CartDetailsPage';
-import ReviewFormModal from '../components/ReviewFormModal';
 import PastOrdersPage from '../components/PastOrdersPage';
 import Layout from './Layout';
 
@@ -51,12 +50,6 @@ export const router = createBrowserRouter([
       {
         path: "shopping-cart",
         element: <CartDetailsPage />
-      },
-      {
-        path: "products/:product_id/review-form",
-        /*We can decide to remove this and have the modal pop up
-        instead on the Product Details page if more streamlined*/
-        element: <ReviewFormModal />
       },
       {
         path: "past-orders",

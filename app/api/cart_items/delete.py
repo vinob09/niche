@@ -11,13 +11,8 @@ Delete cart item by cart id
 @cart_delete_items.route("/<int:cart_item_id>", methods=['DELETE'])
 @login_required
 def remove_from_cart(cart_item_id):
-    check_cart = CartItem.query.filter_by(id=cart_item_id).first()
+    item = CartItem.query.get_or_404(cart_item_id)
 
-    if not check_cart:
-        return {"errors": {"message": "Cart Item record not found"}}, 404
-
-    db.session.delete(check_cart)
+    db.session.delete(item)
     db.session.commit()
-    return jsonify({
-        cart_item_id
-    })
+    return { 'id': cart_item_id}
