@@ -1,3 +1,4 @@
+import { useSelector} from "react-redux";
 import { NavLink } from "react-router-dom";
 import { FaRegHeart} from "react-icons/fa";
 import { FaStoreAlt } from "react-icons/fa";
@@ -5,7 +6,8 @@ import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
-function Navigation({hasLoggedIn}) {
+function Navigation() {
+  const user = useSelector((store) => store.session.user);
   return (
     <div className="navbar">
       <div className="gradient-overlay"></div>
@@ -19,13 +21,13 @@ function Navigation({hasLoggedIn}) {
         <li className="search-bar">
           <input type="text" placeholder="Search" />
         </li>
-        {hasLoggedIn ? (
+        {user ? (
           <>
             <li className="favorites-button">
               <NavLink to="/favorites"><FaRegHeart/></NavLink>
             </li>
             <li className="shop-manager-button">
-            <NavLink to ="/my-products"><FaStoreAlt/></NavLink>
+            <NavLink to ="/products/my-products"><FaStoreAlt/></NavLink>
             </li>
           </>
         ) : null}
