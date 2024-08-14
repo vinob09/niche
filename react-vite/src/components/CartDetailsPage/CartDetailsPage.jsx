@@ -4,23 +4,29 @@ import CartItem from '../cartItem/cartItem';
 import BestSellersBar from '../BestSellersBar';
 import { fetchCartItems } from '../../redux/orders';
 import { fetchProducts } from '../../redux/products';
+import { useModal } from '../../context/Modal'
+import stripeCheckoutModal from '../cartCheckoutModal/cartCheckoutModel';
 import Loader from '../Loader/Loader';
 import './CartDetailsPage.css';
 
 
 function CartDetailsPage () {
     const dispatch = useDispatch();
+    const { setModalContent, closeModal } = useModal();
+
     const [isLoaded, setIsLoaded] = useState(false);
     const currentUser = useSelector(state => state.session.user)
     const cartItems = useSelector(state => Object.values(state.orders.cartItems))
     const products = useSelector(state => Object.values(state.products.allProducts));
 
+    //checks user is logged in to view cart
     if (!currentUser) {
         return (
             <h1>Must be logged in to view cart</h1>
         )
     }
 
+    //calculates the total for all items in the cart
     const getTotal = () => {
         let total = 0;
         cartItems.forEach(item => {
@@ -28,6 +34,13 @@ function CartDetailsPage () {
             total+= price
         })
         return total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    //modal for payment
+    const handleCheckout = () => {
+        setModalContent(
+            <stripeCheckoutModal />
+        )
     }
 
     useEffect(() => {
@@ -51,7 +64,7 @@ function CartDetailsPage () {
                 <h3>Item(s) Total: ${getTotal()}</h3>
             </div>
             <div>
-                <button>Proceed to checkout</button>
+                <button onClick={handleCheckout}>Proceed to checkout</button>
             </div>
             <div>
                 <h3>Items you may like:</h3>
