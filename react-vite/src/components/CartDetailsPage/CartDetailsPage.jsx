@@ -1,16 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
 import CartItem from '../cartItem/cartItem';
-import { fetchCartItems, fetchEditItemQuantity, fetchDeleteCartItem } from '../../redux/orders';
+import BestSellersBar from '../BestSellersBar';
+import { fetchCartItems } from '../../redux/orders';
+import { fetchProducts } from '../../redux/products';
 import Loader from '../Loader/Loader';
 import './CartDetailsPage.css';
+
 
 function CartDetailsPage () {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
     const currentUser = useSelector(state => state.session.user)
     const cartItems = useSelector(state => Object.values(state.orders.cartItems))
+    const products = useSelector(state => Object.values(state.products.allProducts));
 
     if (!currentUser) {
         return (
@@ -18,23 +21,41 @@ function CartDetailsPage () {
         )
     }
 
+    const getTotal = () => {
+        let total = 0;
+        cartItems.forEach(item => {
+            let price = item.quantity * item.product_details.price;
+            total+= price
+        })
+        return total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     useEffect(() => {
         dispatch(fetchCartItems(currentUser.id))
         .then(() => {
+            dispatch(fetchProducts())
+        }).then(() => {
             setIsLoaded(true)
         })
     }, [dispatch, currentUser])
 
     return  isLoaded ? (
         <div className='cart-details-page'>
-            <h2>Shopping Cart</h2>
+            <h2>{cartItems.length} items in your cart</h2>
             <div>
                 {cartItems.map((item, key) =>
                     <CartItem key={key} data={item}/>
                 )}
             </div>
-            <div className='cart-buttons'>
-                <button>Checkout</button>
+            <div className='cart-info'>
+                <h3>Item(s) Total: ${getTotal()}</h3>
+            </div>
+            <div>
+                <button>Proceed to checkout</button>
+            </div>
+            <div>
+                <h3>Items you may like:</h3>
+                <BestSellersBar products={products} />
             </div>
         </div>
     ) : <Loader />
