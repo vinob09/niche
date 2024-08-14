@@ -6,7 +6,7 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import './UserMenu.css';
+import './Navigation.css';
 
 
 function ProfileButton() {
