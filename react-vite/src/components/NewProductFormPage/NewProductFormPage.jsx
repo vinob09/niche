@@ -1,5 +1,5 @@
 import './NewProductFormPage.css';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import { fetchCreateProduct } from '../../redux/products';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -26,7 +26,7 @@ function NewProductFormPage () {
         fetchCategories();
     }, []);
     useEffect(() => {
-        dispatch(fetchProducts())
+        dispatch(fetchCreateProduct())
             .then(() => {
                 setIsLoaded(true)
             })
