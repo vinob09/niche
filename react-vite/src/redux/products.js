@@ -197,11 +197,9 @@ export const fetchProductsByCategory = (cat_id) => async (dispatch) => {
 
 export const fetchFavorites = () => async (dispatch) => {
     const response = await csrfFetch('/api/favorites')
-
-    if (response.okay) {
         const data = await response.json()
         dispatch(getUserFavorites(data))
-    }
+        return response;
 }
 
 export const fetchDeleteFavorite = (product_id) => async (dispatch) => {
