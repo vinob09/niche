@@ -39,7 +39,6 @@ def seed():
     seed_products()
     seed_review()
     seed_favorite()
-    seed_cart_items()
     seed_past_orders()
     seed_order_items()
     seed_cart_items()
