@@ -29,7 +29,7 @@ function FavoritePage() {
 
     // check products against favorites array
     const favoriteProducts = Object.values(products).filter(product =>
-        favorites.some(favorite => favorite.productId === product.id)
+        Array.isArray(favorites) && favorites.some(favorite => favorite.productId === product.id)
     );
 
     // handle on click for add to cart
