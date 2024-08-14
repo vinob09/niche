@@ -27,7 +27,7 @@ function Navigation() {
               <NavLink to="/favorites"><FaRegHeart/></NavLink>
             </li>
             <li className="shop-manager-button">
-            <NavLink to ="/my-products"><FaStoreAlt/></NavLink>
+            <NavLink to ="/products/my-products"><FaStoreAlt/></NavLink>
             </li>
           </>
         ) : null}
