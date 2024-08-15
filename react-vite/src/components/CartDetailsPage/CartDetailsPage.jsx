@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import CartItem from '../cartItem/cartItem';
 import BestSellersBar from '../BestSellersBar';
-import { fetchCartItems } from '../../redux/orders';
+import { fetchCartItems, fetchPostOrders } from '../../redux/orders';
 import { fetchProducts } from '../../redux/products';
 import { useModal } from '../../context/Modal'
 import PaymentCheckoutModal from '../cartCheckoutModal/cartCheckoutModel';
@@ -17,6 +17,7 @@ function CartDetailsPage () {
     const currentUser = useSelector(state => state.session.user)
     const cartItems = useSelector(state => Object.values(state.orders.cartItems))
     const products = useSelector(state => Object.values(state.products.allProducts));
+
 
     //checks user is logged in to view cart
     if (!currentUser) {
@@ -36,10 +37,10 @@ function CartDetailsPage () {
     }
 
     //modal for payment
-    const handleCheckout = (e) => {
+    const handleCheckout = async (e) => {
         e.stopPropagation()
         e.preventDefault()
-        setModalContent(<PaymentCheckoutModal />)
+        setModalContent(<PaymentCheckoutModal order={orderDetails}/>)
     }
 
     useEffect(() => {

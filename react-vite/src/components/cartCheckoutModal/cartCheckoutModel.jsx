@@ -9,7 +9,10 @@ const PaymentCheckoutModal = () => {
 
     return (
         <div>
-            <h1>Payment page coming soon...</h1>
+            <h1>Checkout Successful!</h1>
+            <p>Project website and we will not accept real payments</p>
+            <div>
+            </div>
             <button
             type='button'
             className='close-payment-confirmation'

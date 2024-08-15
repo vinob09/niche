@@ -5,6 +5,7 @@ const GET_CURRENT_CART = '/api/cart/userId';
 const ADD_TO_CART = '/api/cart/post'
 const EDIT_CART = '/api/cart/update';
 const REMOVE_CART_ITEM = '/api/cart/delete'
+const ADD_TO_ORDERS = '/api/orders/post'
 
 //define actions
 const getCartItems = (payload) => ({
@@ -27,6 +28,10 @@ const deleteCartItems = (payload) => ({
     payload
 })
 
+const addToOrders = (payload) => ({
+    type: ADD_TO_ORDERS,
+    payload
+})
 
 //helper function to create products object with a key of product id
 const toDict = (payload) => {
@@ -87,6 +92,14 @@ export const fetchDeleteCartItem = (cart_item_id) => async (dispatch) => {
 
 }
 
+export const fetchPostOrders = (payload) => async (dispatch) => {
+    const response = await csrfFetch('/api/past-orders', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+    })
+    return response
+}
+
 //define route and initial state
 const initialState = {
     cartItems: {},
@@ -112,6 +125,12 @@ const OrdersReducer = (state = initialState, action) => {
             let cartItems = {...state.cartItems}
             delete cartItems[action.payload]
             return {...state, cartItems}
+        }
+        case ADD_TO_ORDERS: {
+            const newState = {...state}
+            newState.pastOrders = newState.pastOrders ? {...newState.pastOrders} : {}
+            newState.pastOrders[action.payload.id] = action.payload
+            return newState
         }
         default:
             return state;
