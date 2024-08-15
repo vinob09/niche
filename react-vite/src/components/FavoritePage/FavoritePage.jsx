@@ -27,15 +27,10 @@ function FavoritePage() {
             })
     }, [dispatch, user, navigate]);
 
-    // check products against favorites array
-    const favoriteProducts = Object.values(products).filter(product =>
-        Array.isArray(favorites) && favorites.some(favorite => favorite.productId === product.id)
-    );
 
-    // handle on click for add to cart
-    const handleAddToCart = () => {
-        navigate('/shopping-cart');
-    };
+    const favoriteProducts = Object.values(products).filter(product =>
+        favorites.some(favorite => favorite.productId === product.id)
+    );
 
     return isLoaded ? (
         <div className='favorite-page'>
@@ -56,7 +51,7 @@ function FavoritePage() {
                                 <span className='favorite-review'>({product.reviewCount})</span>
                             </div>
                             <p className='favorite-price'>${product.price}</p>
-                            <button className='favorite-button' onClick={handleAddToCart}>Add to Cart</button>
+                            <button className='favorite-button'>Add to Cart</button>
                         </div>
                     ))}
                 </div>

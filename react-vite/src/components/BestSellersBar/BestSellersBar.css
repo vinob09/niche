@@ -43,6 +43,11 @@
     padding: 10px 0;
 }
 
+.product-tiles {
+    flex: 0 0 auto;
+    width: 200px;
+}
+
 
 @media (max-width: 1000px) {
     .best-sellers-wrapper {

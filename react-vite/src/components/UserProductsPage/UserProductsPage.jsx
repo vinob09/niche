@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchUserProducts } from '../../redux/products';
 import { FaStar } from "react-icons/fa";
 import { useModal } from '../../context/Modal';
@@ -10,6 +10,7 @@ import './UserProductsPage.css'
 
 function UserProductsPage() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { setModalContent, closeModal } = useModal();
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -17,6 +18,10 @@ function UserProductsPage() {
     const user = useSelector(state => state.session.user);
 
     useEffect(() => {
+        if (!user) {
+            navigate("/login")
+            return;
+        }
         dispatch(fetchUserProducts())
             .then(() => {
                 setIsLoaded(true)

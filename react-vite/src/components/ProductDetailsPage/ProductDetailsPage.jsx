@@ -28,7 +28,7 @@ function ProductDetailsPage() {
 
     // handle on click for add to cart
     const handleAddToCart = () => {
-        navigate('/shopping-cart');
+        return alert('Feature coming soon...')
     };
 
     // handle on click for add a review
@@ -58,7 +58,7 @@ function ProductDetailsPage() {
             <DeleteReviewModal
                 productId={product_id}
                 review={review}
-                onClose={closeModal} 
+                onClose={closeModal}
             />
         );
     };
