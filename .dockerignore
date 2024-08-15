@@ -1,7 +1,24 @@
-instance/*
-instance
-node_modules
-.env
-.venv
-dev.db
-.gitignore
+# Ignore everything by default
+*
+
+# Allow only needed files
+!/app
+!/migrations
+!/react-vite
+!/Pipfile
+!/Pipfile.lock
+!/run.sh
+
+# Ignore any python generated files
+**/__pycache__
+**/*.pyc
+
+# Ignore dist folder for react-vite and node modules
+react-vite/dist
+react-vite/node_modules
+
+# Ignore any READMEs
+**/README*
+
+# Ignore OSX files
+**/.DS_Store
