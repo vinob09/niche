@@ -44,6 +44,10 @@ export const router = createBrowserRouter([
         element: <NewProductFormPage />
       },
       {
+        path: "products/new-product/:productId",
+        element: <NewProductFormPage />
+      },
+      {
         path: "products/my-products",
         element: <UserProductsPage />
       },
