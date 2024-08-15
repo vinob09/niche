@@ -6,11 +6,32 @@
     border: none;
     cursor: pointer;
     font-size: 30px;
-    color: #bcebd4;
+    color: #8fceb0;
     z-index: 1;
     transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorite-toggle-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35px;
+    height: 35px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: -1;
 }
 
 .favorite-toggle-button:hover {
     transform: scale(1.1);
+}
+
+.favorite-toggle-button:hover::before {
+    background-color: rgb(231, 231, 231);
 }

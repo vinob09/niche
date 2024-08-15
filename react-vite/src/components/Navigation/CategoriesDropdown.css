@@ -1,0 +1,46 @@
+/*Categories Dropdown Styline*/
+.categories-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.categories-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border-color: #bcebd4;
+}
+
+.categories-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.categories-dropdown li {
+    padding: 8px 16px;
+    display: block;
+}
+
+.categories-dropdown li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.categories-dropdown li a:hover {
+    background-color: #f1f1f1;
+}
+
+.categories-container:hover .categories-dropdown,
+.categories-dropdown:hover {
+    display: block;
+}
