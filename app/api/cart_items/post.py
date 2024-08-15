@@ -30,6 +30,4 @@ def add_to_cart(product_id):
         db.session.add(cart_item)
         db.session.commit()
         data = cart_item.to_dict()
-        return jsonify({
-            data
-        }), 200
+        return jsonify(data), 200
