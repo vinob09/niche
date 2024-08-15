@@ -1,4 +1,7 @@
 
+.home-link::before {
+  content: 'niche';
+}
 .profile-menu-container {
   position: relative;
 }
@@ -7,13 +10,12 @@
   overflow: visible;
   display: flex;
   flex-direction: column;
+  align-items: center;
   top: 100%;
-  height: 60px;
   right: 0;
-  background-color: #dcf4e881;
+  background-color: #dcf4e8b4;
   border-radius: 10px;
-  box-shadow: 0 5px 15px 4px rgba(0, 0, 0, 0.278);
-  padding: 15px;
+  box-shadow: 0 1px 3px 2px rgba(37, 37, 37, 0.152);
   list-style: none;
   min-width: 120px;
   transform: translateY(-10px);
@@ -21,9 +23,15 @@
   border: none;
 }
 
-.profile-dropdown.show {
-  opacity: 1;
-  transform: translateY(10);
+.profile-dropdown.show{
+  justify-content: space-evenly;
+  height: 120px;
+  transform-origin: 0 0;
+  transform: translate(-100%, 50%) rotate(0deg) translate(100%, -10%);
+}
+
+.login-signup-button {
+  color:red;
 }
 
 .user-circle {
@@ -32,26 +40,25 @@
   cursor: pointer;
   font-size: 20px;
 }
-
 .user-menu-items button {
   color: rgb(43, 43, 43);
   font-weight: normal;
   background-color: #bcebd400;
-  border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   border: none;
 }
 
 .user-menu-items {
-  margin: 5px 0;
   font-weight: lighter;
   color: rgb(4, 4, 4);
   cursor: pointer;
   position: relative;
-  display: block;
   list-style: none;
-  text-align: center;
-}/*NAVBAR */
+}
+.user-menu-items:hover {
+  transform: scaleX(1.05) scaleY(1.05);
+}
+/*NAVBAR */
 .navbar {
   margin: 0px;
   border: 1px solid rgb(187, 251, 220);
@@ -155,12 +162,7 @@
   background-color: #f0f8ff;
   outline: none;
 }
-.profile-menu {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: relative;
-}
+
 .user-circle {
   border-radius: 50%;
   margin-left: 10px;
@@ -170,13 +172,6 @@
 }
 .shopping-cart{
   margin-left: 10px;
-}
-
-/*PROFILE*/
-.profile-dropdown {
-  list-style: none;
-  z-index: 101;
-
 }
 
 /*Categories/Favorites*/
@@ -201,9 +196,7 @@
   align-items: center;
   margin-left: 10px;
 }
-.menu-items {
-  list-style: none;
-}
+
 
 .navbar {
   position: relative;
@@ -268,4 +261,9 @@
 .categories-container:hover .categories-dropdown,
 .categories-dropdown:hover {
   display: block;
+}
+@media (max-width: 600px) {
+  .home-link::before {
+    content: 'n';
+  }
 }
