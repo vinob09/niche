@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "react-bootstrap-typeahead": "^6.3.2",
     "react-redux": "^9.1.2"
   }
 }

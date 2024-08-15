@@ -8,6 +8,7 @@ import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import CategoriesDropdown from "./CategoriesDropdown";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
+import SearchBar from "./SearchBar";
 
 function Navigation() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function Navigation() {
           {showDropdown && <CategoriesDropdown categories={categories} />}
         </li>
         <li className="search-bar">
+          {/* <SearchBar /> */}
           <input type="text" placeholder="Search" />
         </li>
         {user ? (
