@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { fetchProductId } from '../../redux/products';
 import { useModal } from '../../context/Modal';
 import { AddReviewModal, DeleteReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
@@ -10,7 +10,6 @@ import './ProductDetailsPage.css'
 function ProductDetailsPage() {
     const { product_id } = useParams();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { setModalContent, closeModal } = useModal();
 
     const product = useSelector(state => state.products.currProduct);
