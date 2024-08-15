@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, NavLink } from 'react-router-dom';
 import { fetchUserProducts } from '../../redux/products';
 import { FaStar } from "react-icons/fa";
 import { useModal } from '../../context/Modal';
@@ -43,27 +43,32 @@ function UserProductsPage() {
     return isLoaded ? (
         <div className='user-products-page'>
             <h1>{user.firstName}&apos;s Products</h1>
-            <div className='container'>
-                {products.map((product) => (
-                    <div key={product.id} className='user-product-tile'>
-                            <Link to={`/products/${product.id}`}>
-                                <img src={product.previewImage} alt={product.name} className='user-product-image' />
-                            </Link>
-                            <Link to={`/products/${product.id}`}>
-                                <p className='user-product-name'>{product.name}</p>
-                            </Link>
-                            <div className='user-product-rating'>
-                                <span className='user-product-average'>{product.avgRating} <span className='user-product-average-star'><FaStar /></span></span>
-                                <span className='user-product-review'>({product.reviewCount})</span>
-                            </div>
-                            <p className='user-product-price'>${product.price}</p>
-                            <div className='user-product-buttons'>
-                                <button className='user-product-edit'>Edit</button>
-                                <button className='user-product-delete' onClick={() => handleDeleteProduct(product.id)}>Delete</button>
-                            </div>
+            <Link to={`/products/new-product`}>Add a New Product</Link>
+            {products.length > 0 ? (
+                <div className='container'>
+                    {products.map((product) => (
+                        <div key={product.id} className='user-product-tile'>
+                                <NavLink to={`/products/${product.id}`}>
+                                    <img src={product.previewImage} alt={product.name} className='user-product-image' />
+                                </NavLink>
+                                <NavLink to={`/products/${product.id}`}>
+                                    <p className='user-product-name'>{product.name}</p>
+                                </NavLink>
+                                <div className='user-product-rating'>
+                                    <span className='user-product-average'>{product.avgRating} <span className='user-product-average-star'><FaStar /></span></span>
+                                    <span className='user-product-review'>({product.reviewCount})</span>
+                                </div>
+                                <p className='user-product-price'>${product.price}</p>
+                                <div className='user-product-buttons'>
+                                    <button className='user-product-edit'>Edit</button>
+                                    <button className='user-product-delete' onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+                                </div>
                         </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            ) : (
+                <p>No products listed for sale.</p>
+            )}
         </div>
     ) : (<Loader />)
 }

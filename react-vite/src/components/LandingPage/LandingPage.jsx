@@ -10,7 +10,10 @@ import './LandingPage.css'
 function LandingPage() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
-    const products = useSelector(state => Object.values(state.products.allProducts));
+
+    const user = useSelector(state => state.session.user);
+    const productsObj = useSelector(state => state.products.allProducts);
+    const products = Object.values(productsObj);
 
     useEffect(() => {
         dispatch(fetchProducts())
@@ -22,7 +25,9 @@ function LandingPage() {
 
     return isLoaded ? (
         <>
-            <h1 className='landing-page-title'>Welcome, user!</h1>
+            <h1 className='landing-page-title'>
+                {user ? (`Welcome, ${user.firstName}`) : (`Welcome, guest!`)}
+            </h1>
             <BestSellersBar products={products} />
             <div className='landing-page'>
                 <div className='landing-page-text'>

@@ -1,30 +1,24 @@
-import './NewProductFormPage.css';
 import {useEffect, useState} from 'react';
 import { fetchCreateProduct } from '../../redux/products';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../Loader/Loader';
+import './NewProductFormPage.css';
 
 function NewProductFormPage () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const categoriesObj = useSelector(state => state.products.categories);
+    const categories = Object.values(categoriesObj);
+
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [categoryId, setCategoryId] = useState('');
-    const [categories, setCategories] = useState([]);
     const [errors, setErrors] = useState([]);
     const [isLoaded, setIsLoaded] = useState('false');
 
-    useEffect(() => {
-        const fetchCategories = async() => {
-            const res = await fetch('api/categories');
-            const data = await res.json();
-            setCategories(data.categories);
-        };
-        fetchCategories();
-    }, []);
     useEffect(() => {
         dispatch(fetchCreateProduct())
             .then(() => {
@@ -89,7 +83,7 @@ function NewProductFormPage () {
                    <option value=''>select a category for your product</option>
                    {categories.map(category => (
                     <option key={category.id} value={category.id}>
-                        {category.name}
+                        {category.categoryName}
                     </option>
                    ))}
                 </select>

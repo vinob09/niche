@@ -11,7 +11,8 @@ function CategoryPage() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const products = useSelector(state => Object.values(state.products.productsByCategory));
+    const productsObj = useSelector(state => state.products.productsByCategory);
+    const products = Object.values(productsObj);
     const categories = useSelector(state => state.products.categories);
 
     // pull current category being displayed
