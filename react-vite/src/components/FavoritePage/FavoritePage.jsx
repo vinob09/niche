@@ -29,11 +29,6 @@ function FavoritePage() {
     }, [dispatch, user, navigate]);
 
 
-    const favoriteProducts = Object.values(products).filter(product =>
-        favorites.some(favorite => favorite.productId === product.id)
-    );
-
-
     // check products against favorites array
     let favoriteProducts;
     if (isLoaded) {
