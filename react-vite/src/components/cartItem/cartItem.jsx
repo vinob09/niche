@@ -1,31 +1,28 @@
-import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchDeleteCartItem, fetchEditItemQuantity } from "../../redux/orders";
 import { FaDollarSign } from "react-icons/fa";
 import './cartItem.css'
 
-const CartItem = ({key, data}) => {
+const CartItem = ({data}) => {
     const product = data.product_details
     const dispatch = useDispatch()
-    const [editButton, setEditButton] = useState('Update Quantity')
-    const [allowEdit, setAllowEdit] = useState(false)
 
     const handleMinusQuantity = () => {
         dispatch(fetchEditItemQuantity({
             product_id: data.productId,
             quantity: data.quantity - 1
-        })).catch(e => console.log)
+        }))
     }
 
     const handlePlusQuantity = () => {
         dispatch(fetchEditItemQuantity({
             product_id: data.productId,
             quantity: data.quantity + 1
-        })).catch(e => console.log)
+        }))
     }
 
     const removeItem = () => {
-        dispatch(fetchDeleteCartItem(data.id)).catch(e => console.log)
+        dispatch(fetchDeleteCartItem(data.id))
     }
 
     const getPrice = (itemPrice, quantity) => {

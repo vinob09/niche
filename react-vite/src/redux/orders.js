@@ -33,7 +33,7 @@ const toDict = (payload) => {
 
 //define thunks
 export const fetchCartItems = (user_id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/cart/1`);
+    const response = await csrfFetch(`/api/cart/${user_id}`);
 
     const data = await response.json();
     dispatch(getCartItems(toDict(data)))
@@ -46,7 +46,6 @@ export const fetchAddToCart = (payload) => async (dispatch) => {
         method: 'POST',
         body: JSON.stringify(payload.quantity)
     });
-
 
     const data = await response.json();
     dispatch(editCart(data))

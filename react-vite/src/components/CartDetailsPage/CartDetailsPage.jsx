@@ -5,14 +5,13 @@ import BestSellersBar from '../BestSellersBar';
 import { fetchCartItems } from '../../redux/orders';
 import { fetchProducts } from '../../redux/products';
 import { useModal } from '../../context/Modal'
-import { paymentCheckoutModal } from '../cartCheckoutModal/cartCheckoutModel';
+import PaymentCheckoutModal from '../cartCheckoutModal/cartCheckoutModel';
 import Loader from '../Loader/Loader';
 import './CartDetailsPage.css';
 
-
 function CartDetailsPage () {
     const dispatch = useDispatch();
-    const { setModalContent, closeModal } = useModal();
+    const { setModalContent } = useModal();
 
     const [isLoaded, setIsLoaded] = useState(false);
     const currentUser = useSelector(state => state.session.user)
@@ -37,10 +36,10 @@ function CartDetailsPage () {
     }
 
     //modal for payment
-    const handleCheckout = () => {
-        setModalContent(
-            <paymentCheckoutModal onClose={closeModal}/>
-        )
+    const handleCheckout = (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        setModalContent(<PaymentCheckoutModal />)
     }
 
     useEffect(() => {
@@ -64,7 +63,7 @@ function CartDetailsPage () {
                 <h3>Item(s) Total: ${getTotal()}</h3>
             </div>
             <div>
-                <button onClick={() => handleCheckout()}>Proceed to checkout</button>
+                <button onClick={e => handleCheckout(e)}>Proceed to checkout</button>
             </div>
             <div>
                 <h3>Items you may like:</h3>
