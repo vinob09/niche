@@ -13,20 +13,20 @@ product_post_routes = Blueprint("product_post", __name__)
 @login_required
 def create_product():
     form = ProductForm()
-    form.category_id.options = [(category.id, category.name) for category in Category.query.all()]
+    form.category_id.options = [(category.id) for category in Category.query.all()]
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_product = Product(
-        seller_id = current_user.id,
-        name = form.data['name'],
-        description = form.data['description'],
-        price = form.data['price'],
-        category_id = form.data['category_id']
+            seller_id = current_user.id,
+            name = form.data['name'],
+            description = form.data['description'],
+            price = form.data['price'],
+            category_id = form.data['category_id']
         )
         db.session.add(new_product)
         db.session.commit()
 
-        return jsonify({"product_id": new_product.id}), 201
+        return jsonify(new_product.to_dict()), 201
     return jsonify(form.errors), 400
 
 

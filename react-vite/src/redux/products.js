@@ -6,15 +6,13 @@ const GET_PRODUCTS = 'products/getAll';
 const GET_PRODUCT = 'products/productId';
 const GET_MY_PRODUCTS = 'products/current';
 const CREATE_PRODUCT = 'products/new';
-// edit uses the get product to reload the product after the edit
-// delete uses the get products to reload all products
 
 const GET_CATEGORIES = 'categories/getAll';
 const GET_PRODUCTS_BY_CATEGORY = 'products/categories/catId'
 
 const GET_FAVORITES = '/api/favorites'
 const POST_FAVORITE = '/api/favorites/add'
-// delete uses the get favs to reload all favs
+
 
 /* define actions
 A function that takes in the change you want to make and sends it to the reducer along with the action type (url) */
@@ -52,6 +50,7 @@ const getUserFavorites = (payload) => ({
     type: GET_FAVORITES,
     payload
 })
+
 
 /* define a thunk
 a function that will take in the dispatch, and whatever variable you pass into it to do a thing (call the db)
@@ -92,17 +91,26 @@ export const fetchProductId = (product_id) => async (dispatch) => {
 };
 
 export const fetchCreateProduct = (product) => async (dispatch) => {
+    const { name, description, price, category_id } = product
     const response = await csrfFetch('/api/products', {
         method: 'POST',
-        body: JSON.stringify(product)
+        body: JSON.stringify({
+            name,
+            description,
+            price,
+            category_id
+        })
     });
     const data = await response.json();
-    dispatch(createProduct(data));
-    return data;
+    if (response.ok) {
+        dispatch(createProduct(data));
+        return data;
+    }
+    return null;
 };
 
 export const fetchEditProduct = (product) => async (dispatch) => {
-    const {product_id, name, description, price, category_id} = product
+    const { product_id, name, description, price, category_id } = product
     const response = await csrfFetch(`/api/products/${product_id}`, {
         method: 'PUT',
         body: JSON.stringify({
@@ -113,12 +121,14 @@ export const fetchEditProduct = (product) => async (dispatch) => {
         })
     });
 
-    if (response.okay) {
-        const refresh = await Promise.all([
-            dispatch(fetchProductId(product_id)),
-            dispatch(fetchProducts())
-        ]);
-        return refresh;
+    if (response.ok) {
+        const updatedProduct = await response.json();
+        dispatch(getProduct(updatedProduct));
+        dispatch(fetchProducts());
+        return updatedProduct;
+    } else {
+        console.error('Failed to updated product:', response)
+        return null;
     }
 }
 
@@ -144,7 +154,7 @@ export const fetchCreateReview = (payload) => async (dispatch) => {
     });
     if (response.okay) {
         const refresh = await Promise.all([
-        dispatch(fetchProductId(product_id))
+            dispatch(fetchProductId(product_id))
         ])
         return refresh
     }
@@ -174,7 +184,7 @@ export const fetchDeleteReview = (payload) => async (dispatch) => {
 
     if (response.okay) {
         const refresh = await Promise.all([
-        dispatch(fetchProductId(payload.product_id))
+            dispatch(fetchProductId(payload.product_id))
         ])
         return refresh
     }
@@ -182,24 +192,24 @@ export const fetchDeleteReview = (payload) => async (dispatch) => {
 
 export const fetchCategories = () => async (dispatch) => {
     const response = await csrfFetch('/api/categories')
-        const data = await response.json();
-        const orderedData = await toDict(data);
-        dispatch(getCategories(orderedData));
-        return response;
+    const data = await response.json();
+    const orderedData = await toDict(data);
+    dispatch(getCategories(orderedData));
+    return response;
 }
 
 export const fetchProductsByCategory = (cat_id) => async (dispatch) => {
     const response = await csrfFetch(`/api/products/categories/${cat_id}`)
-        const data = await response.json();
-        dispatch(getProductsByCategory(data));
-        return response;
+    const data = await response.json();
+    dispatch(getProductsByCategory(data));
+    return response;
 }
 
 export const fetchFavorites = () => async (dispatch) => {
     const response = await csrfFetch('/api/favorites')
-        const data = await response.json()
-        dispatch(getUserFavorites(data))
-        return response;
+    const data = await response.json()
+    dispatch(getUserFavorites(data))
+    return response;
 }
 
 export const fetchAddFavorite = (product_id) => async (dispatch) => {
@@ -231,6 +241,23 @@ export const fetchDeleteFavorite = (product_id) => async (dispatch) => {
     }
 }
 
+export const fetchAddImage = (payload) => async (dispatch) => {
+    const { product_id, url } = payload
+    const response = await csrfFetch(`/api/products/${product_id}/images`, {
+        method: 'POST',
+        body: JSON.stringify({
+            url
+        })
+    });
+
+    if (response.ok) {
+        const refresh = await Promise.all([
+            dispatch(fetchProductId(product_id))
+        ])
+        return refresh
+    }
+}
+
 /* define a default state
 this will be the initial state of the store */
 const initialState = {
@@ -247,22 +274,22 @@ this is basically a router that will change the state based on the action type (
 const ProductsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_PRODUCTS:
-            return {...state, allProducts: action.payload};
+            return { ...state, allProducts: action.payload };
         case GET_MY_PRODUCTS:
-            return {...state, myProducts: action.payload};
+            return { ...state, myProducts: action.payload };
         case GET_PRODUCT:
-            return {...state, currProduct: action.payload}
+            return { ...state, currProduct: action.payload }
         case CREATE_PRODUCT: {
-            let newState = {...state};
+            let newState = { ...state };
             newState.allProducts[action.payload.id] = action.payload
             return newState
         }
         case GET_CATEGORIES:
-            return {...state, categories: action.payload}
+            return { ...state, categories: action.payload }
         case GET_PRODUCTS_BY_CATEGORY:
-            return {...state, productsByCategory: action.payload}
+            return { ...state, productsByCategory: action.payload }
         case GET_FAVORITES:
-            return {...state, favorites: action.payload}
+            return { ...state, favorites: action.payload }
         case POST_FAVORITE:
             return state;
         default:

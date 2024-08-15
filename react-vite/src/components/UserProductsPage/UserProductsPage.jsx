@@ -29,6 +29,11 @@ function UserProductsPage() {
     }, [dispatch, navigate, user]);
 
 
+    // handle on click for edit a prodcut
+    const handleEditProduct = (productId) => {
+        navigate(`/products/new-product/${productId}`)
+    }
+
     // handle on click for delete a product
     const handleDeleteProduct = (product_id) => {
         setModalContent(
@@ -42,7 +47,7 @@ function UserProductsPage() {
 
     return isLoaded ? (
         <div className='user-products-page'>
-            <h1>{user.firstName}&apos;s Products</h1>
+            <h1>{user ? (`${user.firstName}'s Products`) : <Loader />}</h1>
             <Link to={`/products/new-product`}>Add a New Product</Link>
             {products.length > 0 ? (
                 <div className='container'>
@@ -60,7 +65,7 @@ function UserProductsPage() {
                                 </div>
                                 <p className='user-product-price'>${product.price}</p>
                                 <div className='user-product-buttons'>
-                                    <button className='user-product-edit'>Edit</button>
+                                    <button className='user-product-edit' onClick={() => handleEditProduct(product.id)}>Edit</button>
                                     <button className='user-product-delete' onClick={() => handleDeleteProduct(product.id)}>Delete</button>
                                 </div>
                         </div>
