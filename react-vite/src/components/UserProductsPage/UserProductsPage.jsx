@@ -26,7 +26,7 @@ function UserProductsPage() {
             .then(() => {
                 setIsLoaded(true)
             })
-    }, [dispatch]);
+    }, [dispatch, navigate, user]);
 
 
     // handle on click for delete a product
