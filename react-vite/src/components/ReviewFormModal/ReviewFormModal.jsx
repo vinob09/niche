@@ -44,7 +44,7 @@ export const AddReviewModal = ({ productId, onClose }) => {
             <textarea
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
-                maxLength="1000"
+                required maxLength="1000"
             />
             <input
                 type="number"
@@ -107,7 +107,7 @@ export const EditReviewModal = ({ productId, review, onClose }) => {
             <textarea
                 value={updatedReview}
                 onChange={(e) => setUpdatedReview(e.target.value)}
-                maxLength="1000"
+                required maxLength="1000"
             />
             <input
                 type="number"

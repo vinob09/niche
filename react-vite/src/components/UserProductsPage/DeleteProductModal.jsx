@@ -8,8 +8,8 @@ export const DeleteProductModal = ({ productId, onClose }) => {
 
     const handleSubmit = () => {
         dispatch(fetchDeleteProduct(productId))
-        .then(() => onClose())
-        .catch(err => console.error("Error deleting review:", err));
+            .then(() => onClose())
+            .catch(err => console.error("Error deleting review:", err));
     };
 
     return (
