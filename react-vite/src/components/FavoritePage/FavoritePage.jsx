@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { fetchFavorites, fetchProducts } from '../../redux/products';
+import { fetchAddToCart } from '../../redux/orders';
 import { FavoriteToggle } from './FavoriteToggle';
 import { FaStar } from 'react-icons/fa';
 import Loader from '../Loader/Loader';
@@ -32,6 +33,25 @@ function FavoritePage() {
         favorites.some(favorite => favorite.productId === product.id)
     );
 
+
+    // check products against favorites array
+    let favoriteProducts;
+    if (isLoaded) {
+        favoriteProducts = Object.values(products).filter(product =>
+            favorites.some(favorite => favorite.productId === product.id)
+        );
+    }
+
+
+    // handle on click for add to cart
+    const handleAddToCart = (productId) => {
+        dispatch(fetchAddToCart({
+            product_id: productId,
+            quantity: 1
+        })).then(() => navigate('/shopping-cart'))
+    };
+
+
     return isLoaded ? (
         <div className='favorite-page'>
             <h1>{user.firstName}&apos;s Favorites</h1>
@@ -51,7 +71,7 @@ function FavoritePage() {
                                 <span className='favorite-review'>({product.reviewCount})</span>
                             </div>
                             <p className='favorite-price'>${product.price}</p>
-                            <button className='favorite-button'>Add to Cart</button>
+                            <button className='favorite-button' onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
                         </div>
                     ))}
                 </div>
