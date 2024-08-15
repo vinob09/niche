@@ -10,12 +10,16 @@ cart_add_items = Blueprint('cart_items_post', __name__)
 @cart_add_items.route("/<int:product_id>", methods=['POST', 'PUT'])
 @login_required
 def add_to_cart(product_id):
-    check_cart = CartItem.query.filter(CartItem.user_id==current_user.id, CartItem.product_id==product_id).all()
+    # check if item is in cart already
+    check_cart = CartItem.query.filter(CartItem.user_id==current_user.id, CartItem.product_id==product_id).first()
+    # get the body from the request
     r = request.get_json()
+    # if item is already in cart / update quantity
     if check_cart:
-        check_cart[0].quantity = r['quantity']
+        check_cart.quantity = r['quantity']
+        data = check_cart.to_dict()
         db.session.commit()
-        return jsonify(check_cart[0].to_dict())
+        return jsonify(data)
     else:
         cart_item = CartItem(
         user_id = current_user.id,
@@ -25,7 +29,7 @@ def add_to_cart(product_id):
 
         db.session.add(cart_item)
         db.session.commit()
-
+        data = cart_item.to_dict()
         return jsonify({
-            cart_item
+            data
         }), 200

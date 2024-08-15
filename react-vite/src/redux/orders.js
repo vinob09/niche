@@ -2,7 +2,8 @@ import { csrfFetch } from "./csrf";
 
 //define action types
 const GET_CURRENT_CART = '/api/cart/userId';
-const ADD_EDIT_CART = '/api/cart/update';
+const ADD_TO_CART = '/api/cart/post'
+const EDIT_CART = '/api/cart/update';
 const REMOVE_CART_ITEM = '/api/cart/delete'
 
 //define actions
@@ -11,8 +12,13 @@ const getCartItems = (payload) => ({
     payload
 })
 
+const addCartItems = (payload) => ({
+    type: ADD_TO_CART,
+    payload
+})
+
 const editCart = (payload) => ({
-    type: ADD_EDIT_CART,
+    type: EDIT_CART,
     payload
 })
 
@@ -44,11 +50,13 @@ export const fetchCartItems = (user_id) => async (dispatch) => {
 export const fetchAddToCart = (payload) => async (dispatch) => {
     const response = await csrfFetch(`/api/cart/${payload.product_id}`, {
         method: 'POST',
-        body: JSON.stringify(payload.quantity)
+        body: JSON.stringify({
+            quantity: payload.quantity
+        })
     });
 
     const data = await response.json();
-    dispatch(editCart(data))
+    dispatch(addCartItems(data))
     return data;
 }
 
@@ -89,7 +97,13 @@ const OrdersReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_CURRENT_CART:
             return {...state, cartItems: action.payload}
-        case ADD_EDIT_CART: {
+        case ADD_TO_CART: {
+            const newState = {...state}
+            newState.cartItems = newState.cartItems ? {...newState.cartItems} : {}
+            newState.cartItems[action.payload.product_id] = action.payload
+            return newState
+        }
+        case EDIT_CART: {
             let cartItems = {...state.cartItems}
             cartItems[action.payload.id].quantity = action.payload.quantity
             return {...state, cartItems}
