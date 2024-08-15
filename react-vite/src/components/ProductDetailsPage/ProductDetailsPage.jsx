@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchProductId } from '../../redux/products';
+import { fetchAddToCart } from '../../redux/orders'
 import { useModal } from '../../context/Modal';
 import { AddReviewModal, DeleteReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
 import Loader from '../Loader/Loader';
@@ -26,8 +27,11 @@ function ProductDetailsPage() {
 
 
     // handle on click for add to cart
-    const handleAddToCart = () => {
-        return alert('Feature coming soon...')
+    const handleAddToCart = (productId) => {
+        dispatch(fetchAddToCart({
+            product_id: productId,
+            quantity: 1
+        }))
     };
 
     // handle on click for add a review
@@ -81,7 +85,7 @@ function ProductDetailsPage() {
                 <div className='product-info'>
                     <p>{product.description}</p>
                     <h3>Price: ${product.price}</h3>
-                    <button className='product-details-add' onClick={handleAddToCart}>Add to Cart</button>
+                    <button className='product-details-add' onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
                 </div>
             </div>
             <div className='product-details-reviews'>
