@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAddFavorite, fetchDeleteFavorite } from '../../redux/products';
 import { GoHeartFill, GoHeart } from "react-icons/go";
+
 import './FavoriteToggle.css';
 
 export const FavoriteToggle = ({productId}) => {
@@ -10,9 +11,9 @@ export const FavoriteToggle = ({productId}) => {
 
     const handleClick = () => {
         if (isFavorite) {
-            dispatch(fetchDeleteFavorite(productId));
+            dispatch(fetchDeleteFavorite(productId))
         } else {
-            dispatch(fetchAddFavorite(productId));
+            dispatch(fetchAddFavorite(productId))
         }
     };
 
