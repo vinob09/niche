@@ -18,7 +18,7 @@ from .api.reviews.put import review_put_routes
 from .api.favorites.get import favorite_get_routes
 from .api.favorites.delete import favorite_delete_routes
 from .api.favorites.post import favorite_post_routes
-from .api.past_orders import past_order_get_routes
+from .api.past_orders import past_order_get_routes, past_order_post_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -55,6 +55,7 @@ app.register_blueprint(favorite_get_routes, url_prefix='/api/favorites')
 app.register_blueprint(favorite_delete_routes, url_prefix='/api/favorites')
 app.register_blueprint(favorite_post_routes, url_prefix='/api/favorites')
 app.register_blueprint(past_order_get_routes, url_prefix='/api/past-orders')
+app.register_blueprint(past_order_post_routes, url_prefix='/api/past-orders')
 db.init_app(app)
 Migrate(app, db)
 
