@@ -38,10 +38,7 @@ function ProfileButton() {
     
 
   const closeMenu = () => setShowMenu(false);
-  const closeNav = () => {
-    navigate('/past-orders')
-    closeMenu();
-  };
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
@@ -61,7 +58,6 @@ function ProfileButton() {
             <>
               <li className={"user-menu-items"}>Hello, {user.username}!</li>
               <li className={"user-menu-items"}style={{fontSize:"12px",textDecoration:"underline",marginTop:"-12px"}}>{user.email}</li>
-              <li className={"user-menu-items"} onClick={closeNav}>Past Orders</li>
               <li className={"user-menu-items"}>
                 <button onClick={logout}>Log Out</button>
               </li>
