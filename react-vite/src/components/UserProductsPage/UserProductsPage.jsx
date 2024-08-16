@@ -19,7 +19,8 @@ function UserProductsPage() {
 
     useEffect(() => {
         if (!user) {
-            navigate("/login")
+            setIsLoaded(false);
+            navigate("/");
             return;
         }
         dispatch(fetchUserProducts())

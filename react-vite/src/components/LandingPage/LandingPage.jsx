@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { fetchProducts } from '../../redux/products';
+import { fetchProducts, fetchFavorites } from '../../redux/products';
 import { FaHandHoldingHeart } from "react-icons/fa";
+import { FavoriteToggle } from '../FavoritePage/FavoriteToggle';
 import ProductTiles from '../ProductTiles';
 import BestSellersBar from '../BestSellersBar';
 import Loader from '../Loader/Loader';
@@ -17,10 +18,9 @@ function LandingPage() {
 
     useEffect(() => {
         dispatch(fetchProducts())
-        .then(() => {
-            setIsLoaded(true)
-        })
-    }, [dispatch]);
+        dispatch(fetchFavorites())
+        setIsLoaded(true)
+    }, [dispatch, user]);
 
 
     return isLoaded ? (
@@ -35,7 +35,10 @@ function LandingPage() {
                     <p><FaHandHoldingHeart /></p>
                 </div>
                 {products.map((product) => (
-                    <ProductTiles key={product.id} product={product} />
+                    <div key={product.id} className='product-tile'>
+                        <FavoriteToggle productId={product.id}/>
+                        <ProductTiles product={product} />
+                    </div>
                 ))}
             </div>
 

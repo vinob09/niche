@@ -5,6 +5,8 @@ import { fetchProductId } from '../../redux/products';
 import { fetchAddToCart } from '../../redux/orders'
 import { useModal } from '../../context/Modal';
 import { AddReviewModal, DeleteReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
+import LoginFormModal from '../LoginFormModal/LoginFormModal';
+import OpenModalButton from '../OpenModalButton/OpenModalButton';
 import Loader from '../Loader/Loader';
 import './ProductDetailsPage.css'
 
@@ -28,6 +30,10 @@ function ProductDetailsPage() {
 
     // handle on click for add to cart
     const handleAddToCart = (productId) => {
+        if (!user) {
+            setModalContent(<LoginFormModal />);
+            return;
+        }
         dispatch(fetchAddToCart({
             product_id: productId,
             quantity: 1
@@ -70,8 +76,8 @@ function ProductDetailsPage() {
     const isSeller = user && user.id === product.sellerId;
     // check if owner of review
     const userReview = (Array.isArray(product.reviews) && user)
-    ? product.reviews.find(review => review.userId === user.id)
-    : null;
+        ? product.reviews.find(review => review.userId === user.id)
+        : null;
 
     return isLoaded ? (
         <div className='product-details-page'>
@@ -85,14 +91,27 @@ function ProductDetailsPage() {
                 <div className='product-info'>
                     <p>{product.description}</p>
                     <h3>Price: ${product.price}</h3>
-                    <button className='product-details-add' onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
+                    {user ? (
+                        !isSeller && (
+                            <button
+                                className='product-details-add'
+                                onClick={() => handleAddToCart(product.id)}
+                            >
+                                Add to Cart
+                            </button>
+                        )
+                    ) : (
+                        <OpenModalButton
+                            className='product-details-add'
+                            buttonText='Log in to add to cart'
+                            modalComponent={<LoginFormModal />}
+                        />
+                    )}
                 </div>
             </div>
             <div className='product-details-reviews'>
                 <h2>Reviews</h2>
-                {isSeller ? 'You own this product.' : (
-                    ""
-                )}
+                {isSeller && 'You own this product.'}
                 {user && !isSeller && !userReview && (
                     <button onClick={handleAddReview}>Add a Review</button>
                 )}

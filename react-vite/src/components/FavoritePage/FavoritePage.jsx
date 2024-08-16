@@ -19,7 +19,8 @@ function FavoritePage() {
 
     useEffect(() => {
         if (!user) {
-            navigate("/login")
+            setIsLoaded(false);
+            navigate("/");
             return;
         }
         Promise.all([dispatch(fetchProducts()), dispatch(fetchFavorites())])

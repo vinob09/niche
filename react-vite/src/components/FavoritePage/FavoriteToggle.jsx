@@ -17,7 +17,10 @@ export const FavoriteToggle = ({ productId }) => {
     useEffect(() => {
         if (user && favoritesObj) {
             const favorites = Object.values(favoritesObj);
-            setIsFavorite(favorites.some(fav => fav.productId === productId));
+            const isFavorited = favorites.some(fav => fav.productId === productId);
+            setIsFavorite(isFavorited);
+        } else {
+            setIsFavorite(false)
         }
     }, [user, favoritesObj, productId]);
 
