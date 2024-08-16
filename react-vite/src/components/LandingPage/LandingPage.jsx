@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { fetchProducts, fetchFavorites } from '../../redux/products';
+import { fetchProducts } from '../../redux/products';
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { FavoriteToggle } from '../FavoritePage/FavoriteToggle';
 import ProductTiles from '../ProductTiles';

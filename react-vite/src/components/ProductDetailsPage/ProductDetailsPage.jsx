@@ -91,7 +91,7 @@ function ProductDetailsPage() {
                 <div className='product-images'>
                     <img className='product-image-main' src={product.images[0]?.url} alt={product.name} onError={handleImageError} />
                     <div className='product-image-thumbnails'>
-                        {product.images.slice(1, 4).map(image => (
+                        {product.images.slice(1, 5).map(image => (
                             <img key={image.id} src={image.url} alt={product.name} onError={handleImageError} />
                         ))}
                     </div>

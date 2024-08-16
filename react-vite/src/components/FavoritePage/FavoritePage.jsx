@@ -31,6 +31,12 @@ function FavoritePage() {
             })
     }, [dispatch, user, navigate]);
 
+    useEffect(() => {
+        if (!user && isLoaded) {
+            navigate("/");
+        }
+    }, [user, isLoaded, navigate]);
+
 
     // check products against favorites array
     // let favoriteProducts;
