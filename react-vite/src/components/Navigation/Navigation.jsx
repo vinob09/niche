@@ -7,6 +7,7 @@ import { FaStoreAlt } from "react-icons/fa";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import CategoriesDropdown from "./CategoriesDropdown";
 import ProfileButton from "./ProfileButton";
+
 import "./Navigation.css";
 
 function Navigation() {
@@ -25,7 +26,7 @@ function Navigation() {
       <div className="gradient-overlay"></div>
       <ul className='navbar-list'>
         <li>
-          <NavLink to="/" className={"home-link"}>niche</NavLink>
+          <NavLink to="/" className={"home-link"}></NavLink>
         </li>
         <li className="categories-container"
             onMouseEnter={() => setShowDropdown(true)}

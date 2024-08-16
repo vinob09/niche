@@ -50,22 +50,20 @@ function ProfileButton() {
   };
   return (
     <div className="profile-menu-container">
-      <button onClick={toggleMenu} className={"user-circle"}>
-        <FaUserCircle />
-      </button>
+      {!showMenu && (
+        <button onClick={toggleMenu} className={"user-circle"}>
+          <FaUserCircle />
+        </button>
+      )}
       {showMenu && (
-        <ul
-          className={`profile-dropdown ${showMenu ? 'show' : ''}`}
-        >
+        <ul ref={ulRef}className={`profile-dropdown ${showMenu ? 'show' : ''}`}>
           {user ? (
             <>
-              <li className={"user-menu-items"}>{user.username}</li>
-              <li className={"user-menu-items"}>{user.email}</li>
-              <li className={"user-menu-items"} onClick={closeNav}>
-                Past Orders
-              </li>
-              <li>
-                <button onClick={logout} className={"user-menu-items"}>Log Out</button>
+              <li className={"user-menu-items"}>Hello, {user.username}!</li>
+              <li className={"user-menu-items"}style={{fontSize:"12px",textDecoration:"underline",marginTop:"-12px"}}>{user.email}</li>
+              <li className={"user-menu-items"} onClick={closeNav}>Past Orders</li>
+              <li className={"user-menu-items"}>
+                <button onClick={logout}>Log Out</button>
               </li>
             </>
           ) : (
