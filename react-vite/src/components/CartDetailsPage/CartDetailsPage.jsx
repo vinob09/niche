@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CartItem from '../cartItem/cartItem';
 import BestSellersBar from '../BestSellersBar';
-import { fetchCartItems, fetchPostOrders } from '../../redux/orders';
+import { fetchCartItems } from '../../redux/orders';
 import { fetchProducts } from '../../redux/products';
 import { useModal } from '../../context/Modal'
 import PaymentCheckoutModal from '../cartCheckoutModal/cartCheckoutModel';
@@ -12,19 +13,26 @@ import './CartDetailsPage.css';
 function CartDetailsPage () {
     const dispatch = useDispatch();
     const { setModalContent } = useModal();
+    const navigate = useNavigate()
 
     const [isLoaded, setIsLoaded] = useState(false);
     const currentUser = useSelector(state => state.session.user)
     const cartItems = useSelector(state => Object.values(state.orders.cartItems))
     const products = useSelector(state => Object.values(state.products.allProducts));
 
+    useEffect(() => {
+        if (!currentUser) {
+            navigate("/login")
+            return;
+        }
 
-    //checks user is logged in to view cart
-    if (!currentUser) {
-        return (
-            <h1>Must be logged in to view cart</h1>
-        )
-    }
+        dispatch(fetchCartItems(currentUser.id))
+        .then(() => {
+            dispatch(fetchProducts())
+        }).then(() => {
+            setIsLoaded(true)
+        })
+    }, [dispatch, currentUser])
 
     //calculates the total for all items in the cart
     const getTotal = () => {
@@ -40,19 +48,10 @@ function CartDetailsPage () {
     const handleCheckout = async (e) => {
         e.stopPropagation()
         e.preventDefault()
-        setModalContent(<PaymentCheckoutModal order={orderDetails}/>)
+        setModalContent(<PaymentCheckoutModal />)
     }
 
-    useEffect(() => {
-        dispatch(fetchCartItems(currentUser.id))
-        .then(() => {
-            dispatch(fetchProducts())
-        }).then(() => {
-            setIsLoaded(true)
-        })
-    }, [dispatch, currentUser])
-
-    return  isLoaded ? (
+    return  isLoaded && currentUser ? (
         <div className='cart-details-page'>
             <h2>{cartItems.length} items in your cart</h2>
             <div>
@@ -64,7 +63,13 @@ function CartDetailsPage () {
                 <h3>Item(s) Total: ${getTotal()}</h3>
             </div>
             <div>
-                <button onClick={e => handleCheckout(e)}>Proceed to checkout</button>
+                <button
+                    className='checkout-button'
+                    onClick={e => handleCheckout(e)}
+                    disabled={!cartItems.length}
+                >
+                    Proceed to checkout
+                </button>
             </div>
             <div>
                 <h3>Items you may like:</h3>
