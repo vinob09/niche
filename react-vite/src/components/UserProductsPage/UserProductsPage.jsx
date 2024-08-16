@@ -19,7 +19,6 @@ function UserProductsPage() {
 
     useEffect(() => {
         if (!user) {
-            setIsLoaded(false);
             navigate("/");
             return;
         }

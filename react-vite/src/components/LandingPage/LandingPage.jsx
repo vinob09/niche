@@ -18,8 +18,7 @@ function LandingPage() {
 
     useEffect(() => {
         dispatch(fetchProducts())
-        dispatch(fetchFavorites())
-        setIsLoaded(true)
+        .then(() => setIsLoaded(true))
     }, [dispatch, user]);
 
 

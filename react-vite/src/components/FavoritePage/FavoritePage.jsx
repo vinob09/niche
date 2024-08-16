@@ -19,7 +19,6 @@ function FavoritePage() {
 
     useEffect(() => {
         if (!user) {
-            setIsLoaded(false);
             navigate("/");
             return;
         }
