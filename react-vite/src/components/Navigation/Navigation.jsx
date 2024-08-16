@@ -36,8 +36,8 @@ function Navigation() {
           {showDropdown && <CategoriesDropdown categories={categories} />}
         </li>
         <li className="search-bar">
-          {/* <SearchBar /> */}
-          <input type="text" placeholder="Search" />
+          <SearchBar />
+          {/* <input type="text" placeholder="Search" /> */}
         </li>
         {user ? (
           <>
