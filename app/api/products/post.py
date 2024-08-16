@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
-from app.models import Product, Review, PastOrder, ProductImage, Category, OrderItem, db
+from app.models import Product, Review, ProductImage, Category, db
 from app.forms import ImageForm
 from app.forms.product_form import ProductForm
 from app.forms.review_form import ReviewForm
@@ -39,17 +39,6 @@ def new_product_review(product_id):
     if form.validate_on_submit():
         review = form.review.data
         star_rating = form.star_rating.data
-
-        past_order = (
-            db.session.query(OrderItem)
-            .join(PastOrder)
-            .filter(PastOrder.purchaser_id == current_user.id)
-            .filter(OrderItem.product_id == product_id)
-            .first()
-        )
-
-        if not past_order:
-            return jsonify({'error': 'User must have this product in a past order.'}), 403
 
         new_review = Review(
             user_id = current_user.id,
