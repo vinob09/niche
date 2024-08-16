@@ -5,6 +5,8 @@ import { fetchProductId } from '../../redux/products';
 import { fetchAddToCart } from '../../redux/orders'
 import { useModal } from '../../context/Modal';
 import { AddReviewModal, DeleteReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
+import LoginFormModal from '../LoginFormModal/LoginFormModal';
+import OpenModalButton from '../OpenModalButton/OpenModalButton';
 import Loader from '../Loader/Loader';
 import './ProductDetailsPage.css'
 
@@ -26,8 +28,17 @@ function ProductDetailsPage() {
     }, [dispatch, product_id]);
 
 
+    // handle broken image links
+    const handleImageError = (e) => {
+        e.target.src = '/sorry-image-not-available.jpg';
+    }
+
     // handle on click for add to cart
     const handleAddToCart = (productId) => {
+        if (!user) {
+            setModalContent(<LoginFormModal />);
+            return;
+        }
         dispatch(fetchAddToCart({
             product_id: productId,
             quantity: 1
@@ -70,29 +81,45 @@ function ProductDetailsPage() {
     const isSeller = user && user.id === product.sellerId;
     // check if owner of review
     const userReview = (Array.isArray(product.reviews) && user)
-    ? product.reviews.find(review => review.userId === user.id)
-    : null;
+        ? product.reviews.find(review => review.userId === user.id)
+        : null;
 
     return isLoaded ? (
         <div className='product-details-page'>
             <h1>{product.name}</h1>
             <div className='product-details'>
                 <div className='product-images'>
-                    {product.images.map(image => (
-                        <img key={image.id} src={image.url} alt={product.name} />
-                    ))}
+                    <img className='product-image-main' src={product.images[0]?.url} alt={product.name} onError={handleImageError} />
+                    <div className='product-image-thumbnails'>
+                        {product.images.slice(1, 5).map(image => (
+                            <img key={image.id} src={image.url} alt={product.name} onError={handleImageError} />
+                        ))}
+                    </div>
                 </div>
                 <div className='product-info'>
                     <p>{product.description}</p>
                     <h3>Price: ${product.price}</h3>
-                    <button className='product-details-add' onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
+                    {user ? (
+                        !isSeller && (
+                            <button
+                                className='product-details-add'
+                                onClick={() => handleAddToCart(product.id)}
+                            >
+                                Add to Cart
+                            </button>
+                        )
+                    ) : (
+                        <OpenModalButton
+                            className='product-details-add'
+                            buttonText='Log in to add to cart'
+                            modalComponent={<LoginFormModal />}
+                        />
+                    )}
                 </div>
             </div>
             <div className='product-details-reviews'>
                 <h2>Reviews</h2>
-                {isSeller ? 'You own this product.' : (
-                    ""
-                )}
+                {isSeller && 'You own this product.'}
                 {user && !isSeller && !userReview && (
                     <button onClick={handleAddReview}>Add a Review</button>
                 )}

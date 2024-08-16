@@ -1,3 +1,5 @@
+import { fetchFavorites } from "./products";
+
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
@@ -31,7 +33,8 @@ export const thunkLogin = (credentials) => async dispatch => {
 
   if(response.ok) {
     const data = await response.json();
-    dispatch(setUser(data));
+    dispatch(setUser(data))
+    dispatch(fetchFavorites())
   } else if (response.status < 500) {
     const errorMessages = await response.json();
     return errorMessages
