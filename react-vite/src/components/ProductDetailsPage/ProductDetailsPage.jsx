@@ -90,6 +90,9 @@ function ProductDetailsPage() {
             </div>
             <div className='product-details-reviews'>
                 <h2>Reviews</h2>
+                {isSeller ? 'You own this product.' : (
+                    ""
+                )}
                 {user && !isSeller && !userReview && (
                     <button onClick={handleAddReview}>Add a Review</button>
                 )}
