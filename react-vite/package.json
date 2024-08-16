@@ -13,6 +13,7 @@
   "dependencies": {
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
+    "react-bootstrap-typeahead": "^6.3.2",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-redux": "^8.1.3",

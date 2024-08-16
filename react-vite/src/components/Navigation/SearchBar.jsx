@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import { AsyncTypeahead } from "react-bootstrap-typeahead"
-import { fetchProducts } from '../../redux/products'
+import { csrfFetch } from '../../redux/csrf';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 export const SearchBar = () => {
@@ -13,15 +13,15 @@ export const SearchBar = () => {
         setIsLoading(true)
 
         csrfFetch('/api/products')
-        .then((response) => response.json())
-        .then(json =>
-            json.filter(product => product && product.name && product.name.toLowerCase().includes(query))
-        )
-        .then((products) => {
-            console.log(products)
-            setOptions(products)
-            setIsLoading(false)
-        })
+            .then((response) => response.json())
+            .then(json =>
+                json.filter(product => product && product.name && product.name.toLowerCase().includes(query))
+            )
+            .then((products) => {
+                console.log(products)
+                setOptions(products)
+                setIsLoading(false)
+            })
     };
 
     const selectProduct = (e, product) => {
