@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
@@ -26,9 +26,14 @@ def login():
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
+
+    user = User.query.filter(User.email == form.data['email']).first()
+
+    if not user:
+        return {"errors": "Please verify Username and Password"}, 404
+
+    if user and form.validate_on_submit():
         # Add the user to the session, we are logged in!
-        user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
         return user.to_dict()
     return form.errors, 401

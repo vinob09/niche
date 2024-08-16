@@ -28,10 +28,11 @@ export const thunkLogin = (credentials) => async dispatch => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials)
   });
-
+  console.log(response)
   if(response.ok) {
     const data = await response.json();
     dispatch(setUser(data));
+    return response
   } else if (response.status < 500) {
     const errorMessages = await response.json();
     return errorMessages
