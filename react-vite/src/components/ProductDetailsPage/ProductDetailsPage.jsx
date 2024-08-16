@@ -28,6 +28,11 @@ function ProductDetailsPage() {
     }, [dispatch, product_id]);
 
 
+    // handle broken image links
+    const handleImageError = (e) => {
+        e.target.src = '/sorry-image-not-available.jpg';
+    }
+
     // handle on click for add to cart
     const handleAddToCart = (productId) => {
         if (!user) {
@@ -84,9 +89,12 @@ function ProductDetailsPage() {
             <h1>{product.name}</h1>
             <div className='product-details'>
                 <div className='product-images'>
-                    {product.images.map(image => (
-                        <img key={image.id} src={image.url} alt={product.name} />
-                    ))}
+                    <img className='product-image-main' src={product.images[0]?.url} alt={product.name} onError={handleImageError} />
+                    <div className='product-image-thumbnails'>
+                        {product.images.slice(1, 4).map(image => (
+                            <img key={image.id} src={image.url} alt={product.name} onError={handleImageError} />
+                        ))}
+                    </div>
                 </div>
                 <div className='product-info'>
                     <p>{product.description}</p>
