@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchCategories } from "../../redux/products";
+import { fetchTotalCartCount } from "../../redux/orders";
 import { NavLink } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { FaStoreAlt } from "react-icons/fa";
@@ -17,10 +18,13 @@ function Navigation() {
 
   const user = useSelector((store) => store.session.user);
   const categories = useSelector(state => state.products.categories);
+  const cartCount = useSelector(fetchTotalCartCount);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+
 
   return (
     <div className="navbar">
@@ -53,7 +57,10 @@ function Navigation() {
 
         <li className='user-cart'>
           <ProfileButton />
-          <NavLink to="/shopping-cart" className="shopping-cart"><MdOutlineLocalGroceryStore /></NavLink>
+          <div className="cart-icon-container">
+            <NavLink to="/shopping-cart" className="shopping-cart"><MdOutlineLocalGroceryStore /></NavLink>
+            {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
+          </div>
         </li>
       </ul>
     </div>
