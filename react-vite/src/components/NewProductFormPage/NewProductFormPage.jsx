@@ -14,6 +14,7 @@ function NewProductFormPage() {
     const categoriesObj = useSelector(state => state.products.categories);
     const categories = Object.values(categoriesObj);
     const product = useSelector(state => state.products.currProduct);
+    const user = useSelector(state => state.session.user);
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -25,6 +26,12 @@ function NewProductFormPage() {
     const [imageThree, setImageThree] = useState('');
     const [errors, setErrors] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/');
+        }
+    }, [user, navigate]);
 
     // error validations
     const validationErrors = () => {
