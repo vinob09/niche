@@ -6,62 +6,80 @@ import "./SignupFormModal.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
-  const [username, setUsername] = useState("");
-  const [first_name, setFirst_name] = useState("");
-  const [last_name, setLast_name] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState({
+    username: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
+  // const [username, setUsername] = useState("");
+  // const [first_name, setFirst_name] = useState("");
+  // const [last_name, setLast_name] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
+  // const [email, setEmail] = useState("");
   const [disableSignUp, setDisableSignUp] = useState(true);
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   useEffect(() => {
-    if (username && email && password && confirmPassword) {
-      setDisableSignUp(false)
+    const { username, first_name, last_name, email, password, confirmPassword } = user;
+    if (username && first_name && last_name && email && password && confirmPassword) {
+      setDisableSignUp(false);
     } else {
-      setDisableSignUp(true)
+      setDisableSignUp(true);
     }
-}, [username, email, password, confirmPassword])
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = {
-      username,
-      first_name,
-      last_name,
-      email,
-      password
-    }
-    if (password !== confirmPassword) {
+    setErrors({});
+
+    if (user.password !== user.confirmPassword) {
       return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
+        confirmPassword: "Confirm Password field must be the same as the Password field",
       });
     }
 
-    const res = await dispatch(thunkSignup(user));
+    const userData = {  
+      username: user.username,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+      password: user.password,
+    };
+
+    const res = await dispatch(thunkSignup(userData));
 
     if (res && res.errors) {
       setErrors(res.errors);
-    } else if(res && res.server){
-      setErrors([res.server])
-  }else {
+    } else if (res && res.server) {
+      setErrors({ server: res.server })
+    } else {
       closeModal();
     }
   };
-  
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+
+    setErrors({ ...errors, [name]: '' })
+  }
+
   return (
     <div className="signup-form-modal">
       <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
         <label>
           Username
           <input
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            value={user.username}
+            onChange={handleInputChange}
             required
           />
         </label>
@@ -70,8 +88,9 @@ function SignupFormModal() {
           First Name
           <input
             type="text"
-            value={first_name}
-            onChange={(e) => setFirst_name(e.target.value)}
+            name="first_name"
+            value={user.first_name}
+            onChange={handleInputChange}
             required
           />
         </label>
@@ -80,8 +99,9 @@ function SignupFormModal() {
           Last Name
           <input
             type="text"
-            value={last_name}
-            onChange={(e) => setLast_name(e.target.value)}
+            name="last_name"
+            value={user.last_name}
+            onChange={handleInputChange}
             required
           />
         </label>
@@ -90,8 +110,9 @@ function SignupFormModal() {
           Email
           <input
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={user.email}
+            onChange={handleInputChange}
             required
           />
         </label>
@@ -100,8 +121,9 @@ function SignupFormModal() {
           Password
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={user.password}
+            onChange={handleInputChange}
             required
           />
         </label>
@@ -110,8 +132,9 @@ function SignupFormModal() {
           Confirm Password
           <input
             type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            name="confirmPassword"
+            value={user.confirmPassword}
+            onChange={handleInputChange}
             required
           />
         </label>
@@ -122,4 +145,3 @@ function SignupFormModal() {
   );
 }
 export default SignupFormModal;
-
