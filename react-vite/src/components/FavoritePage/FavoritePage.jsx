@@ -14,7 +14,7 @@ function FavoritePage() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const user = useSelector(state => state.session.user);
-    const favorites = useSelector(state => state.products.favorites);
+    const favorites = useSelector(state => state.products.favorites) || [];
     const productsObj = useSelector(state => state.products.allProducts);
     const products = Object.values(productsObj);
 
