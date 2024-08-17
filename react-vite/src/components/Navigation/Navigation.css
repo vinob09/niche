@@ -2,6 +2,9 @@
 .home-link::before {
   content: 'niche';
 }
+.home-link:hover {
+  text-decoration: none;
+}
 .profile-menu-container {
   position: relative;
 }
@@ -156,7 +159,7 @@
 }
 
 .search-bar input {
-  width: 100%;
+  width: 600px;
   padding: 10px;
   font-size: medium;
   border: 2px solid #ddd;
@@ -169,6 +172,24 @@
   border-color: #bef4fa;
   background-color: #f0f8ff;
   outline: none;
+}
+.search-bar button{
+  background-color: #EBEBEB;
+  border: none;
+  color: #5A7684;
+  font-weight: bolder;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 15px 10px;
+  border-radius: 30px;
+  transition: background-color 0.9s ease, transform 0.7s ease;
+  display: inline-block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.322);
+}
+.search-bar button:hover{
+  background-color: #7395a7;
+  transform: scale(1.05);
+  color: white;
 }
 
 .user-circle {

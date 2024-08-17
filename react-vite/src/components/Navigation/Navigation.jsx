@@ -4,6 +4,7 @@ import { fetchCategories } from "../../redux/products";
 import { NavLink } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { FaStoreAlt } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import CategoriesDropdown from "./CategoriesDropdown";
 import ProfileButton from "./ProfileButton";

@@ -59,7 +59,7 @@ export const AddReviewModal = ({ productId, onClose }) => {
                 </div>
             )}
             <button onClick={handleSubmit}>Submit</button>
-            <button onClick={onClose}>Cancel</button>
+            <div className="cancel-delete"><button onClick={onClose}>Cancel</button></div>
         </div>
     )
 };
@@ -122,7 +122,7 @@ export const EditReviewModal = ({ productId, review, onClose }) => {
                 </div>
             )}
             <button onClick={handleSubmit}>Submit</button>
-            <button onClick={onClose}>Cancel</button>
+            <div className="cancel-delete"><button onClick={onClose}>Cancel</button></div>
         </div>
     );
 };
@@ -146,7 +146,7 @@ export const DeleteReviewModal = ({ productId, review, onClose }) => {
         <div className="review-form-modal">
             <h2>Confirm Delete?</h2>
             <p>Are you sure you want to delete this review?</p>
-            <button onClick={handleSubmit}>Yes, Delete</button>
+            <div className="cancel-delete"><button onClick={handleSubmit}>Yes, Delete</button></div>
             <button onClick={onClose}>Cancel</button>
         </div>
     );

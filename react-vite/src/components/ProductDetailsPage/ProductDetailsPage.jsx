@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchProductId } from '../../redux/products';
 import { fetchAddToCart } from '../../redux/orders'
+import { FaPlusCircle, FaStar, FaRegComment } from 'react-icons/fa';
 import { useModal } from '../../context/Modal';
 import { AddReviewModal, DeleteReviewModal, EditReviewModal } from '../ReviewFormModal/ReviewFormModal';
 import Loader from '../Loader/Loader';
@@ -83,29 +84,29 @@ function ProductDetailsPage() {
                     ))}
                 </div>
                 <div className='product-info'>
-                    <p>{product.description}</p>
-                    <h3>Price: ${product.price}</h3>
+                    <p className="product-description">{product.description}</p>
+                    <div className="product-price-d-page"><h3>${product.price}</h3><p>+tx</p></div>
                     <button className='product-details-add' onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
                 </div>
             </div>
             <div className='product-details-reviews'>
-                <h2>Reviews</h2>
+                <div className="review-head"><h2>Reviews</h2><FaRegComment /></div>
                 {isSeller ? 'You own this product.' : (
                     ""
                 )}
                 {user && !isSeller && !userReview && (
-                    <button onClick={handleAddReview}>Add a Review</button>
+                    <button onClick={handleAddReview}><FaPlusCircle/>Add a Review</button>
                 )}
                 {product.reviews.map(review => (
                     <div key={review.id} className='product-details-review'>
-                        <p>{review.userFirstName}</p>
-                        <p>Rating: {review.starRating} stars</p>
-                        <p>{review.review}</p>
+                        <h5>{review.userFirstName}</h5>
+                        <div className="avg-star"><p>{review.starRating} </p><FaStar/></div>
+                        <p className="review-text">{review.review}</p>
                         {user && review.userId === user.id && (
-                            <>
+                            <div className="review-edit-delete">
                                 <button onClick={() => handleEditReview(review)}>Edit</button>
                                 <button onClick={() => handleDeleteReview(review)}>Delete</button>
-                            </>
+                            </div>
                         )}
                     </div>
                 ))}

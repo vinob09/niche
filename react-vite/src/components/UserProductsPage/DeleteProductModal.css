@@ -1,3 +1,47 @@
 /* .delete-product-modal {
     - whatever styling here
 } */
+
+.delete-product-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 400px;
+    height: fit-content;
+    border-radius: 20px;
+    padding: 2px 15px;
+    background: linear-gradient(135deg, #f3f5f7, #ebfffc, #bcebd4, #abe5c1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    transform: translate(-50%, -50%);
+    animation: fadeIn 1s ease-in-out;
+}
+.delete-product-modal h2{
+    text-align: center;
+    color: #465c67;
+    margin-bottom: 20px;
+}
+.delete-product-modal p{
+    color: #5564a5;
+}
+.delete-product-modal .cancel-delete button:hover {
+    background-color: #ED6A5A;
+}
+.delete-product-modal button{
+    background-color: #EBEBEB;
+    border: none;
+    color: #5A7684;
+    font-weight: bolder;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.9s ease, transform 0.7s ease;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.delete-product-modal button:hover{
+    background-color: #7395a7;
+    transform: scale(1.05);
+    color: white;
+}
