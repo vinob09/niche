@@ -31,9 +31,9 @@ function ProfileButton() {
       document.addEventListener("click", closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-   
 
-    
+
+
 
   const closeMenu = () => setShowMenu(false);
 
@@ -41,7 +41,7 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
-    window.location.reload();
+    // window.location.reload();
   };
   return (
     <div className="profile-menu-container">
@@ -63,7 +63,7 @@ function ProfileButton() {
           ) : (
             <>
               <li className={"user-menu-items"}>
-                
+
                 <OpenModalMenuItem
                   itemText="Log In"
                   className="login-signup-button"
@@ -78,7 +78,7 @@ function ProfileButton() {
                   onItemClick={closeMenu}
                   modalComponent={<SignupFormModal />}
                 />
-                
+
               </li>
             </>
           )}
@@ -88,4 +88,3 @@ function ProfileButton() {
   );
 }
 export default ProfileButton;
-
