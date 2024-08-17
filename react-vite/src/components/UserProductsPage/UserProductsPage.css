@@ -1,7 +1,11 @@
 .user-products-page {
     padding: 20px;
 }
-
+.new-product-link{
+    color: #5A7684;
+    text-decoration: none;
+    padding: 20px;
+}
 .user-products-page h1 {
     display: flex;
     justify-content: center;
@@ -16,6 +20,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+    padding: 20px;
 }
 
 .user-product-tile {
@@ -44,71 +49,72 @@
 }
 
 .user-product-name {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 10px 0;
+    height: 35px;
     text-align: center;
-    color: #333;
+    color: #5A7684;
 }
 
 .user-product-rating {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    font-size: 20px;
+    font-size: 15px;
     color: #555;
 }
 
 .user-product-average {
+    margin-top: 2px;
     display: flex;
     align-items: center;
     margin-right: 5px;
 }
 
 .user-product-average-star {
-    color: #bcebd4;
+    color: #5A7684;
     margin-left: 5px;
 }
 
 .user-product-review {
-    font-size: 20px;
+    font-size: 15px;
     color: #555;
 }
 
 .user-product-price {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     color: #555;
 }
 
 .user-product-buttons {
-    display: flex;
+    display:flex;
     justify-content: space-between;
     width: 100%;
+    margin: -1px -1px;
 }
-
 .user-product-edit, .user-product-delete {
-    padding: 5px 10px;
-    font-size: 14px;
+    background-color: #EBEBEB;
     border: none;
-    border-radius: 5px;
+    color: #5A7684;
     cursor: pointer;
-    width: 48%;
+    width: 80px;
+    padding:10px;
+    border-radius: 30px;
+    transition: background-color 0.9s ease, transform 0.7s ease;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.user-product-edit {
-    background-color: lightgray;
-}
 
 .user-product-edit:hover {
-    background-color: #bcebd4;
+    background-color: #7395a7;
+    transform: scale(1.05);
+    color: white;
 }
 
-.user-product-delete {
-    background-color: lightgray;
-}
 
 .user-product-delete:hover {
-    background-color: #bcebd4;
+    background-color: #7395a7;
+    transform: scale(1.05);
+    color: white;
 }

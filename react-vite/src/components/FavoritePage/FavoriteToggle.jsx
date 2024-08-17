@@ -40,7 +40,7 @@ export const FavoriteToggle = ({ productId }) => {
 
     return (
         <button onClick={handleClick} className='favorite-toggle-button'>
-            {isFavorite ? <GoHeartFill /> : < GoHeart />}
+            {isFavorite ? <GoHeartFill className="fill-heart"/> : < GoHeart className="not_fill-heart"/>}
         </button>
     )
 };

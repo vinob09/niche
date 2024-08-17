@@ -1,21 +1,19 @@
 .login-form-modal {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     width: 400px;
     padding: 30px;
     border-radius: 20px;
-    background: linear-gradient(135deg,#f3f5f7,#ebfffc,#bcebd4,#77c593);
+    background: linear-gradient(135deg,#f3f5f7,#ebfffc,#bcebd4,#abe5c1);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     animation: fadeIn 1s ease-in-out;
-    z-index: 1002;
 }
 
 .login-form-modal h1 {
     text-align: center;
-    color: #333;
+    color: #465c67;
     margin-bottom: 20px;
 }
 
@@ -27,9 +25,7 @@
 }
 
 .login-form-modal label {
-    font-weight: bold;
-    color: #4b4b4b;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    color: #5A7684;
     margin-bottom: 5px;
     display: block;
     width: 100%;
@@ -44,16 +40,16 @@
 }
 
 .login-form-modal input:focus {
-    border-color:#73cee95d;
-    background-color: #f0f8ff;
+    border-color:#5a768448;
+    background-color: #dce8ed;
     outline: none;
 }
 
 
 .login-form-modal .pill-button {
-    background-color: #f8f9f8;
+    background-color: #EBEBEB;
     border: none;
-    color: black;
+    color:#5A7684;
     font-weight: bold;
     cursor: pointer;
     padding: 10px 20px;
@@ -64,33 +60,15 @@
 }
 
 .login-form-modal .pill-button:hover {
-    background-color: #73cde9;
+    background-color: #7395a7;
     transform: scale(1.05);
     color: white;
 }
 
 .login-form-modal .pill-button:disabled {
     background-color: #ddd;
-    color:#9c9b9b;
+    color:#868788;
     cursor: not-allowed;
-}
-
-.login-form-modal .text-button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    transition: color 0.3s ease;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    display: inline-block;
-}
-
-.login-form-modal .text-button:hover {
-    color: #ffafbd;
 }
 
 .login-form-modal .error {
