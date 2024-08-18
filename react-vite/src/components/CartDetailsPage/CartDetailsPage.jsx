@@ -63,7 +63,7 @@ function CartDetailsPage () {
             <div className='cart-info'>
                 <h3>Item(s) Total: ${getTotal()}</h3>
             </div>
-            <div>
+            <div className="checkout-button">
                 <button onClick={e => handleCheckout(e)}>Proceed to checkout</button>
             </div>
             <div>

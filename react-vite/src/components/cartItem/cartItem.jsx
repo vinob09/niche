@@ -36,9 +36,9 @@ const CartItem = ({data}) => {
             <h3>{product.name}</h3>
             <p><FaDollarSign/>{getPrice(product.price, data.quantity)}</p>
             <div className="edit-quantity">
-                <button className="reduce-quantity" onClick={handleMinusQuantity}>-</button>
+                <button onClick={handleMinusQuantity}>-</button>
                 <span>{data.quantity}</span>
-                <button className="add-quantity" onClick={handlePlusQuantity}>+</button>
+                <button onClick={handlePlusQuantity}>+</button>
             </div>
             <div className="remove-from-cart">
                 <button className="remove-item" onClick={removeItem}>Remove Item</button>

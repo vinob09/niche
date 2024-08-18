@@ -28,14 +28,22 @@
     position: absolute;
     bottom: 5px;
     left: 5px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.415);
     border-radius: 20px;
     padding: 5px 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.5s ease;
 }
 
 .product-price {
     margin: 0;
     font-weight: bold;
-    color: black;
+    color: #5a7684a5;
+    transition: color 0.5s ease;
+}
+.product-tiles:hover .product-price{
+    color: #5A7684;
+}
+.product-tiles:hover .price-container{
+    background-color: white;
 }
