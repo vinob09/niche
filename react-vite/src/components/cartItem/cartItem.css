@@ -8,3 +8,43 @@
     border-top:  1px solid #E1E8EE;
     border-bottom:  1px solid #E1E8EE;
   }
+.cart-item-tile .edit-quantity button{
+  display:flex;
+  justify-content: space-between;
+  margin: 2px 5px;
+  background-color: #ededed;
+  border: 1px solid rgba(0, 0, 0, 0.096);
+  color: #5A7684;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  transition: background-color 0.5s ease, transform 0.4s ease;
+  display: inline-block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.cart-item-tile .edit-quantity button:hover {
+  background-color: #7395a7;
+  transform: scale(1.05);
+  color: white;
+}
+.cart-item-tile .remove-item{
+  background-color: #EBEBEB;
+  font-weight:bold;
+    border: none;
+    color: #5A7684;
+    cursor: pointer;
+    width: 80px;
+    padding: 10px;
+    border-radius: 20px;
+    transition: background-color 0.9s ease, transform 0.7s ease;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);;
+}
+.cart-item-tile .remove-item:hover {
+  background-color: #ED6A5A;
+  transform: scale(1.05);
+  color: white;
+}
+.cart-item-tile .product-tile-name-sc{
+  color: #81b89d;
+}

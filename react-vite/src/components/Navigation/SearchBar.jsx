@@ -41,7 +41,7 @@ export const SearchBar = () => {
             minLength={3}
             onSearch={handleSearch}
             options={options}
-            placeholder="Search for Products"
+            placeholder="Search for a product.."
             renderMenuItemChildren={product => (
                 <button onClick={(e) => selectProduct(e, product)}>
                     {product.name}

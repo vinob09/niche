@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, NavLink } from 'react-router-dom';
 import { fetchUserProducts } from '../../redux/products';
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaPlusCircle } from "react-icons/fa";
 import { useModal } from '../../context/Modal';
 import { DeleteProductModal } from './DeleteProductModal';
 import Loader from '../Loader/Loader';
@@ -55,7 +55,7 @@ function UserProductsPage() {
     return isLoaded ? (
         <div className='user-products-page'>
             <h1>{user ? (`${user.firstName}'s Products`) : <Loader />}</h1>
-            <Link to={`/products/new-product`}>Add a New Product</Link>
+            <Link to={`/products/new-product`} className="new-product-link"><FaPlusCircle/>Add a New Product</Link>
             {products.length > 0 ? (
                 <div className='container'>
                     {products.map((product) => (

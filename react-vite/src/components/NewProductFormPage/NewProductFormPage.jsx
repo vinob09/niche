@@ -134,44 +134,45 @@ function NewProductFormPage() {
     }
 
     return isLoaded ? (
-        <>
+        <div className="new-product-page">
             <h1>{productId ? 'Update Your Product' : 'Create a New Product'}</h1>
             <form onSubmit={handleSubmit} className='product-form'>
-                <div>
-                    <label htmlFor="name">product name...
+                <div className="product-name">
+                    <label htmlFor="name">Name</label>
+                    <p>Enter a short and descriptive name for your product.</p>
                         <input
                             id='name' type='text' value={name}
                             onChange={handleInputs(setName, 'name')}
                             ref={(el) => inputRefs.current.name = el}
                             required maxLength='50'
                         />
-                    </label>
                     {errors.name && <p>{errors.name}</p>}
                 </div>
-                <div>
-                    <label htmlFor='description'>product description...
+                <div className="product-description">
+                    <label htmlFor='description'>Description</label>
+                    <p>Provide a detailed description of your product in 1000 characters or less. Highlight key features to attract potential buyers.</p>
                         <input
                             id='description' value={description}
                             onChange={handleInputs(setDescription, 'description')}
                             ref={(el) => inputRefs.current.description = el}
                             required maxLength='1000'
                         />
-                    </label>
                     {errors.description && <p>{errors.description}</p>}
                 </div>
-                <div>
-                    <label htmlFor='price'>set a price
+                <div className="product-price">
+                    <label htmlFor='price'>Price</label>
+                    <p>Set the retail price of your product. Note: This amount is before taxes and fees.</p>
                         <input
                             id='price' type='number' value={price}
                             onChange={handleInputs(setPrice, 'price')}
                             ref={(el) => inputRefs.current.price = el}
-                            required min='0' step='0.01'
+                            required min='0' step='1.00'
                         />
-                    </label>
                     {errors.price && <p>{errors.price}</p>}
                 </div>
-                <div>
-                    <label htmlFor='previewImage'>images...
+                <div className="product-images">
+                    <label htmlFor='previewImage'>Upload images for your product.</label>
+                    <p>Upload high-quality images to showcase your product and capture buyers' interest.</p>
                         <input
                             id='previewImage' type='url' value={previewImage}
                             onChange={handleInputs(setPreviewImage, 'previewImage')}
@@ -192,25 +193,24 @@ function NewProductFormPage() {
                             value={imageThree}
                             onChange={(e) => setImageThree(e.target.value)}
                         />
-                    </label>
                 </div>
-                <div>
-                    <label htmlFor='category'>select a category..
+                <div className="product-category">
+                    <label htmlFor='category'>Select a Category</label>
+                    <p>Select the category that best represents your product. This will help users find your product more easily.</p>
                         <select id='category' value={categoryId}
                             onChange={(e) => setCategoryId(e.target.value)}
                             required>
-                            <option value=''>select a category for your product</option>
+                            <option value=''>select a category</option>
                             {categories.map(category => (
                                 <option key={category.id} value={category.id}>
                                     {category.categoryName}
                                 </option>
                             ))}
                         </select>
-                    </label>
                 </div>
                 <button type='submit'>{productId ? 'Update Product' : 'Create Product'}</button>
             </form>
-        </>
+        </div>
     ) : <Loader />;
 }
 

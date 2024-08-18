@@ -12,6 +12,9 @@
     text-align: center;
     margin-bottom: 50px;
 }
+.landing-page-title, .landing-page h2{
+    color: #5A7684;
+}
 
 .landing-page-text {
     text-align: center;

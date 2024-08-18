@@ -33,29 +33,27 @@ function LoginFormPage() {
 
   return (
     <div className="login-form-page">
+      <div className="login-div">
       <h1>Log In</h1>
+      </div>
       {errors.length > 0 &&
         errors.map((message) => <p key={message}>{message}</p>)}
       <form onSubmit={handleSubmit}>
-        <label>
-          Email
+        <label>Email</label>
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
+        <label>Password </label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>
       </form>

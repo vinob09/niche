@@ -2,6 +2,9 @@
 .home-link::before {
   content: 'niche';
 }
+.home-link:hover {
+  text-decoration: none;
+}
 .profile-menu-container {
   position: relative;
 }
@@ -13,9 +16,9 @@
   align-items: center;
   top: 100%;
   right: 0;
-  background-color: #dcf4e8b4;
+  background-color: #b4e0cb8a;
   border-radius: 10px;
-  box-shadow: 0 1px 3px 2px rgba(37, 37, 37, 0.152);
+  box-shadow: 0 1px 3px 2px #bdd7ca;
   list-style: none;
   min-width: 120px;
   transform: translateY(-10px);
@@ -41,16 +44,25 @@
   font-size: 20px;
 }
 .user-menu-items button {
-  color: rgb(43, 43, 43);
-  font-weight: normal;
-  background-color: #bcebd400;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  border: none;
+  background-color: #EBEBEB;
+    border: none;
+    color: #5A7684;
+    font-weight: bolder;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.9s ease, transform 0.7s ease;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.193);
+}
+.user-menu-items button:hover{
+  background-color: #7395a7;
+  transform: scale(1.05);
+  color: white;
 }
 
 .user-menu-items {
   font-weight: lighter;
-  color: rgb(4, 4, 4);
   cursor: pointer;
   position: relative;
   list-style: none;
@@ -68,7 +80,6 @@
   align-items: center;
   justify-content: space-between;
   height: 60px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: #bcebd4;
   overflow: visible;
   color: black;
@@ -148,7 +159,7 @@
 }
 
 .search-bar input {
-  width: 100%;
+  width: 600px;
   padding: 10px;
   font-size: medium;
   border: 2px solid #ddd;
@@ -161,6 +172,24 @@
   border-color: #bef4fa;
   background-color: #f0f8ff;
   outline: none;
+}
+.search-bar button{
+  background-color: #EBEBEB;
+  border: none;
+  color: #5A7684;
+  font-weight: bolder;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 15px 10px;
+  border-radius: 30px;
+  transition: background-color 0.9s ease, transform 0.7s ease;
+  display: inline-block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.322);
+}
+.search-bar button:hover{
+  background-color: #7395a7;
+  transform: scale(1.05);
+  color: white;
 }
 
 .user-circle {
@@ -194,7 +223,6 @@
 .favorites-button{
   margin-right: 15px;
 }
-
 /* LOGGED OUT USER*/
 .logged-out .user-cart{
   margin-left: auto;
