@@ -1,15 +1,26 @@
 
-* {
+.cart-details-page {
   box-sizing: border-box;
 }
-
+.cart-details-page h2, .cart-details-page h3{
+  color: #5A7684;
+  font-size: 16px;
+}
+.cart-info p{
+  color: #51585b7a;
+  font-size: 12px;
+  margin-top: -10px;
+}
 .cart-details-page {
   padding: 40px;
   background-color: #f5f5f5;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 20px auto;
+  border: 2px solid #bcebd475;
+  padding: 30px;
+  box-shadow: 0 8px 46px #bcebd4;
 }
 .cart-details-page img{
   width: 100px;

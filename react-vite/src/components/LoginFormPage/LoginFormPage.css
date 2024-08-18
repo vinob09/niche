@@ -1,3 +1,74 @@
 /* .login-form-page {
     - whatever styling we want to do
 } */
+.login-form-page{
+    width: 400px;
+    border-radius: 20px;
+    background: #bcebd4;
+    box-shadow: 0 10px 30px #bcebd4;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeIn 1s ease-in-out;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid rgba(255, 255, 255, 0.57);
+}
+.login-form-page form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    gap: 10px;
+  
+}
+.login-div{
+    width: 100%;
+    background-color: white;
+    border-radius: 0px 0px 10px 10px;
+    margin-top: -1%;
+}
+.login-form-page h1{
+    color: #5A7684;
+    padding: 5px;
+    
+}
+.login-form-page label{
+    color: #999999;
+    font-weight:bold;
+    
+}
+.login-form-page p{
+    color: #ED6A5A;
+}
+.login-form-page input{
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.login-form-page input:focus{
+    border-color: #5a768448;
+    background-color: #dce8ed;
+    outline: none;
+}
+.login-form-page button{
+    background-color: #EBEBEB;
+    border: none;
+    color: #5A7684;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.9s ease, transform 0.7s ease;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.login-form-page button:hover{
+    background-color: #7395a7;
+    transform: scale(1.05);
+    color: white;
+}

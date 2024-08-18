@@ -5,13 +5,14 @@
     position: relative;
     padding: 10px;
     box-sizing: border-box;
+    transition: transform 0.8s ease;
 }
 
 .best-sellers-title {
     text-align: center;
     margin: 0 0 10px;
-    font-size: 1.5em;
-    color: #333;
+    font-size: 1.4em;
+    color: #7e8183b0;
 }
 
 .best-sellers-bar {
@@ -22,9 +23,12 @@
     background-color: #bcebd4;
     box-sizing: border-box;
 }
+.best-sellers-wrapper:hover{
+    transform: scale(1.05);
+}
 
 .best-sellers-bar::-webkit-scrollbar {
-    height: 8px;
+    height: 12px;
 }
 
 .best-sellers-bar::-webkit-scrollbar-track {
@@ -32,9 +36,8 @@
     border-radius: 8px;
 }
 
-.best-sellers-bar::-webkit-scrollbar-thumb {
-    background-color: #afafaf;
-    border-radius: 8px;
+.best-sellers-bar:hover::-webkit-scrollbar-thumb {
+    background-color: #a1a1a167;
 }
 
 .best-sellers-content {

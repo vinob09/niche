@@ -33,7 +33,7 @@ const CartItem = ({data}) => {
     return (
         <div className="cart-item-tile">
             <img src={product.previewImage} className="cart-item-product-images" />
-            <h3>{product.name}</h3>
+            <h3 className="product-tile-name-sc">{product.name}</h3>
             <p><FaDollarSign/>{getPrice(product.price, data.quantity)}</p>
             <div className="edit-quantity">
                 <button onClick={handleMinusQuantity}>-</button>
