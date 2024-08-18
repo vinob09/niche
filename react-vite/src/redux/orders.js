@@ -92,6 +92,10 @@ export const fetchDeleteCartItem = (cart_item_id) => async (dispatch) => {
 
 }
 
+export const fetchTotalCartCount = (state) => {
+    return Object.values(state.orders.cartItems).reduce((total, i) => total + i.quantity, 0);
+}
+
 export const fetchPostOrders = (payload) => async (dispatch) => {
     const response = await csrfFetch('/api/past-orders', {
         method: 'POST',

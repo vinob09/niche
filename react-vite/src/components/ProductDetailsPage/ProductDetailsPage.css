@@ -23,13 +23,26 @@
 
 .product-images {
     display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.product-image-main {
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.product-image-thumbnails {
+    display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.product-images img {
-    width: 250px;
-    height: 250px;
+.product-image-thumbnails img {
+    width: 80px;
+    height: 80px;
     object-fit: cover;
     border: 3px solid #dff1e9e0;
     border-radius: 20px;

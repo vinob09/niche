@@ -14,12 +14,14 @@ function UserProductsPage() {
     const { setModalContent, closeModal } = useModal();
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const products = useSelector(state => Object.values(state.products.myProducts));
+    const productsObj = useSelector(state => state.products.myProducts);
+    const products = Object.values(productsObj);
     const user = useSelector(state => state.session.user);
 
     useEffect(() => {
         if (!user) {
-            navigate("/login")
+            setIsLoaded(false);
+            navigate("/");
             return;
         }
         dispatch(fetchUserProducts())
@@ -28,6 +30,11 @@ function UserProductsPage() {
             })
     }, [dispatch, navigate, user]);
 
+
+    // handle broken image links
+    const handleImageError = (e) => {
+        e.target.src = '/sorry-image-not-available.jpg';
+    }
 
     // handle on click for edit a prodcut
     const handleEditProduct = (productId) => {
@@ -53,21 +60,21 @@ function UserProductsPage() {
                 <div className='container'>
                     {products.map((product) => (
                         <div key={product.id} className='user-product-tile'>
-                                <NavLink to={`/products/${product.id}`}>
-                                    <img src={product.previewImage} alt={product.name} className='user-product-image' />
-                                </NavLink>
-                                <NavLink to={`/products/${product.id}`}>
-                                    <p className='user-product-name'>{product.name}</p>
-                                </NavLink>
-                                <div className='user-product-rating'>
-                                    <span className='user-product-average'>{product.avgRating} <span className='user-product-average-star'><FaStar /></span></span>
-                                    <span className='user-product-review'>({product.reviewCount})</span>
-                                </div>
-                                <p className='user-product-price'>${product.price}</p>
-                                <div className='user-product-buttons'>
-                                    <button className='user-product-edit' onClick={() => handleEditProduct(product.id)}>Edit</button>
-                                    <button className='user-product-delete' onClick={() => handleDeleteProduct(product.id)}>Delete</button>
-                                </div>
+                            <NavLink to={`/products/${product.id}`}>
+                                <img src={product.previewImage} alt={product.name} className='user-product-image' onError={handleImageError} />
+                            </NavLink>
+                            <NavLink to={`/products/${product.id}`}>
+                                <p className='user-product-name'>{product.name}</p>
+                            </NavLink>
+                            <div className='user-product-rating'>
+                                <span className='user-product-average'>{product.avgRating} <span className='user-product-average-star'><FaStar /></span></span>
+                                <span className='user-product-review'>({product.reviewCount})</span>
+                            </div>
+                            <p className='user-product-price'>${product.price}</p>
+                            <div className='user-product-buttons'>
+                                <button className='user-product-edit' onClick={() => handleEditProduct(product.id)}>Edit</button>
+                                <button className='user-product-delete' onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+                            </div>
                         </div>
                     ))}
                 </div>
