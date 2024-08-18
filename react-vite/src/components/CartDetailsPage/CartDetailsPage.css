@@ -44,7 +44,7 @@
 }
 
 /* Checkout button */
-.cart-details-page .checkout-button button {
+.cart-details-page .checkout-button {
   background-color: #749aad;
   color: white;
   padding: 12px 24px;
@@ -55,7 +55,7 @@
   margin-top: 20px;
 }
 
-.cart-details-page .checkout-button button:hover {
+.cart-details-page .checkout-button:hover {
   background-color: #92cfb1;
   color: white;
   transform: scale(1.05);
