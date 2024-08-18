@@ -31,7 +31,10 @@
     width: 350px;
     height: 350px;
     object-fit: cover;
-    border: 1px solid #ccc;
+    border: 3px solid #dff1e9e0;
+    border-radius: 20px;
+    box-shadow: 0 8px 46px #bcebd4;
+    transition: transform 0.7s ease;
 }
 
 .product-image-thumbnails {
@@ -184,9 +187,7 @@
     display: inline-block;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.product-details-reviews button:not(:hover){
-    text-shadow: 2px 1px rgba(23, 48, 32, 0.313);
-}
+
 .product-details-reviews button:hover{
     background-color: #7395a7;
     transform: scale(1.05);
