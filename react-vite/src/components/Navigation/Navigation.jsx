@@ -60,7 +60,7 @@ function Navigation() {
           <ProfileButton />
           <div className="cart-icon-container">
             <NavLink to="/shopping-cart" className="shopping-cart"><MdOutlineLocalGroceryStore /></NavLink>
-            {cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
+            {user&& cartCount > 0 && <span className="cart-counter">{cartCount}</span>}
           </div>
         </li>
       </ul>

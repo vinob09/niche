@@ -1,4 +1,5 @@
 import { useModal } from '../../context/Modal'
+import './cartCheckout.css'
 
 const PaymentCheckoutModal = () => {
     const { closeModal } = useModal();
