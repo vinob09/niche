@@ -14,6 +14,21 @@ function LoginFormPage() {
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
+  const handleDemo = async (e) => {
+    e.preventDefault();
+    try {
+      await dispatch(thunkLogin({ email: "demo@aa.io", password: "password" }));
+      closeModal();
+    } catch (res) {
+      const data = await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors)
+      } else {
+        setErrors({ email: 'Unsuccessful Demo Login' })
+      }
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -56,6 +71,7 @@ function LoginFormPage() {
           />
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>
+        <button type="button" className="pill-button" onClick={handleDemo}>Demo User</button>
       </form>
     </div>
   );

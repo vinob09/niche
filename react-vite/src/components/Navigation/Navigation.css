@@ -80,6 +80,7 @@
   align-items: center;
   justify-content: space-between;
   height: 60px;
+  width:100%;
   background-color: #bcebd4;
   overflow: visible;
   color: black;
@@ -304,6 +305,9 @@
   display: block;
 }
 @media (max-width: 600px) {
+  .navbar{
+    width: 100vw;
+  }
   .home-link::before {
     content: 'n';
   }
