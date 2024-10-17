@@ -28,10 +28,10 @@ const deleteCartItems = (payload) => ({
     payload
 })
 
-const addToOrders = (payload) => ({
-    type: ADD_TO_ORDERS,
-    payload
-})
+// const addToOrders = (payload) => ({
+//     type: ADD_TO_ORDERS,
+//     payload
+// })
 
 //helper function to create products object with a key of product id
 const toDict = (payload) => {
@@ -96,7 +96,7 @@ export const fetchTotalCartCount = (state) => {
     return Object.values(state.orders.cartItems).reduce((total, i) => total + i.quantity, 0);
 }
 
-export const fetchPostOrders = (payload) => async (dispatch) => {
+export const fetchPostOrders = (payload) => async () => {
     const response = await csrfFetch('/api/past-orders', {
         method: 'POST',
         body: JSON.stringify(payload)
