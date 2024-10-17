@@ -32,7 +32,7 @@ function CartDetailsPage () {
         }).then(() => {
             setIsLoaded(true)
         })
-    }, [dispatch, currentUser])
+    }, [dispatch, currentUser, navigate])
 
     //calculates the total for all items in the cart
     const getTotal = () => {

@@ -2,11 +2,13 @@ import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useModal } from "../../context/Modal";
 import "./LoginFormPage.css";
 
 function LoginFormPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { closeModal } = useModal();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

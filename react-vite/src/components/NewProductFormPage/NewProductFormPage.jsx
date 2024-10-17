@@ -172,7 +172,7 @@ function NewProductFormPage() {
                 </div>
                 <div className="product-images">
                     <label htmlFor='previewImage'>Upload images for your product.</label>
-                    <p>Upload high-quality images to showcase your product and capture buyers' interest.</p>
+                    <p>Upload high-quality images to showcase your product and capture buyers&apos; interest.</p>
                         <input
                             id='previewImage' type='url' value={previewImage}
                             onChange={handleInputs(setPreviewImage, 'previewImage')}
